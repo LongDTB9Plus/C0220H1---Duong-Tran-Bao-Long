@@ -2,6 +2,10 @@ function addTime(abc) {
     var timeCall = document.getElementById("timeCall");
     var money = 0;
     var afMoney = document.getElementById("result");
+    var timeCallArray = [timeCall];
+    var plusCount = (timeCallArray.split("+").length - 1) ;
+    var i = 0;
+     alert(plusCount);
     switch (abc) {
         case '+':
             if ( eval(timeCall.value) <= 50) {

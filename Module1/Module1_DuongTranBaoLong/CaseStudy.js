@@ -13,7 +13,7 @@ var typeRoom = document.getElementById("typeRoom");
 
 function priceLook() {
     var bill = typeService.value * rentDays.value * (1 - (disct.value)/100);
-    document.write("Name: " + nameCus.value);
+    alert("/n Name: " + nameCus.value);
     document.write("ID Number: " + idNum.value);
     document.write("Date Of Birth: " + dayOb.value);
     document.write("Email: " + email.value);
