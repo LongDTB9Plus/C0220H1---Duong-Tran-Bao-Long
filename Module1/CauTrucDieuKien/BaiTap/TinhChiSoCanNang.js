@@ -1,5 +1,5 @@
-var weight = prompt("Nhap Can Nang (kg)") * 1;
-var height = prompt("Nhap Chieu Cao (m)") * 1;
+var weight = prompt("Nhap Can Nang (kg)") ;
+var height = prompt("Nhap Chieu Cao (m)") ;
 var bmi = weight / (height**2);
 
 if (bmi < 18.5) {
