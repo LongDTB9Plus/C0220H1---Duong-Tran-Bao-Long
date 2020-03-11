@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
+    <script src="FakeTextarea.js"></script>
 </head>
 <body>
 <center>
     <h2> Type Anything Slowly.</h2>
-    <textarea name="doc"  cols="60" rows="10" onkeydown="process();"></textarea>
+    <textarea id="doc" cols="60" rows="10" onkeyup="process();"></textarea>
 </center>
-<script src="FakeTextarea.js"></script>
+
 </body>
 </html>
