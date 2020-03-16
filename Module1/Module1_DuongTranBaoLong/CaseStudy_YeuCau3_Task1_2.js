@@ -24,13 +24,21 @@ while (checkOb === false) {
         (dayOb[5] !== "/") ||
         ((dayOb[3] + dayOb[4]) * 1 > 12) ||
         (dayOb.length > 10) ||
-        ((dayOb[0] + dayOb[1]) * 1 > 31)) {
+        ((dayOb[0] + dayOb[1]) * 1 > 31) ||
+        (Number.isInteger(dayOb.substring(0,2)*1) === false) ||
+        (Number.isInteger(dayOb.substring(3,5)*1) === false) ||
+        (Number.isInteger(dayOb.substring(6)*1) === false)) {
         var dayOb = prompt("Ngay Thang Nam Sinh Khong Hop Le\nNhap Lai");
     } else checkOb = true;
 }
 var checkOb = true;
 var email = prompt("Nhap Dia Chi Email");
-var checkEmail = true;
+var checkEmail = false;
+while (checkEmail === false){
+    if((email.length >= 11) && (email.indexOf('@') > 0) && (email.indexOf('.') !== -1) && ((email.indexOf('.') === (email.length-4))){
+        checkEmail = true;
+    }email = prompt("Sai Dinh Dang Email\nNhap Lai");
+}
 var address = prompt("Nhap Dia Chi");
 address = address.toLowerCase();
 address = address.substring(0, 1).toUpperCase() + address.substring(1);
