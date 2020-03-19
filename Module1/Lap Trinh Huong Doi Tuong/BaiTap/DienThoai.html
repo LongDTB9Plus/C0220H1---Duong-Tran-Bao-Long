@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<h2>Nokia</h2>
+<p style="align-content: center" id="nokiaDisplay">
+<hr>
+    <label>Battery</label>
+    <input  id="batteryNokia">
+    <button onclick="Nokia.chargePhone()">Charge</button>
+    <button id="NokiaTurn" onclick="Nokia.statusChange()">ON</button>
+    <br>
+    <label>New Message</label>
+    <input id = "newMessageNokia">
+    <br>
+    <label>Inbox</label>
+     <textarea  id="messageNokia"></textarea>
+    <button onclick="Nokia.loadInbox()">Load Inbox</button>
+    <br>
+    <label>Create Message</label>
+    <textarea id="createMesaageNokia"></textarea>
+    <button onclick="Nokia.sendMessage(IPhone)">Send Message</button>
+    <br>
+    <label>Sent Message Inbox</label>
+    <textarea id="sentMessageNokia"></textarea>
+    <button onclick="Nokia.loadSentInbox()">Load Sent Messgae</button>
+<hr>
+</p>
+<h2>IPhone</h2>
+<p id="iphoneDisplay">
+    <hr>
+    <label>Battery</label>
+    <input  id="batteryIPhone">
+    <button id="iphoneCharge" onclick="IPhone.chargePhone()">Charge</button>
+    <button id="IPhoneTurn" onclick="IPhone.statusChange()">ON</button>
+    <br>
+    <label>New Message</label>
+    <input id = "newMessageIPhone">
+    <br>
+    <label>Inbox</label>
+    <textarea id="messageIPhone"></textarea>
+    <button onclick="IPhone.loadInbox()">Load Inbox</button>
+    <br>
+    <label>Create Message</label>
+    <textarea id="createMesaageIPhone"></textarea>
+    <button onclick="IPhone.sendMessage(Nokia)">Send Message</button>
+    <br>
+    <label>Sent Message Inbox</label>
+    <textarea id="sentMessageIPhone"></textarea>
+    <button onclick="IPhone.loadSentInbox()">Load Sent Message</button>
+</p>
+<script src="DienThoai.js"></script>
+</body>
+</html>
