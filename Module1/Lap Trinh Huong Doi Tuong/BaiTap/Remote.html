@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<label>TV</label>
+<textarea id="TV" style="width: 600px;height: 400px"></textarea>
+<br>
+<label>Remote</label>
+<button id="status" onclick="sonyRemote.turnOnTV()">ON</button>
+<br>
+<input id="channel">
+<button onclick="sonyRemote.channelChange()">Submit</button>
+<br>
+<button onclick="sonyRemote.increseVolume('increase')">Volume Up</button>
+<button onclick="sonyRemote.increseVolume('decrease')">Volume Down</button>
+
+<script src="Remote.js"></script>
+</body>
+</html>
