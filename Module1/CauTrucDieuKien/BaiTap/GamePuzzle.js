@@ -44,8 +44,8 @@ for ( let p = 0; p < array.length; p++){
             if (countWin === 5){
                 alert("Win");
             }
-        }else countWin = 0;
-    }
+        }
+    }countWin = 0;
     }
 
 }
