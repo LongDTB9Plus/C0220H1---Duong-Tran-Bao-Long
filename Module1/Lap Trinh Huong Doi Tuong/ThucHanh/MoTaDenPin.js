@@ -11,7 +11,8 @@ class Battery{
         this._energy = energy;
     }
     decreaseEnergy(){
-        this._energy = parseInt(this._energy) - 1;
+        console.log(this._energy);
+        this._energy = this._energy - 1;
         document.getElementById("lampBatt").innerText = this._energy.toString();
     }
 }
@@ -29,7 +30,7 @@ class Lamp{
         this._status = status;
         this. statusLight = false;
     }
-    light(x) {
+    light() {
         switch (this.statusLight) {
             case false:
                  timer = setInterval(this.batt.decreaseEnergy,1000);
