@@ -13,7 +13,7 @@ public class HienThi20SoNguyenTo {
         boolean checkPrime;
         while (count < number){
             checkPrime = true;
-            for (int j = 2; j < i; j++) {
+            for (int j = 2; j < Math.sqrt(i); j++) {
                 if (i % j == 0) {
                     checkPrime = false;
                     break;
