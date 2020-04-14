@@ -1,4 +1,4 @@
-package MangVaPhuongThuc.ThucHanh;
+package MangVaPhuongThuc.BaiTap;
 
 import java.util.Scanner;
 

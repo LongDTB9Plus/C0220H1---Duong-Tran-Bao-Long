@@ -2,7 +2,7 @@ package MangVaPhuongThuc.ThucHanh;
 
 import java.util.Scanner;
 
-public class DéminhhVienThiDo {
+public class DemSoSinhVienDo {
     public static void main(String[] args) {
         int size;
         int[] array;
