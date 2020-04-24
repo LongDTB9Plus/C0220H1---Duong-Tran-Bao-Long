@@ -1,13 +1,45 @@
 package CaseStudy.Models;
 
 public class Villa extends Services {
-    String typeService;
-    String servicesRoom;
-    double areaPool;
-    int numberFloor;
+    private String typeService;
+    private String servicesRoom;
+    private double areaPool;
+    private int numberFloor;
 
-    public Villa(){
+    public String getTypeService() {
+        return typeService;
+    }
 
+    public void setTypeService(String typeService) {
+        this.typeService = typeService;
+    }
+
+    public String getServicesRoom() {
+        return servicesRoom;
+    }
+
+    public void setServicesRoom(String servicesRoom) {
+        this.servicesRoom = servicesRoom;
+    }
+
+    public double getAreaPool() {
+        return areaPool;
+    }
+
+    public void setAreaPool(double areaPool) {
+        this.areaPool = areaPool;
+    }
+
+    public int getNumberFloor() {
+        return numberFloor;
+    }
+
+    public void setNumberFloor(int numberFloor) {
+        this.numberFloor = numberFloor;
+    }
+
+    public Villa() {
+    Services.increaseID();
     }
 
     public Villa(String typeService, String servicesRoom, double areaPool, int numberFloor) {
@@ -15,10 +47,11 @@ public class Villa extends Services {
         this.servicesRoom = servicesRoom;
         this.areaPool = areaPool;
         this.numberFloor = numberFloor;
+        Services.increaseID();
     }
 
-    public Villa(String serviceName, double serviceArea, int serviceMaxPeople,double servicePrice, String serviceRentType, String id, String typeService, String servicesRoom, double areaPool, int numberFloor) {
-        super(serviceName, serviceArea, serviceMaxPeople,servicePrice, serviceRentType, id);
+    public Villa(String serviceName, double serviceArea, int serviceMaxPeople, double servicePrice, String serviceRentType, String id, String typeService, String servicesRoom, double areaPool, int numberFloor) {
+        super(serviceName, serviceArea, serviceMaxPeople, servicePrice, serviceRentType);
         this.typeService = typeService;
         this.servicesRoom = servicesRoom;
         this.areaPool = areaPool;
@@ -27,9 +60,10 @@ public class Villa extends Services {
 
     @Override
     String showInfo() {
-        return ("Ten Dich Vu:\t" + this.serviceName +
+        return ("ID :\t" + this.id +
+                "\nTen Dich Vu:\t" + this.serviceName +
                 "\nDien Tich su Dung:\t" + this.serviceArea +
-                "\nChi Phi Thue:\t" + this.servicePrice +
+                "\nGia Thue:\t" + this.servicePrice +
                 "\nSo Luong Nguoi Toi Da:\t" + this.serviceMaxPeople +
                 "\nKieu Thue:\t" + this.serviceRentType +
                 "\nTieu Chuan Phong:\t" + this.typeService +
@@ -42,4 +76,5 @@ public class Villa extends Services {
         Villa asc = new Villa();
         System.out.println(asc.showInfo());
     }
+
 }

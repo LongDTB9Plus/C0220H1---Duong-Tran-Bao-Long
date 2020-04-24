@@ -29,7 +29,7 @@ public class House extends Services {
         this.numberFloor = numberFloor;
     }
 
-    public House(){
+    public House() {
 
     }
 
@@ -40,7 +40,7 @@ public class House extends Services {
     }
 
     public House(String serviceName, double serviceArea, int serviceMaxPeople, double servicePrice, String serviceRentType, String id, String typeService, String servicesRoom, int numberFloor) {
-        super(serviceName, serviceArea, serviceMaxPeople, servicePrice, serviceRentType, id);
+        super(serviceName, serviceArea, serviceMaxPeople, servicePrice, serviceRentType);
         this.typeService = typeService;
         this.servicesRoom = servicesRoom;
         this.numberFloor = numberFloor;
@@ -48,7 +48,8 @@ public class House extends Services {
 
     @Override
     String showInfo() {
-        return ("Ten Dich Vu:\t" + this.serviceName +
+        return ("ID :\t" + this.id +
+                "\nTen Dich Vu:\t" + this.serviceName +
                 "\nDien Tich su Dung:\t" + this.serviceArea +
                 "\nChi Phi Thue:\t" + this.servicePrice +
                 "\nSo Luong Nguoi Toi Da:\t" + this.serviceMaxPeople +
