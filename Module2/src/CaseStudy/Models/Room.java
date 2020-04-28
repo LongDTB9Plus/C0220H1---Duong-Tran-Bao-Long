@@ -26,7 +26,7 @@ public class Room extends Services {
     }
 
     @Override
-    String showInfo() {
+    public String showInfo() {
         return ("ID :\t" + this.id +
                 "\nTen Dich Vu:\t" + this.serviceName +
                 "\nDien Tich su Dung:\t" + this.serviceArea +

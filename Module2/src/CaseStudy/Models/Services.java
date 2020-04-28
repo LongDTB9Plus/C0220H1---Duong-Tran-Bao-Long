@@ -9,6 +9,10 @@ public abstract class Services {
     static int count = 0;
     String id = String.valueOf(count);
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getId() {
         return id;
     }
