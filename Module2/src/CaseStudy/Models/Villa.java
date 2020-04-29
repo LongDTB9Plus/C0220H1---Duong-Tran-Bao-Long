@@ -6,11 +6,28 @@ public class Villa extends Services {
     private double areaPool;
     private int numberFloor;
 
+    @Override
+    public void setId(String id){
+        matcher = VILLA_ID.matcher(id).matches();
+        while (!matcher) {
+            System.out.println("Sai DInh Dang ID: SVVL-YYYY");
+            id = scanner.nextLine();
+            matcher = VILLA_ID.matcher(id).matches();
+        }
+        this.id = id;
+    }
+
     public String getTypeService() {
         return typeService;
     }
 
     public void setTypeService(String typeService) {
+        matcher = VALID_STRING.matcher(typeService).matches();
+        while (!matcher) {
+            System.out.println("Phai Viet Hoa Chu Cai Dau Tien:");
+            typeService = scanner.nextLine();
+            matcher = VALID_STRING.matcher(typeService).matches();
+        }
         this.typeService = typeService;
     }
 
@@ -19,6 +36,12 @@ public class Villa extends Services {
     }
 
     public void setServicesRoom(String servicesRoom) {
+        matcher = VALID_ROOM_SERVICES.matcher(servicesRoom).matches();
+        while (!matcher) {
+            System.out.println("Sai Ten Dich Vu:");
+            servicesRoom = scanner.nextLine();
+            matcher = VALID_ROOM_SERVICES.matcher(servicesRoom).matches();
+        }
         this.servicesRoom = servicesRoom;
     }
 
@@ -27,6 +50,12 @@ public class Villa extends Services {
     }
 
     public void setAreaPool(double areaPool) {
+        matcher = VALID_AREA.matcher(String.valueOf(areaPool)).matches();
+        while (!matcher) {
+            System.out.println("Dien Tich Khong Hop Le:");
+            areaPool = scanner.nextDouble();
+            matcher = VALID_AREA.matcher(String.valueOf(areaPool)).matches();
+        }
         this.areaPool = areaPool;
     }
 
@@ -35,27 +64,16 @@ public class Villa extends Services {
     }
 
     public void setNumberFloor(int numberFloor) {
+        matcher = VALID_NUMBER.matcher(String.valueOf(numberFloor)).matches();
+        while (!matcher) {
+            System.out.println("Khong Phai La So Nguyen Duong:");
+            numberFloor = scanner.nextInt();
+            matcher = VALID_NUMBER.matcher(String.valueOf(numberFloor)).matches();
+        }
         this.numberFloor = numberFloor;
     }
 
     public Villa() {
-    Services.increaseID();
-    }
-
-    public Villa(String typeService, String servicesRoom, double areaPool, int numberFloor) {
-        this.typeService = typeService;
-        this.servicesRoom = servicesRoom;
-        this.areaPool = areaPool;
-        this.numberFloor = numberFloor;
-        Services.increaseID();
-    }
-
-    public Villa(String serviceName, double serviceArea, int serviceMaxPeople, double servicePrice, String serviceRentType, String id, String typeService, String servicesRoom, double areaPool, int numberFloor) {
-        super(serviceName, serviceArea, serviceMaxPeople, servicePrice, serviceRentType);
-        this.typeService = typeService;
-        this.servicesRoom = servicesRoom;
-        this.areaPool = areaPool;
-        this.numberFloor = numberFloor;
     }
 
     @Override
@@ -70,11 +88,6 @@ public class Villa extends Services {
                 "\nTien Nghi Khac: \t" + this.servicesRoom +
                 "\nDien Tich Ho Boi:\t" + this.areaPool +
                 "\nSo Tang:\t" + this.numberFloor);
-    }
-
-    public static void main(String[] args) {
-        Villa asc = new Villa();
-        System.out.println(asc.showInfo());
     }
 
 }

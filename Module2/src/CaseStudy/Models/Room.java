@@ -1,20 +1,21 @@
 package CaseStudy.Models;
 
 public class Room extends Services {
-    String servicesFree;
+    private String servicesFree;
 
     public Room() {
-        Services.increaseID();
+
     }
 
-    public Room(String servicesFree) {
-        this.servicesFree = servicesFree;
-        Services.increaseID();
-    }
-
-    public Room(String serviceName, double serviceArea, int serviceMaxPeople, double servicePrice, String serviceRentType, String id, String servicesFree) {
-        super(serviceName, serviceArea, serviceMaxPeople, servicePrice, serviceRentType);
-        this.servicesFree = servicesFree;
+    @Override
+    public void setId(String id){
+        matcher = ROOM_ID.matcher(id).matches();
+        while (!matcher) {
+            System.out.println("Sai DInh Dang ID: SVRO-YYYY");
+            id = scanner.nextLine();
+            matcher = ROOM_ID.matcher(id).matches();
+        }
+        this.id = id;
     }
 
     public String getServicesFree() {
@@ -36,7 +37,4 @@ public class Room extends Services {
                 "\nDich Vu Mien Phi Kem Theo:\t" + this.servicesFree);
     }
 
-    public static void main(String[] args) {
-
-    }
 }
