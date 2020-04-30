@@ -17,9 +17,9 @@ public abstract class Services {
     public final Pattern ROOM_ID = Pattern.compile("^([S][V][R][O])-[0-9]{4}$");
     public  final Pattern VALID_STRING = Pattern.compile("^[A-Z]+[A-Za-z]+$");
     public final Pattern VALID_AREA = Pattern.compile("^[3-9][0-9]+[.]*[0-9]*$");
-    public  final Pattern VALID_NUMBER = Pattern.compile("^[0-9]+[0-9]*$");
+    public  final Pattern VALID_NUMBER = Pattern.compile("^[0-9]+[0-9]*[.]?[0-9]*$");
     public  final Pattern VALID_PEOPLE = Pattern.compile("^[01]?[0-9]$");
-    public  final Pattern VALID_ROOM_SERVICES = Pattern.compile("^(([Mm][a][s]*[a][g][e])|([Kk][a][r][a][o][k][e])|([Ff][o]{2}[d])|([Dd][r][i][n][k])|([Cc][a][r]))$");
+    public  final Pattern VALID_ROOM_SERVICES = Pattern.compile("^(([Mm][a][s]{2}[a][g][e])|([Kk][a][r][a][o][k][e])|([Ff][o]{2}[d])|([Dd][r][i][n][k])|([Cc][a][r]))$");
     public  final Pattern VALID_DATE = Pattern.compile("^(([012][0-9]+)|([3][0-1]))[/](([0]?[0-9])|([1][0-2]))[/][12][0-9]{3}$");
     public int year = Calendar.getInstance().get(Calendar.YEAR);
     public int day = Calendar.getInstance().get(Calendar.DATE);
