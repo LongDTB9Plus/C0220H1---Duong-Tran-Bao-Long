@@ -69,6 +69,7 @@ public class SystemService {
         int numberFloor;
         FileWriter fileWriter;
         BufferedWriter writer;
+        String filePath = new File("").getAbsolutePath();
         House house = new House();
         System.out.println("Nhap Ten Dich Vu");
         name = scanner.next();
@@ -95,7 +96,7 @@ public class SystemService {
         numberFloor = scanner.nextInt();
         house.setNumberFloor(numberFloor);
         if (file == null) {
-            file = new File("C:\\Users\\Alex\\Downloads\\Codegym\\Module2\\src\\CaseStudy\\data\\house.csv");
+            file = new File("C:\\Users\\Alex\\Downloads\\CodeGym\\C0220H1---Duong-Tran-Bao-Long\\Module2\\src\\CaseStudy\\data");
         }
         fileWriter = new FileWriter(file, true);
         writer = new BufferedWriter(fileWriter);
@@ -139,7 +140,7 @@ public class SystemService {
         room.setServicesFree(serviceFree);
 
         if (file == null) {
-            file = new File("C:\\Users\\Alex\\Downloads\\Codegym\\Module2\\src\\CaseStudy\\data\\room.csv");
+            file = new File("C:\\Users\\Alex\\Downloads\\CodeGym\\C0220H1---Duong-Tran-Bao-Long\\Module2\\src\\CaseStudy\\data");
         }
         fileWriter = new FileWriter(file, true);
         writer = new BufferedWriter(fileWriter);
@@ -193,7 +194,7 @@ public class SystemService {
         numberFloor = scanner.nextInt();
         villa.setNumberFloor(numberFloor);
         if (file == null) {
-            file = new File("C:\\Users\\Alex\\Downloads\\Codegym\\Module2\\src\\CaseStudy\\data\\villa.csv");
+            file = new File("C:\\Users\\Alex\\Downloads\\CodeGym\\C0220H1---Duong-Tran-Bao-Long\\Module2\\src\\CaseStudy\\data");
         }
         fileWriter = new FileWriter(file, true);
         writer = new BufferedWriter(fileWriter);
