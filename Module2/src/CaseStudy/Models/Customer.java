@@ -18,7 +18,7 @@ public class Customer {
     private String address;
     private Services useService;
     String filePath = new File("").getAbsolutePath();
-    File file = new File("C:\\Users\\Alex\\Downloads\\CodeGym\\C0220H1---Duong-Tran-Bao-Long\\Module2\\src\\CaseStudy\\data");
+    File file = new File(filePath + "src\\CaseStudy\\data\\Customer.csv");
      final String[] FILE_HEADER = {"id", "code", "name"};
 
     public String getName() {
@@ -104,11 +104,12 @@ public class Customer {
         System.out.println("Nhap Dia Chi:");
         this.setAddress(scanner.nextLine());
         System.out.println("Nhap Loai Dich Vu:");
-        String abc = scanner.nextLine();
+//        this.setUseService(scanner.next());
         String[] text = {this.getName() , this.getBirthday() , this.getGender() , this.getIdNumber() , this.getPhoneNumber() , this.getIdNumber() , this.getCustomerType() , this.getAddress() , String.valueOf(this.getUseService())};
         csvWriter.writeNext(text);
         csvWriter.close();
     }
+
 
 
     public static void main(String[] args) throws IOException {
