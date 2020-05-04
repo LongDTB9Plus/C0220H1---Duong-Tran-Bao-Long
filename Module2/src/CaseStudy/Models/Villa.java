@@ -1,5 +1,7 @@
 package CaseStudy.Models;
+
 import com.opencsv.bean.CsvBindByPosition;
+
 public class Villa extends Services {
     @CsvBindByPosition(position = 6)
     private String typeService;
@@ -10,8 +12,23 @@ public class Villa extends Services {
     @CsvBindByPosition(position = 9)
     private int numberFloor;
 
+    public Villa(String id, String serviceName, double serviceArea, double servicePrice, int serviceMaxPeople, String serviceRentType, String typeService, String servicesRoom, double areaPool, int numberFloor) {
+        super(id, serviceName, serviceArea, servicePrice, serviceMaxPeople, serviceRentType);
+        this.typeService = typeService;
+        this.servicesRoom = servicesRoom;
+        this.areaPool = areaPool;
+        this.numberFloor = numberFloor;
+    }
+
+    public Villa(String typeService, String servicesRoom, double areaPool, int numberFloor) {
+        this.typeService = typeService;
+        this.servicesRoom = servicesRoom;
+        this.areaPool = areaPool;
+        this.numberFloor = numberFloor;
+    }
+
     @Override
-    public void setId(String id){
+    public void setId(String id) {
         matcher = VILLA_ID.matcher(id).matches();
         while (!matcher) {
             System.out.println("Sai DInh Dang ID: SVVL-YYYY");
@@ -81,17 +98,23 @@ public class Villa extends Services {
     }
 
     @Override
-    public String showInfo() {
-        return ("ID :\t" + this.id +
-                "\nTen Dich Vu:\t" + this.serviceName +
-                "\nDien Tich su Dung:\t" + this.serviceArea +
-                "\nGia Thue:\t" + this.servicePrice +
-                "\nSo Luong Nguoi Toi Da:\t" + this.serviceMaxPeople +
-                "\nKieu Thue:\t" + this.serviceRentType +
-                "\nTieu Chuan Phong:\t" + this.typeService +
-                "\nTien Nghi Khac: \t" + this.servicesRoom +
-                "\nDien Tich Ho Boi:\t" + this.areaPool +
-                "\nSo Tang:\t" + this.numberFloor);
+    public String tostring() {
+        String string = new String(this.id + ","
+                + this.serviceName + ","
+                + this.serviceArea + ","
+                + this.servicePrice + ","
+                + this.serviceMaxPeople + ","
+                + this.serviceRentType + ","
+                + this.typeService + ","
+                + this.servicesRoom + ","
+                + this.areaPool + ","
+                + this.numberFloor);
+        return string;
+    }
+
+    @Override
+    String showInfo() {
+        return null;
     }
 
 }

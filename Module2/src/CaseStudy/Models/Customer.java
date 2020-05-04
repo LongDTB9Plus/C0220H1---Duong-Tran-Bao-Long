@@ -1,14 +1,16 @@
 package CaseStudy.Models;
 
-import com.opencsv.CSVReader;
-import com.opencsv.CSVWriter;
-import com.opencsv.exceptions.CsvValidationException;
-import jdk.jfr.events.FileReadEvent;
+import CaseStudy.Controller.Exception.*;
 
 import java.io.*;
-import java.util.*;
 
 public class Customer {
+    private int id;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     private String name;
     private String birthday;
     private String gender;
@@ -18,6 +20,31 @@ public class Customer {
     private String address;
     private Services useService;
     private String inputService;
+
+    public Customer() {
+    }
+
+    public Customer(int id,
+                    String name,
+                    String birthday,
+                    String gender,
+                    String idNumber,
+                    String phoneNumber,
+                    String customerType,
+                    String address,
+                    Services useService,
+                    String inputService) {
+        this.id = id;
+        this.name = name;
+        this.birthday = birthday;
+        this.gender = gender;
+        this.idNumber = idNumber;
+        this.phoneNumber = phoneNumber;
+        this.customerType = customerType;
+        this.address = address;
+        this.useService = useService;
+        this.inputService = inputService;
+    }
 
     public String getInputService() {
         return inputService;
@@ -31,32 +58,57 @@ public class Customer {
         return name;
     }
 
-    public void setName(String name) {
+    public boolean setName(String name) {
+        try {
+            UserException.isValidName(name);
+        } catch (NameException e) {
+            return false;
+        }
         this.name = name;
+        return true;
     }
 
     public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public boolean setBirthday(String birthday) {
+        try {
+            UserException.isValidBirthDay(birthday);
+        } catch (BirthdayException e) {
+            return false;
+        }
         this.birthday = birthday;
+        return true;
     }
 
     public String getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public boolean setGender(String gender) {
+        try {
+            UserException.isValidGender(gender);
+        } catch (GenderException e) {
+            return false;
+        }
         this.gender = gender;
+        return true;
     }
 
     public String getIdNumber() {
         return idNumber;
     }
 
-    public void setIdNumber(String idNumber) {
+    public boolean setIdNumber(String idNumber) {
+        try {
+            UserException.isValidIdCard(idNumber);
+
+        } catch (IdCardException e) {
+            return false;
+        }
         this.idNumber = idNumber;
+        return true;
     }
 
     public String getPhoneNumber() {
@@ -90,8 +142,6 @@ public class Customer {
     public void setUseService(Services useService) {
         this.useService = useService;
     }
-
-
 
 
     public static void main(String[] args) throws IOException {

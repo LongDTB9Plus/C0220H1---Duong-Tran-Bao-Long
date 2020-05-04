@@ -11,7 +11,7 @@ public class Room extends Services {
     }
 
     @Override
-    public void setId(String id){
+    public void setId(String id) {
         matcher = ROOM_ID.matcher(id).matches();
         while (!matcher) {
             System.out.println("Sai DInh Dang ID: SVRO-YYYY");
@@ -30,14 +30,21 @@ public class Room extends Services {
     }
 
     @Override
-    public String showInfo() {
-        return ("ID :\t" + this.id +
-                "\nTen Dich Vu:\t" + this.serviceName +
-                "\nDien Tich su Dung:\t" + this.serviceArea +
-                "\nChi Phi Thue:\t" + this.servicePrice +
-                "\nSo Luong Nguoi Toi Da:\t" + this.serviceMaxPeople +
-                "\nKieu Thue:\t" + this.serviceRentType +
-                "\nDich Vu Mien Phi Kem Theo:\t" + this.servicesFree);
-    }
+    public String tostring() {
+            String string = new String(this.id + ","
+                    + this.serviceName + ","
+                    + this.serviceArea + ","
+                    + this.servicePrice + ","
+                    + this.serviceMaxPeople + ","
+                    + this.serviceRentType + ","
+                    + this.servicesFree);
+            return string;
+        }
 
+    @Override
+    String showInfo() {
+        return null;
+    }
 }
+
+

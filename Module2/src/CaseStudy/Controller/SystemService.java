@@ -5,30 +5,31 @@ import CaseStudy.Models.House;
 import CaseStudy.Models.Room;
 import CaseStudy.Models.Villa;
 import com.opencsv.CSVReader;
-import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
-
+import java.util.List;
 import java.io.*;
 import java.util.*;
 
 public class SystemService {
     protected int choiceMain;
     Scanner scanner = new Scanner(System.in);
-    String[] record;
+    String record;
     static String filePath = new File("").getAbsolutePath();
-    static final File fileVilla = new File(filePath + "/Module2/src/CaseStudy/data/villa.csv");
-    static final File fileHouse = new File(filePath + "/Module2/src/CaseStudy/data/house.csv");
-    static final File fileRoom = new File(filePath + "/Module2/src/CaseStudy/data/room.csv");
-    static final File fileCustomer = new File(filePath + "/Module2/src/CaseStudy/data/customer.csv");
+    static final File fileVilla = new File(filePath + "/src/CaseStudy/data/villa.csv");
+    static final File fileHouse = new File(filePath + "/src/CaseStudy/data/house.csv");
+    static final File fileRoom = new File(filePath + "/src/CaseStudy/data/room.csv");
+    static final File fileCustomer = new File(filePath + "/src/CaseStudy/data/customer.csv");
     FileWriter fileWriter = null;
-    CSVWriter csvWriter = null;
+    BufferedReader bufferedReader = null;
     Reader fileReader = null;
-    CSVReader csvReader = null;
+    BufferedWriter bufferedWriter = null;
 
-    public SystemService() throws IOException {
+    public SystemService() {
     }
 
-    protected void addNewService() throws IOException {
+
+
+    public void addNewService() throws IOException {
         boolean loopNewService = true;
         while (loopNewService) {
             System.out.println("1: Add New Villa\n" +
@@ -57,58 +58,35 @@ public class SystemService {
         }
     }
 
-    protected boolean addHouse() throws IOException {
-        String id;
-        String name;
-        double serviceArea;
-        double servicePrice;
-        int maxPeople;
-        String rentType;
-        String serviceType;
-        String serviceRoom;
-        int numberFloor;
+    public boolean addHouse() throws IOException {
+        scanner = new Scanner(System.in);
         House house = new House();
         System.out.println("Nhap ID:");
-        id = scanner.nextLine();
-        house.setId(id);
+        house.setId(scanner.next());
         System.out.println("Nhap Ten Dich Vu");
-        name = scanner.next();
-        house.setServiceName(name);
+        house.setServiceName(scanner.next());
         System.out.println("Nhap Dien Tich Su Dung");
-        serviceArea = scanner.nextDouble();
-        house.setServiceArea(serviceArea);
+        house.setServiceArea(scanner.nextDouble());
         System.out.println("Gia Thue");
-        servicePrice = scanner.nextDouble();
-        house.setServicePrice(servicePrice);
+        house.setServicePrice(scanner.nextDouble());
         System.out.println("So Nguoi O Toi Da");
-        maxPeople = scanner.nextInt();
-        house.setServiceMaxPeople(maxPeople);
+        house.setServiceMaxPeople(scanner.nextInt());
         System.out.println("Kieu Thue");
-        rentType = scanner.next();
-        house.setServiceRentType(rentType);
+        house.setServiceRentType(scanner.next());
         System.out.println("Tieu Chuan Phong");
-        serviceType = scanner.next();
-        house.setTypeService(serviceType);
+        house.setTypeService(scanner.next());
         System.out.println("Tien Nghi Khac");
-        serviceRoom = scanner.next();
-        house.setServiceRoom(serviceRoom);
+        house.setServiceRoom(scanner.next());
         System.out.println("So Tang");
-        numberFloor = scanner.nextInt();
-        house.setNumberFloor(numberFloor);
-        fileWriter = new FileWriter(fileVilla, true);
-        csvWriter = new CSVWriter(fileWriter);
-        ArrayList<House> listHouse = new ArrayList<House>();
-        listHouse.add(house);
-        for (int i = 0; i < listHouse.size(); i++) {
-            record[i] = String.valueOf(listHouse.get(i));
-        }
-        csvWriter.writeNext(record);
-        listHouse.clear();
-        csvWriter.close();
+        house.setNumberFloor(scanner.nextInt());
+        bufferedWriter = new BufferedWriter(fileWriter);
+        fileWriter = new FileWriter(fileHouse, true);
+        bufferedWriter.write(house.tostring());
+        bufferedWriter.close();
         return true;
     }
 
-    protected boolean addRoom() throws IOException {
+    public boolean addRoom() throws IOException {
         String id;
         String name;
         double serviceArea;
@@ -141,76 +119,42 @@ public class SystemService {
         serviceFree = scanner.next();
         room.setServicesFree(serviceFree);
         fileWriter = new FileWriter(fileRoom, true);
-        csvWriter = new CSVWriter(fileWriter);
-        ArrayList<Room> listRoom = new ArrayList<Room>();
-        listRoom.add(room);
-        for (int i = 0; i < listRoom.size(); i++) {
-            record[i] = String.valueOf(listRoom.get(i));
-        }
-        csvWriter.writeNext(record);
-        listRoom.clear();
-        csvWriter.close();
+        bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(room.tostring());
+        bufferedWriter.close();
         return true;
     }
 
-    protected boolean addVilla() throws IOException {
-        String id;
-        String name;
-        double serviceArea;
-        double servicePrice;
-        int maxPeople;
-        String rentType;
-        String serviceType;
-        String serviceRoom;
-        double poolArea;
-        int numberFloor;
-        FileWriter fileWriter;
-        BufferedWriter writer;
+    public boolean addVilla() throws IOException {
         Villa villa = new Villa();
         System.out.println("Nhap ID");
-        id = scanner.nextLine();
-        villa.setId(id);
+        villa.setId(scanner.next());
         System.out.println("Nhap Ten Dich Vu");
-        name = scanner.next();
-        villa.setServiceName(name);
+        villa.setServiceName(scanner.next());
         System.out.println("Nhap Dien Tich Su Dung");
-        serviceArea = scanner.nextDouble();
-        villa.setServiceArea(serviceArea);
+        villa.setServiceArea(scanner.nextDouble());
         System.out.println("Gia Thue");
-        servicePrice = scanner.nextDouble();
-        villa.setServicePrice(servicePrice);
+        villa.setServicePrice(scanner.nextDouble());
         System.out.println("So Nguoi O Toi Da");
-        maxPeople = scanner.nextInt();
-        villa.setServiceMaxPeople(maxPeople);
+        villa.setServiceMaxPeople(scanner.nextInt());
         System.out.println("Kieu Thue");
-        rentType = scanner.next();
-        villa.setServiceRentType(rentType);
+        villa.setServiceRentType(scanner.next());
         System.out.println("Tieu Chuan Phong");
-        serviceType = scanner.next();
-        villa.setTypeService(serviceType);
+        villa.setTypeService(scanner.next());
         System.out.println("Tien Nghi Khac");
-        serviceRoom = scanner.next();
-        villa.setServicesRoom(serviceRoom);
+        villa.setServicesRoom(scanner.next());
         System.out.println("Dien Tich Ho Boi");
-        poolArea = scanner.nextDouble();
-        villa.setAreaPool(poolArea);
+        villa.setAreaPool(scanner.nextDouble());
         System.out.println("So Tang");
-        numberFloor = scanner.nextInt();
-        villa.setNumberFloor(numberFloor);
+        villa.setNumberFloor(scanner.nextInt());
         fileWriter = new FileWriter(fileVilla, true);
-        csvWriter = new CSVWriter(fileWriter);
-        ArrayList<Villa> listVilla = new ArrayList<>();
-        listVilla.add(villa);
-        for (int i = 0; i < listVilla.size(); i++) {
-            record[i] = String.valueOf(listVilla.get(i));
-        }
-        csvWriter.writeNext(record);
-        listVilla.clear();
-        csvWriter.close();
+        bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(villa.tostring());
+        bufferedWriter.close();
         return true;
     }
 
-    protected void showService() throws IOException, CsvValidationException {
+    public void showService() throws IOException {
         boolean loopShowService = true;
         while (loopShowService) {
             System.out.println("1: Show All Villa\n" +
@@ -225,27 +169,27 @@ public class SystemService {
             switch (showChoice) {
                 case 1:
                     fileReader = new FileReader(fileVilla);
-                    csvReader = new CSVReader(fileReader);
-                    while ((record = csvReader.readNext()) != null){
-                        createVillaObjFromArray(record).showInfo();
+                    bufferedReader = new BufferedReader(fileReader);
+                    while ((record = bufferedReader.readLine()) != null) {
+                        createVillaObjFromArray(SystemService.toStringArray(record));
                     }
-                    csvReader.close();
+                    bufferedReader.close();
                     break;
                 case 2:
                     fileReader = new FileReader(fileHouse);
-                    csvReader = new CSVReader(fileReader);
-                    while ((record = csvReader.readNext()) != null){
-                        createHouseObjFromArray(record).showInfo();
+                    bufferedReader = new BufferedReader(fileReader);
+                    while ((record = bufferedReader.readLine()) != null) {
+                        createHouseObjFromArray(SystemService.toStringArray(record));
                     }
-                    csvReader.close();
+                    bufferedReader.close();
                     break;
                 case 3:
                     fileReader = new FileReader(fileRoom);
-                    csvReader = new CSVReader(fileReader);
-                    while ((record = csvReader.readNext()) != null){
-                        createRoomObjFromArray(record).showInfo();
+                    bufferedReader = new BufferedReader(fileReader);
+                    while ((record = bufferedReader.readLine()) != null) {
+                        createRoomObjFromArray(SystemService.toStringArray(record));
                     }
-                    csvReader.close();
+                    bufferedReader.close();
                     break;
                 case 4:
                     break;
@@ -263,19 +207,30 @@ public class SystemService {
         }
     }
 
-    public void addNewCustomer() throws IOException, CsvValidationException {
+    public void addNewCustomer() throws Exception,IOException {
         Customer customer = new Customer();
         Scanner scanner = new Scanner(System.in);
         String serviceChoice;
+        String input;
 
         System.out.println("Nhap Ten Khach Hang:");
-        customer.setName(scanner.nextLine());
+        input = scanner.nextLine();
+        while (!customer.setName(input)){
+            input = scanner.nextLine();
+            continue;
+        }
         System.out.println("Nhap Ngay Sinh:");
-        customer.setBirthday(scanner.nextLine());
+        while (customer.setBirthday(scanner.nextLine())){
+            continue;
+        }
         System.out.println("Nhap Gioi Tinh");
-        customer.setGender(scanner.nextLine());
+        while (!customer.setGender(scanner.nextLine())){
+            continue;
+        }
         System.out.println("Nhap So CMND:");
-        customer.setIdNumber(scanner.nextLine());
+        while (!customer.setIdNumber(scanner.nextLine())){
+            continue;
+        }
         System.out.println("Nhap So Dien Thoai:");
         customer.setPhoneNumber(scanner.nextLine());
         System.out.println("Nhap Loai Khach Hang:");
@@ -287,45 +242,42 @@ public class SystemService {
         switch (serviceChoice) {
             case "1":
                 fileReader = new FileReader(fileVilla);
-                csvReader = new CSVReader(fileReader);
+                bufferedReader = new BufferedReader(fileReader);
                 ArrayList<Villa> listVilla = new ArrayList<>();
-                while ((record = csvReader.readNext()) != null) {
-                    Villa temp = createVillaObjFromArray(record);
-                    temp.showInfo();
+                while ((record = bufferedReader.readLine()) != null) {
+                    Villa temp = createVillaObjFromArray(SystemService.toStringArray(record));
                     listVilla.add(temp);
                 }
                 System.out.println(listVilla);
-                csvReader.close();
+                bufferedReader.close();
                 System.out.println("Nhao Loai Villa:");
                 customer.setInputService(scanner.nextLine());
                 addVillaUser(listVilla, customer);
                 break;
             case "2":
                 fileReader = new FileReader(fileRoom);
-                csvReader = new CSVReader(fileReader);
+                bufferedReader = new BufferedReader(fileReader);
                 ArrayList<Room> listRoom = new ArrayList<Room>();
-                while ((record = csvReader.readNext()) != null) {
-                    Room temp = createRoomObjFromArray(record);
-                    temp.showInfo();
+                while ((record = bufferedReader.readLine()) != null) {
+                    Room temp = createRoomObjFromArray(SystemService.toStringArray(record));
                     listRoom.add(temp);
                 }
                 System.out.println(listRoom);
-                csvReader.close();
+                bufferedReader.close();
                 System.out.println("Nhao Loai Room:");
                 customer.setInputService(scanner.nextLine());
                 addRoomUser(listRoom, customer);
                 break;
             case "3":
                 fileReader = new FileReader(fileHouse);
-                csvReader = new CSVReader(fileReader);
+                bufferedReader = new BufferedReader(fileReader);
                 List<House> listHouse = new ArrayList<House>();
-                while ((record = csvReader.readNext()) != null) {
-                    House temp = createHouseObjFromArray(record);
-                    temp.showInfo();
+                while ((record = bufferedReader.readLine()) != null) {
+                    House temp = createHouseObjFromArray(SystemService.toStringArray(record));
                     listHouse.add(temp);
                 }
                 System.out.println(listHouse);
-                csvReader.close();
+                bufferedReader.close();
                 System.out.println("Nhao Loai Room:");
                 customer.setInputService(scanner.nextLine());
                 addHouseUser(listHouse, customer);
@@ -333,11 +285,51 @@ public class SystemService {
         }
 
 
-        String[] text = {customer.getName(), customer.getBirthday(), customer.getGender(), customer.getIdNumber(), customer.getPhoneNumber(), customer.getIdNumber(), customer.getCustomerType(), customer.getAddress(), String.valueOf(customer.getUseService())};
-        csvWriter.writeNext(text);
-        csvWriter.close();
+        String text = (customer.getName() + customer.getBirthday() + customer.getGender() + customer.getIdNumber() + customer.getPhoneNumber() + customer.getCustomerType() + customer.getAddress() + customer.getUseService());
+        bufferedWriter.write(text);
+        bufferedWriter.close();
     }
 
+    public void showInformationCustomer() throws IOException{
+        fileReader = new FileReader(fileCustomer);
+        bufferedReader = new BufferedReader(fileReader);
+        ArrayList<Customer> list = new ArrayList<Customer>();
+        int count = 0;
+        while ((record = bufferedReader.readLine()) != null){
+            String[] array = record.split(",");
+        }
+
+    }
+
+    public void addNewBooking() throws IOException{
+        fileReader = new FileReader(fileCustomer);
+        bufferedReader = new BufferedReader(fileReader);
+        ArrayList<Customer> list = new ArrayList<Customer>();
+        int count = 0;
+        while ((record = bufferedReader.readLine()) != null){
+            String[] array = record.split(",");
+            count++;
+            Customer temp = createCustomerObjFromArray(array,count);
+            temp.setUseService(array[7]);
+
+
+
+
+        }
+
+    }
+private Customer createCustomerObjFromArray(String[] array,int id){
+        Customer customer = new Customer();
+        customer.setId(id);
+        customer.setName(array[0]);
+        customer.setBirthday(array[1]);
+        customer.setGender(array[2]);
+        customer.setIdNumber(array[3]);
+        customer.setPhoneNumber(array[4]);
+        customer.setCustomerType(array[5]);
+        customer.setAddress(array[6]);
+
+}
     private Room createRoomObjFromArray(String[] record) {
         Room room = new Room();
         room.setId(record[0]);
@@ -419,5 +411,10 @@ public class SystemService {
                 break;
             }
         }
+    }
+
+    public static String[] toStringArray(String e){
+        String[] string = e.split(",");
+        return string;
     }
 }

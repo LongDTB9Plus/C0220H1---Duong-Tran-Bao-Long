@@ -2,10 +2,8 @@ package CaseStudy.Models;
 
 import java.util.Calendar;
 import java.util.Scanner;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.opencsv.bean.CsvBindByPosition;
-import com.opencsv.bean.CsvCustomBindByPosition;
 
 public abstract class Services {
     @CsvBindByPosition(position = 0)
@@ -24,17 +22,26 @@ public abstract class Services {
     public final Pattern VILLA_ID = Pattern.compile("^([S][V]{2}[L])-[0-9]{4}$");
     public final Pattern HOUSE_ID = Pattern.compile("^([S][V][H][O])-[0-9]{4}$");
     public final Pattern ROOM_ID = Pattern.compile("^([S][V][R][O])-[0-9]{4}$");
-    public  final Pattern VALID_STRING = Pattern.compile("^[A-Z]+[A-Za-z]+$");
-    public final Pattern VALID_AREA = Pattern.compile("^[3-9][0-9]{2,}[.]*[0-9]*$");
+    public  final Pattern VALID_STRING = Pattern.compile("^[A-Z]+[A-Za-z0-9]+$");
+    public final Pattern VALID_AREA = Pattern.compile("^[3-9][0-9]+[.]*[0-9]*$");
     public  final Pattern VALID_NUMBER = Pattern.compile("^[0-9]+[0-9]*[.]?[0-9]*$");
     public  final Pattern VALID_PEOPLE = Pattern.compile("^[01]?[0-9]$");
     public  final Pattern VALID_ROOM_SERVICES = Pattern.compile("^(([Mm][a][s]{2}[a][g][e])|([Kk][a][r][a][o][k][e])|([Ff][o]{2}[d])|([Dd][r][i][n][k])|([Cc][a][r]))$");
-    public  final Pattern VALID_DATE = Pattern.compile("^(([012][0-9]+)|([3][0-1]))[/](([0]?[0-9])|([1][0-2]))[/][12][0-9]{3}$");
-    public int year = Calendar.getInstance().get(Calendar.YEAR);
-    public int day = Calendar.getInstance().get(Calendar.DATE);
-    public int month = Calendar.getInstance().get(Calendar.MONTH);
-    boolean matcher = Boolean.parseBoolean(null);
+    boolean matcher;
 
+    {
+        Boolean.parseBoolean(null);
+        matcher = false;
+    }
+
+    public Services(String id, String serviceName, double serviceArea, double servicePrice, int serviceMaxPeople, String serviceRentType) {
+        this.id = id;
+        this.serviceName = serviceName;
+        this.serviceArea = serviceArea;
+        this.servicePrice = servicePrice;
+        this.serviceMaxPeople = serviceMaxPeople;
+        this.serviceRentType = serviceRentType;
+    }
 
     public Services() {
 
@@ -118,7 +125,7 @@ public abstract class Services {
         this.serviceRentType = serviceRentType;
     }
 
+    abstract String tostring();
     abstract String showInfo();
 
-    ;
 }

@@ -6,18 +6,15 @@ import CaseStudy.Models.Villa;
 import com.opencsv.exceptions.CsvValidationException;
 
 import java.io.*;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class MainController extends SystemService {
-    Scanner scanner = new Scanner(System.in);
-
     public MainController() throws IOException {
     }
 
-    void displayMainMenu() throws IOException, CsvValidationException {
+    void displayMainMenu() throws IOException,Exception {
+        Scanner scanner = new Scanner(System.in);
         boolean loopMain = true;
         while (loopMain) {
             System.out.println("Main Menu:\n" +
@@ -31,17 +28,19 @@ public class MainController extends SystemService {
             this.choiceMain = scanner.nextInt();
             switch (this.choiceMain) {
                 case 1:
-                    this.addNewService();
+                    addNewService();
                     break;
                 case 2:
-                    this.showService();
+                    showService();
                     break;
                 case 3:
                     addNewCustomer();
                     break;
                 case 4:
+                    showInformationCustomer();
                     break;
                 case 5:
+                    addNewBooking();
                     break;
                 case 6:
                     break;
@@ -53,7 +52,7 @@ public class MainController extends SystemService {
         }
     }
 
-    public static void main(String[] args) throws IOException, CsvValidationException {
+    public static void main(String[] args) throws IOException,Exception {
         MainController console = new MainController();
         console.displayMainMenu();
     }
