@@ -1,12 +1,12 @@
 package CaseStudy.Models;
 
+import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvValidationException;
+import jdk.jfr.events.FileReadEvent;
 
 import java.io.*;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Customer {
     private String name;
@@ -17,9 +17,15 @@ public class Customer {
     private String customerType;
     private String address;
     private Services useService;
-    String filePath = new File("").getAbsolutePath();
-    File file = new File(filePath + "src\\CaseStudy\\data\\Customer.csv");
-     final String[] FILE_HEADER = {"id", "code", "name"};
+    private String inputService;
+
+    public String getInputService() {
+        return inputService;
+    }
+
+    public void setInputService(String inputService) {
+        this.inputService = inputService;
+    }
 
     public String getName() {
         return name;
@@ -85,35 +91,10 @@ public class Customer {
         this.useService = useService;
     }
 
-    public void addNewCustomer() throws IOException {
-        Scanner scanner = new Scanner(System.in);
-        FileWriter fileWriter = new FileWriter(file);
-        CSVWriter csvWriter = new CSVWriter(fileWriter, CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
-        System.out.println("Nhap Ten Khach Hang:");
-        this.setName(scanner.nextLine());
-        System.out.println("Nhap Ngay Sinh:");
-        this.setBirthday(scanner.nextLine());
-        System.out.println("Nhap Gioi Tinh");
-        this.setGender(scanner.nextLine());
-        System.out.println("Nhap So CMND:");
-        this.setIdNumber(scanner.nextLine());
-        System.out.println("Nhap So Dien Thoai:");
-        this.setPhoneNumber(scanner.nextLine());
-        System.out.println("Nhap Loai Khach Hang:");
-        this.setCustomerType(scanner.nextLine());
-        System.out.println("Nhap Dia Chi:");
-        this.setAddress(scanner.nextLine());
-        System.out.println("Nhap Loai Dich Vu:");
-//        this.setUseService(scanner.next());
-        String[] text = {this.getName() , this.getBirthday() , this.getGender() , this.getIdNumber() , this.getPhoneNumber() , this.getIdNumber() , this.getCustomerType() , this.getAddress() , String.valueOf(this.getUseService())};
-        csvWriter.writeNext(text);
-        csvWriter.close();
-    }
 
 
 
     public static void main(String[] args) throws IOException {
         Customer john = new Customer();
-        john.addNewCustomer();
     }
 }

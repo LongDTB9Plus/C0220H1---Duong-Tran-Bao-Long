@@ -3,6 +3,7 @@ package CaseStudy.Controller;
 import CaseStudy.Models.House;
 import CaseStudy.Models.Room;
 import CaseStudy.Models.Villa;
+import com.opencsv.exceptions.CsvValidationException;
 
 import java.io.*;
 import java.lang.reflect.Array;
@@ -12,7 +13,11 @@ import java.util.Scanner;
 
 public class MainController extends SystemService {
     Scanner scanner = new Scanner(System.in);
-    void displayMainMenu() throws IOException {
+
+    public MainController() throws IOException {
+    }
+
+    void displayMainMenu() throws IOException, CsvValidationException {
         boolean loopMain = true;
         while (loopMain) {
             System.out.println("Main Menu:\n" +
@@ -32,6 +37,7 @@ public class MainController extends SystemService {
                     this.showService();
                     break;
                 case 3:
+                    addNewCustomer();
                     break;
                 case 4:
                     break;
@@ -47,7 +53,7 @@ public class MainController extends SystemService {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, CsvValidationException {
         MainController console = new MainController();
         console.displayMainMenu();
     }

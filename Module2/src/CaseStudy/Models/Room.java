@@ -1,6 +1,9 @@
 package CaseStudy.Models;
 
+import com.opencsv.bean.CsvBindByPosition;
+
 public class Room extends Services {
+    @CsvBindByPosition(position = 6)
     private String servicesFree;
 
     public Room() {

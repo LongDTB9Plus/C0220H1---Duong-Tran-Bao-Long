@@ -4,19 +4,28 @@ import java.util.Calendar;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import com.opencsv.bean.CsvBindByPosition;
+import com.opencsv.bean.CsvCustomBindByPosition;
 
 public abstract class Services {
+    @CsvBindByPosition(position = 0)
+    String id;
+    @CsvBindByPosition(position = 1)
     String serviceName;
+    @CsvBindByPosition(position = 2)
     double serviceArea;
-    int serviceMaxPeople;
+    @CsvBindByPosition(position = 3)
     double servicePrice;
+    @CsvBindByPosition(position = 4)
+    int serviceMaxPeople;
+    @CsvBindByPosition(position = 5)
     String serviceRentType;
     Scanner scanner = new Scanner(System.in);
     public final Pattern VILLA_ID = Pattern.compile("^([S][V]{2}[L])-[0-9]{4}$");
     public final Pattern HOUSE_ID = Pattern.compile("^([S][V][H][O])-[0-9]{4}$");
     public final Pattern ROOM_ID = Pattern.compile("^([S][V][R][O])-[0-9]{4}$");
     public  final Pattern VALID_STRING = Pattern.compile("^[A-Z]+[A-Za-z]+$");
-    public final Pattern VALID_AREA = Pattern.compile("^[3-9][0-9]+[.]*[0-9]*$");
+    public final Pattern VALID_AREA = Pattern.compile("^[3-9][0-9]{2,}[.]*[0-9]*$");
     public  final Pattern VALID_NUMBER = Pattern.compile("^[0-9]+[0-9]*[.]?[0-9]*$");
     public  final Pattern VALID_PEOPLE = Pattern.compile("^[01]?[0-9]$");
     public  final Pattern VALID_ROOM_SERVICES = Pattern.compile("^(([Mm][a][s]{2}[a][g][e])|([Kk][a][r][a][o][k][e])|([Ff][o]{2}[d])|([Dd][r][i][n][k])|([Cc][a][r]))$");
@@ -25,7 +34,7 @@ public abstract class Services {
     public int day = Calendar.getInstance().get(Calendar.DATE);
     public int month = Calendar.getInstance().get(Calendar.MONTH);
     boolean matcher = Boolean.parseBoolean(null);
-    String id;
+
 
     public Services() {
 

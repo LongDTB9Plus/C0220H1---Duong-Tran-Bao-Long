@@ -1,8 +1,13 @@
 package CaseStudy.Models;
 
+import com.opencsv.bean.CsvBindByPosition;
+
 public class House extends Services {
+    @CsvBindByPosition(position = 6)
     private String typeService;
+    @CsvBindByPosition(position = 7)
     private String servicesRoom;
+    @CsvBindByPosition(position = 8)
     private int numberFloor;
 
     @Override
