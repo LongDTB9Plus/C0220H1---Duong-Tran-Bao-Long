@@ -123,7 +123,7 @@ public class Villa extends Services {
                         "Type Service:\t%s\n" +
                         "Room Service:\t%s\n" +
                         "Pool Area:\t%f\n" +
-                        "Number Floow:\t%d\n", this.id, this.serviceName, this.serviceArea,
+                        "Number Floor:\t%d\n", this.id, this.serviceName, this.serviceArea,
                 this.servicePrice, this.serviceMaxPeople, this.serviceRentType,
                 this.typeService, this.servicesRoom, this.areaPool, this.numberFloor);
     }

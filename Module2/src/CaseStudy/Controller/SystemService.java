@@ -20,6 +20,7 @@ public class SystemService {
     static final File fileRoom = new File(filePath + "/src/CaseStudy/data/room.csv");
     static final File fileCustomer = new File(filePath + "/src/CaseStudy/data/customer.csv");
     static final File fileBooking = new File(filePath + "/src/CaseStudy/data/booking.csv");
+    static public final String LINE_SEPARATOR = "------------------------------------------------------------";
     FileWriter fileWriter = null;
     BufferedReader bufferedReader = null;
     Reader fileReader = null;
@@ -149,7 +150,7 @@ public class SystemService {
                     "5: Show All House Not Duplicate\n" +
                     "6: Show All Room Not Duplicate\n" +
                     "7: Back To Main Menu\n" +
-                    "8: Exit");
+                    "8: Exit\n" + LINE_SEPARATOR);
             int showChoice = scanner.nextInt();
             switch (showChoice) {
                 case 1:
@@ -157,6 +158,7 @@ public class SystemService {
                     bufferedReader = new BufferedReader(fileReader);
                     while ((record = bufferedReader.readLine()) != null) {
                         createVillaObjFromArray(SystemService.toStringArray(record)).showInfo();
+                        System.out.println(LINE_SEPARATOR);
                     }
                     bufferedReader.close();
                     break;
@@ -165,6 +167,7 @@ public class SystemService {
                     bufferedReader = new BufferedReader(fileReader);
                     while ((record = bufferedReader.readLine()) != null) {
                         createHouseObjFromArray(SystemService.toStringArray(record)).showInfo();
+                        System.out.println(LINE_SEPARATOR);
                     }
                     bufferedReader.close();
                     break;
@@ -173,6 +176,7 @@ public class SystemService {
                     bufferedReader = new BufferedReader(fileReader);
                     while ((record = bufferedReader.readLine()) != null) {
                         createRoomObjFromArray(SystemService.toStringArray(record)).showInfo();
+                        System.out.println(LINE_SEPARATOR);
                     }
                     bufferedReader.close();
                     break;
@@ -188,6 +192,7 @@ public class SystemService {
                     loopShowService = false;
                     break;
                 default:
+                    System.out.println("Failed!");
             }
         }
     }
@@ -239,6 +244,9 @@ public class SystemService {
         int count = 0;
         while ((record = bufferedReader.readLine()) != null) {
             String[] array = record.split(",");
+            count++;
+            createCustomerObjFromArray(array, count).showInfo();
+            System.out.println(LINE_SEPARATOR);
         }
 
     }
@@ -255,6 +263,7 @@ public class SystemService {
             Customer temp = createCustomerObjFromArray(array, count);
             list.add(temp);
             System.out.printf("STT : %d\tName: %s\n", count, temp.getName());
+            System.out.println(LINE_SEPARATOR);
         }
         System.out.println("Xin Nhap Ten Khach Hang :");
         String inputNameChoose = scanner.next();
@@ -281,7 +290,7 @@ public class SystemService {
                         Villa temp = createVillaObjFromArray(SystemService.toStringArray(record));
                         listVilla.add(temp);
                     }
-                    for(Villa search : listVilla){
+                    for (Villa search : listVilla) {
                         System.out.println(search.getId());
                     }
                     bufferedReader.close();
@@ -297,7 +306,7 @@ public class SystemService {
                         Room temp = createRoomObjFromArray(SystemService.toStringArray(record));
                         listRoom.add(temp);
                     }
-                    for(Room search : listRoom){
+                    for (Room search : listRoom) {
                         System.out.println(search.getId());
                     }
                     bufferedReader.close();
@@ -313,7 +322,7 @@ public class SystemService {
                         House temp = createHouseObjFromArray(SystemService.toStringArray(record));
                         listHouse.add(temp);
                     }
-                    for(House search : listHouse){
+                    for (House search : listHouse) {
                         System.out.println(search.getId());
                     }
                     bufferedReader.close();

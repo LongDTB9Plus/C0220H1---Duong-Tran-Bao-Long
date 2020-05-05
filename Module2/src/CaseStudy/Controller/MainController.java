@@ -24,7 +24,7 @@ public class MainController extends SystemService {
                     "4: Show Information Of Customer\n" +
                     "5: Add New Booking\n" +
                     "6: Show Information Of Employee\n" +
-                    "7: Exit");
+                    "7: Exit\n" + LINE_SEPARATOR);
             this.choiceMain = scanner.nextInt();
             switch (this.choiceMain) {
                 case 1:
@@ -48,6 +48,7 @@ public class MainController extends SystemService {
                     loopMain = false;
                     break;
                 default:
+                    System.out.println("Failed!");
             }
         }
     }

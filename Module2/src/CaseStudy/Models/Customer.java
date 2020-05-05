@@ -18,7 +18,7 @@ public class Customer {
     private String phoneNumber;
     private String customerType;
     private String address;
-    public Services useService;
+    public Services useService = null;
     private String inputService;
 
     public Customer() {
@@ -143,7 +143,7 @@ public class Customer {
         this.useService = useService;
     }
 
-    public String tostring(){
+    public String tostring() {
         return (this.name + "," +
                 this.birthday + "," +
                 this.gender + "," +
@@ -151,7 +151,19 @@ public class Customer {
                 this.phoneNumber + "," +
                 this.customerType + "," +
                 this.address
-                );
+        );
 
+    }
+
+    public void showInfo() {
+        System.out.printf("STT:\t%d\n" +
+                        "Name:\t%s\n" +
+                        "Birth Day:\t%s\n" +
+                        "Gender:\t%s\n" +
+                        "ID Number:\t%s\n" +
+                        "Phone Number:\t%s\n" +
+                        "Customer Type:\t%s\n" +
+                        "Address:\t%s\n",this.id,this.name, this.birthday, this.gender,
+                this.idNumber, this.phoneNumber, this.customerType,this.address);
     }
 }
