@@ -42,8 +42,8 @@ public class UserException {
     static public boolean isValidBirthDay(String day) throws BirthdayException {
         matcher = VALID_DATE.matcher(day).matches();
         int year = Calendar.getInstance().get(Calendar.YEAR);
-        Integer yearTest = Integer.valueOf(day.substring(5));
-        if ((!matcher) ||(yearTest <= 1900) || ((year - Integer.valueOf(yearTest) < 18))){
+        Integer yearTest = Integer.valueOf(day.substring(6));
+        if ((!matcher) ||(yearTest <= 1900) || ((year - Integer.parseInt(String.valueOf(yearTest))) < 18)){
             throw new BirthdayException();
         }else return true;
     }

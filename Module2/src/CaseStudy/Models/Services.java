@@ -125,7 +125,13 @@ public abstract class Services {
         this.serviceRentType = serviceRentType;
     }
 
-    abstract String tostring();
-    abstract String showInfo();
+    public String tostring(){
+        return (this.id + "," +
+                this.serviceName + "," +
+                this.serviceArea + "," +
+                this.serviceMaxPeople + "," +
+                this.serviceRentType + ",");
+    };
+    abstract void showInfo();
 
 }

@@ -82,8 +82,18 @@ public class House extends Services {
     }
 
     @Override
-    String showInfo() {
-        return null;
+    public void showInfo() {
+        System.out.printf("ID:\t%s\n" +
+                "Name Service:\t%s\n"+
+                "Service Area:\t%f\n"+
+                "Price Service:\t%f\n"+
+                "Max People:\t%d\n"+
+                "Rent Type:\t%s\n"+
+                "Type Service:\t%s\n"+
+                "Room Service:\t%s\n"+
+                "Number Floow:\t%d\n",this.id,this.serviceName,this.serviceArea,
+                this.servicePrice,this.serviceMaxPeople,this.serviceRentType,
+                this.typeService,this.servicesRoom,this.numberFloor);
     }
 
 }

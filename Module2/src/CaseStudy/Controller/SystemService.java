@@ -4,11 +4,11 @@ import CaseStudy.Models.Customer;
 import CaseStudy.Models.House;
 import CaseStudy.Models.Room;
 import CaseStudy.Models.Villa;
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvValidationException;
-import java.util.List;
+
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class SystemService {
     protected int choiceMain;
@@ -19,6 +19,7 @@ public class SystemService {
     static final File fileHouse = new File(filePath + "/src/CaseStudy/data/house.csv");
     static final File fileRoom = new File(filePath + "/src/CaseStudy/data/room.csv");
     static final File fileCustomer = new File(filePath + "/src/CaseStudy/data/customer.csv");
+    static final File fileBooking = new File(filePath + "/src/CaseStudy/data/booking.csv");
     FileWriter fileWriter = null;
     BufferedReader bufferedReader = null;
     Reader fileReader = null;
@@ -26,7 +27,6 @@ public class SystemService {
 
     public SystemService() {
     }
-
 
 
     public void addNewService() throws IOException {
@@ -79,45 +79,30 @@ public class SystemService {
         house.setServiceRoom(scanner.next());
         System.out.println("So Tang");
         house.setNumberFloor(scanner.nextInt());
-        bufferedWriter = new BufferedWriter(fileWriter);
         fileWriter = new FileWriter(fileHouse, true);
+        bufferedWriter = new BufferedWriter(fileWriter);
         bufferedWriter.write(house.tostring());
         bufferedWriter.close();
         return true;
     }
 
     public boolean addRoom() throws IOException {
-        String id;
-        String name;
-        double serviceArea;
-        double servicePrice;
-        int maxPeople;
-        String rentType;
-        String serviceFree;
-        FileWriter fileWriter;
-        BufferedWriter writer;
+        scanner = new Scanner(System.in);
         Room room = new Room();
         System.out.println("Nhap ID:");
-        id = scanner.nextLine();
-        room.setId(id);
+        room.setId(scanner.nextLine());
         System.out.println("Nhap Ten Dich Vu");
-        name = scanner.next();
-        room.setServiceName(name);
+        room.setServiceName(scanner.next());
         System.out.println("Nhap Dien Tich Su Dung");
-        serviceArea = scanner.nextDouble();
-        room.setServiceArea(serviceArea);
+        room.setServiceArea(scanner.nextDouble());
         System.out.println("Gia Thue");
-        servicePrice = scanner.nextDouble();
-        room.setServicePrice(servicePrice);
+        room.setServicePrice(scanner.nextDouble());
         System.out.println("So Nguoi O Toi Da");
-        maxPeople = scanner.nextInt();
-        room.setServiceMaxPeople(maxPeople);
+        room.setServiceMaxPeople(scanner.nextInt());
         System.out.println("Kieu Thue");
-        rentType = scanner.next();
-        room.setServiceRentType(rentType);
+        room.setServiceRentType(scanner.next());
         System.out.println("Tieu Chuan Phong");
-        serviceFree = scanner.next();
-        room.setServicesFree(serviceFree);
+        room.setServicesFree(scanner.next());
         fileWriter = new FileWriter(fileRoom, true);
         bufferedWriter = new BufferedWriter(fileWriter);
         bufferedWriter.write(room.tostring());
@@ -171,7 +156,7 @@ public class SystemService {
                     fileReader = new FileReader(fileVilla);
                     bufferedReader = new BufferedReader(fileReader);
                     while ((record = bufferedReader.readLine()) != null) {
-                        createVillaObjFromArray(SystemService.toStringArray(record));
+                        createVillaObjFromArray(SystemService.toStringArray(record)).showInfo();
                     }
                     bufferedReader.close();
                     break;
@@ -179,7 +164,7 @@ public class SystemService {
                     fileReader = new FileReader(fileHouse);
                     bufferedReader = new BufferedReader(fileReader);
                     while ((record = bufferedReader.readLine()) != null) {
-                        createHouseObjFromArray(SystemService.toStringArray(record));
+                        createHouseObjFromArray(SystemService.toStringArray(record)).showInfo();
                     }
                     bufferedReader.close();
                     break;
@@ -187,7 +172,7 @@ public class SystemService {
                     fileReader = new FileReader(fileRoom);
                     bufferedReader = new BufferedReader(fileReader);
                     while ((record = bufferedReader.readLine()) != null) {
-                        createRoomObjFromArray(SystemService.toStringArray(record));
+                        createRoomObjFromArray(SystemService.toStringArray(record)).showInfo();
                     }
                     bufferedReader.close();
                     break;
@@ -207,28 +192,32 @@ public class SystemService {
         }
     }
 
-    public void addNewCustomer() throws Exception,IOException {
+    public void addNewCustomer() throws Exception, IOException {
         Customer customer = new Customer();
         Scanner scanner = new Scanner(System.in);
-        String serviceChoice;
         String input;
-
+        fileWriter = new FileWriter(fileCustomer, true);
+        bufferedWriter = new BufferedWriter(fileWriter);
         System.out.println("Nhap Ten Khach Hang:");
         input = scanner.nextLine();
-        while (!customer.setName(input)){
+        while (!customer.setName(input)) {
             input = scanner.nextLine();
             continue;
         }
         System.out.println("Nhap Ngay Sinh:");
-        while (customer.setBirthday(scanner.nextLine())){
+        input = scanner.nextLine();
+        while (!customer.setBirthday(input)) {
+            input = scanner.nextLine();
             continue;
         }
         System.out.println("Nhap Gioi Tinh");
-        while (!customer.setGender(scanner.nextLine())){
+        input = scanner.nextLine();
+        while (!customer.setGender(input)) {
+            input = scanner.nextLine();
             continue;
         }
         System.out.println("Nhap So CMND:");
-        while (!customer.setIdNumber(scanner.nextLine())){
+        while (!customer.setIdNumber(scanner.nextLine())) {
             continue;
         }
         System.out.println("Nhap So Dien Thoai:");
@@ -237,88 +226,117 @@ public class SystemService {
         customer.setCustomerType(scanner.nextLine());
         System.out.println("Nhap Dia Chi:");
         customer.setAddress(scanner.nextLine());
-        System.out.println("Xin Chon Kieu Dich Vu Su Dung:\n1:\tVilla\n2:\tRoom\n3:\tHouse");
-        serviceChoice = scanner.nextLine();
-        switch (serviceChoice) {
-            case "1":
-                fileReader = new FileReader(fileVilla);
-                bufferedReader = new BufferedReader(fileReader);
-                ArrayList<Villa> listVilla = new ArrayList<>();
-                while ((record = bufferedReader.readLine()) != null) {
-                    Villa temp = createVillaObjFromArray(SystemService.toStringArray(record));
-                    listVilla.add(temp);
-                }
-                System.out.println(listVilla);
-                bufferedReader.close();
-                System.out.println("Nhao Loai Villa:");
-                customer.setInputService(scanner.nextLine());
-                addVillaUser(listVilla, customer);
-                break;
-            case "2":
-                fileReader = new FileReader(fileRoom);
-                bufferedReader = new BufferedReader(fileReader);
-                ArrayList<Room> listRoom = new ArrayList<Room>();
-                while ((record = bufferedReader.readLine()) != null) {
-                    Room temp = createRoomObjFromArray(SystemService.toStringArray(record));
-                    listRoom.add(temp);
-                }
-                System.out.println(listRoom);
-                bufferedReader.close();
-                System.out.println("Nhao Loai Room:");
-                customer.setInputService(scanner.nextLine());
-                addRoomUser(listRoom, customer);
-                break;
-            case "3":
-                fileReader = new FileReader(fileHouse);
-                bufferedReader = new BufferedReader(fileReader);
-                List<House> listHouse = new ArrayList<House>();
-                while ((record = bufferedReader.readLine()) != null) {
-                    House temp = createHouseObjFromArray(SystemService.toStringArray(record));
-                    listHouse.add(temp);
-                }
-                System.out.println(listHouse);
-                bufferedReader.close();
-                System.out.println("Nhao Loai Room:");
-                customer.setInputService(scanner.nextLine());
-                addHouseUser(listHouse, customer);
-                break;
-        }
-
-
-        String text = (customer.getName() + customer.getBirthday() + customer.getGender() + customer.getIdNumber() + customer.getPhoneNumber() + customer.getCustomerType() + customer.getAddress() + customer.getUseService());
-        bufferedWriter.write(text);
+        String text = customer.tostring();
+        bufferedWriter.append(text);
         bufferedWriter.close();
     }
 
-    public void showInformationCustomer() throws IOException{
+    public void showInformationCustomer() throws IOException {
+        scanner = new Scanner(System.in);
         fileReader = new FileReader(fileCustomer);
         bufferedReader = new BufferedReader(fileReader);
         ArrayList<Customer> list = new ArrayList<Customer>();
         int count = 0;
-        while ((record = bufferedReader.readLine()) != null){
+        while ((record = bufferedReader.readLine()) != null) {
             String[] array = record.split(",");
         }
 
     }
 
-    public void addNewBooking() throws IOException{
+    public void addNewBooking() throws IOException {
+        scanner = new Scanner(System.in);
         fileReader = new FileReader(fileCustomer);
         bufferedReader = new BufferedReader(fileReader);
         ArrayList<Customer> list = new ArrayList<Customer>();
         int count = 0;
-        while ((record = bufferedReader.readLine()) != null){
+        while ((record = bufferedReader.readLine()) != null) {
             String[] array = record.split(",");
             count++;
-            Customer temp = createCustomerObjFromArray(array,count);
-            temp.setUseService(array[7]);
+            Customer temp = createCustomerObjFromArray(array, count);
+            list.add(temp);
+            System.out.printf("STT : %d\tName: %s\n", count, temp.getName());
+        }
+        System.out.println("Xin Nhap Ten Khach Hang :");
+        String inputNameChoose = scanner.next();
+        Customer customer = new Customer();
+        for (Customer choose : list) {
+            if (choose.getName().equals(inputNameChoose)) {
+                customer = choose;
+            }
+        }
+        fileReader.close();
+        bufferedReader.close();
+        String serviceChoice;
+        boolean loopServiceChoice = true;
+        scanner = new Scanner(System.in);
+        while (loopServiceChoice) {
+            System.out.println("Xin Chon Kieu Dich Vu Su Dung:\n1:\tVilla\n2:\tRoom\n3:\tHouse");
+            serviceChoice = scanner.nextLine();
+            switch (serviceChoice) {
+                case "1":
+                    fileReader = new FileReader(fileVilla);
+                    bufferedReader = new BufferedReader(fileReader);
+                    ArrayList<Villa> listVilla = new ArrayList<>();
+                    while ((record = bufferedReader.readLine()) != null) {
+                        Villa temp = createVillaObjFromArray(SystemService.toStringArray(record));
+                        listVilla.add(temp);
+                    }
+                    for(Villa search : listVilla){
+                        System.out.println(search.getId());
+                    }
+                    bufferedReader.close();
+                    System.out.println("Nhap ID Loai Villa:");
+                    customer.setInputService(scanner.nextLine());
+                    addVillaUser(listVilla, customer);
+                    break;
+                case "2":
+                    fileReader = new FileReader(fileRoom);
+                    bufferedReader = new BufferedReader(fileReader);
+                    ArrayList<Room> listRoom = new ArrayList<Room>();
+                    while ((record = bufferedReader.readLine()) != null) {
+                        Room temp = createRoomObjFromArray(SystemService.toStringArray(record));
+                        listRoom.add(temp);
+                    }
+                    for(Room search : listRoom){
+                        System.out.println(search.getId());
+                    }
+                    bufferedReader.close();
+                    System.out.println("Nhap ID Loai Room:");
+                    customer.setInputService(scanner.nextLine());
+                    addRoomUser(listRoom, customer);
+                    break;
+                case "3":
+                    fileReader = new FileReader(fileHouse);
+                    bufferedReader = new BufferedReader(fileReader);
+                    List<House> listHouse = new ArrayList<House>();
+                    while ((record = bufferedReader.readLine()) != null) {
+                        House temp = createHouseObjFromArray(SystemService.toStringArray(record));
+                        listHouse.add(temp);
+                    }
+                    for(House search : listHouse){
+                        System.out.println(search.getId());
+                    }
+                    bufferedReader.close();
+                    System.out.println("Nhap ID Loai Room:");
+                    customer.setInputService(scanner.nextLine());
+                    addHouseUser(listHouse, customer);
+                    break;
+                case "5":
+                    this.choiceMain = 7;
+                case "4":
+                    loopServiceChoice = false;
+                    break;
+                default:
+                    System.out.println("Failed!");
+                    break;
 
 
-
+            }
 
         }
-
     }
-private Customer createCustomerObjFromArray(String[] array,int id){
+
+    private Customer createCustomerObjFromArray(String[] array, int id) {
         Customer customer = new Customer();
         customer.setId(id);
         customer.setName(array[0]);
@@ -328,8 +346,9 @@ private Customer createCustomerObjFromArray(String[] array,int id){
         customer.setPhoneNumber(array[4]);
         customer.setCustomerType(array[5]);
         customer.setAddress(array[6]);
+        return customer;
+    }
 
-}
     private Room createRoomObjFromArray(String[] record) {
         Room room = new Room();
         room.setId(record[0]);
@@ -342,11 +361,19 @@ private Customer createCustomerObjFromArray(String[] array,int id){
         return room;
     }
 
-    private void addVillaUser(List<Villa> list, Customer customer) {
+    private void addVillaUser(List<Villa> list, Customer customer) throws IOException {
+        fileWriter = new FileWriter(fileBooking);
+        bufferedWriter = new BufferedWriter(fileWriter);
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getId() == customer.getInputService()) {
+            if (list.get(i).getId().equals(customer.getInputService())) {
                 customer.setUseService(list.get(i));
                 System.out.println("Them Thanh Cong!");
+                record = customer.tostring();
+                bufferedWriter.append(record);
+                record = customer.useService.tostring();
+                bufferedWriter.append(",");
+                bufferedWriter.append(record);
+                bufferedWriter.append("\n");
                 break;
             }
             if (i == list.size() - 1) {
@@ -354,6 +381,8 @@ private Customer createCustomerObjFromArray(String[] array,int id){
                 break;
             }
         }
+        bufferedWriter.close();
+        fileWriter.close();
     }
 
     private Villa createVillaObjFromArray(String[] record) {
@@ -371,11 +400,19 @@ private Customer createCustomerObjFromArray(String[] array,int id){
         return villa;
     }
 
-    private void addRoomUser(List<Room> listRoom, Customer customer) {
+    private void addRoomUser(List<Room> listRoom, Customer customer) throws IOException {
+        fileWriter = new FileWriter(fileBooking);
+        bufferedWriter = new BufferedWriter(fileWriter);
         for (int i = 0; i < listRoom.size(); i++) {
             if (listRoom.get(i).getId() == customer.getInputService()) {
                 customer.setUseService(listRoom.get(i));
                 System.out.println("Them Thanh Cong!");
+                record = customer.tostring();
+                bufferedWriter.append(record);
+                record = customer.useService.tostring();
+                bufferedWriter.append(",");
+                bufferedWriter.append(record);
+                bufferedWriter.append("\n");
                 break;
             }
             if (i == listRoom.size() - 1) {
@@ -383,6 +420,8 @@ private Customer createCustomerObjFromArray(String[] array,int id){
                 break;
             }
         }
+        bufferedWriter.close();
+        fileWriter.close();
     }
 
     private House createHouseObjFromArray(String[] record) {
@@ -399,11 +438,19 @@ private Customer createCustomerObjFromArray(String[] array,int id){
         return house;
     }
 
-    private void addHouseUser(List<House> listHouse, Customer customer) {
+    private void addHouseUser(List<House> listHouse, Customer customer) throws IOException {
+        fileWriter = new FileWriter(fileBooking);
+        bufferedWriter = new BufferedWriter(fileWriter);
         for (int i = 0; i < listHouse.size(); i++) {
             if (listHouse.get(i).getId() == customer.getInputService()) {
                 customer.setUseService(listHouse.get(i));
                 System.out.println("Them Thanh Cong!");
+                record = customer.tostring();
+                bufferedWriter.append(record);
+                record = customer.useService.tostring();
+                bufferedWriter.append(",");
+                bufferedWriter.append(record);
+                bufferedWriter.append("\n");
                 break;
             }
             if (i == listHouse.size() - 1) {
@@ -411,10 +458,13 @@ private Customer createCustomerObjFromArray(String[] array,int id){
                 break;
             }
         }
+        bufferedWriter.close();
+        fileWriter.close();
     }
 
-    public static String[] toStringArray(String e){
-        String[] string = e.split(",");
+    public static String[] toStringArray(String in) {
+        String[] string = in.split(",");
         return string;
     }
 }
+

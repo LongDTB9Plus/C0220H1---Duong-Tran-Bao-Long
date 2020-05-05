@@ -42,8 +42,16 @@ public class Room extends Services {
         }
 
     @Override
-    String showInfo() {
-        return null;
+    public void showInfo() {
+        System.out.printf("ID:\t%s\n" +
+                        "Name Service:\t%s\n"+
+                        "Service Area:\t%f\n"+
+                        "Price Service:\t%f\n"+
+                        "Max People:\t%d\n"+
+                        "Rent Type:\t%s\n"+
+                        "Free Service:\t%s\n",this.id,this.serviceName,this.serviceArea,
+                this.servicePrice,this.serviceMaxPeople,this.serviceRentType,
+                this.servicesFree);
     }
 }
 

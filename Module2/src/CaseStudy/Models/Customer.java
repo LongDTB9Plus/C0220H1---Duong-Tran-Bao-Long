@@ -18,7 +18,7 @@ public class Customer {
     private String phoneNumber;
     private String customerType;
     private String address;
-    private Services useService;
+    public Services useService;
     private String inputService;
 
     public Customer() {
@@ -143,8 +143,15 @@ public class Customer {
         this.useService = useService;
     }
 
+    public String tostring(){
+        return (this.name + "," +
+                this.birthday + "," +
+                this.gender + "," +
+                this.idNumber + "," +
+                this.phoneNumber + "," +
+                this.customerType + "," +
+                this.address
+                );
 
-    public static void main(String[] args) throws IOException {
-        Customer john = new Customer();
     }
 }
