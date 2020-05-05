@@ -1,14 +1,14 @@
 package CaseStudy.Controller;
 
+import CaseStudy.Controller.Comparator.NameComparator;
 import CaseStudy.Models.Customer;
 import CaseStudy.Models.House;
 import CaseStudy.Models.Room;
 import CaseStudy.Models.Villa;
+import CaseStudy.Models.Employee;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class SystemService {
     protected int choiceMain;
@@ -20,6 +20,7 @@ public class SystemService {
     static final File fileRoom = new File(filePath + "/src/CaseStudy/data/room.csv");
     static final File fileCustomer = new File(filePath + "/src/CaseStudy/data/customer.csv");
     static final File fileBooking = new File(filePath + "/src/CaseStudy/data/booking.csv");
+    static final File fileEmployee = new File(filePath + "/src/CaseStudy/data/employee.csv");
     static public final String LINE_SEPARATOR = "------------------------------------------------------------";
     FileWriter fileWriter = null;
     BufferedReader bufferedReader = null;
@@ -29,7 +30,7 @@ public class SystemService {
     public SystemService() {
     }
 
-
+    //Task 2:
     public void addNewService() throws IOException {
         boolean loopNewService = true;
         while (loopNewService) {
@@ -140,6 +141,7 @@ public class SystemService {
         return true;
     }
 
+    //Task 3:
     public void showService() throws IOException {
         boolean loopShowService = true;
         while (loopShowService) {
@@ -154,37 +156,22 @@ public class SystemService {
             int showChoice = scanner.nextInt();
             switch (showChoice) {
                 case 1:
-                    fileReader = new FileReader(fileVilla);
-                    bufferedReader = new BufferedReader(fileReader);
-                    while ((record = bufferedReader.readLine()) != null) {
-                        createVillaObjFromArray(SystemService.toStringArray(record)).showInfo();
-                        System.out.println(LINE_SEPARATOR);
-                    }
-                    bufferedReader.close();
+                    showAllVilla();
                     break;
                 case 2:
-                    fileReader = new FileReader(fileHouse);
-                    bufferedReader = new BufferedReader(fileReader);
-                    while ((record = bufferedReader.readLine()) != null) {
-                        createHouseObjFromArray(SystemService.toStringArray(record)).showInfo();
-                        System.out.println(LINE_SEPARATOR);
-                    }
-                    bufferedReader.close();
+                    showAllHouse();
                     break;
                 case 3:
-                    fileReader = new FileReader(fileRoom);
-                    bufferedReader = new BufferedReader(fileReader);
-                    while ((record = bufferedReader.readLine()) != null) {
-                        createRoomObjFromArray(SystemService.toStringArray(record)).showInfo();
-                        System.out.println(LINE_SEPARATOR);
-                    }
-                    bufferedReader.close();
+                    showAllRoom();
                     break;
                 case 4:
+                    treeSetVilla();
                     break;
                 case 5:
+                    treeSetHouse();
                     break;
                 case 6:
+                    treeSetRoom();
                     break;
                 case 8:
                     this.choiceMain = 7;
@@ -197,6 +184,86 @@ public class SystemService {
         }
     }
 
+    private void showAllRoom() throws IOException {
+        fileReader = new FileReader(fileRoom);
+        bufferedReader = new BufferedReader(fileReader);
+        while ((record = bufferedReader.readLine()) != null) {
+            createRoomObjFromArray(SystemService.toStringArray(record)).showInfo();
+            System.out.println(LINE_SEPARATOR);
+        }
+        bufferedReader.close();
+    }
+
+    private void showAllHouse() throws IOException {
+        fileReader = new FileReader(fileHouse);
+        bufferedReader = new BufferedReader(fileReader);
+        while ((record = bufferedReader.readLine()) != null) {
+            createHouseObjFromArray(SystemService.toStringArray(record)).showInfo();
+            System.out.println(LINE_SEPARATOR);
+        }
+        bufferedReader.close();
+    }
+
+    private void showAllVilla() throws IOException {
+        fileReader = new FileReader(fileVilla);
+        bufferedReader = new BufferedReader(fileReader);
+        while ((record = bufferedReader.readLine()) != null) {
+            createVillaObjFromArray(SystemService.toStringArray(record)).showInfo();
+            System.out.println(LINE_SEPARATOR);
+        }
+        bufferedReader.close();
+    }
+
+    //Task 8:
+    private void treeSetVilla() throws IOException {
+        fileReader = new FileReader(fileVilla);
+        bufferedReader = new BufferedReader(fileReader);
+        TreeSet<String> treeSetNameVilla = new TreeSet<>(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        while ((record = bufferedReader.readLine()) != null) {
+            Villa temp = createVillaObjFromArray(toStringArray(record));
+            treeSetNameVilla.add(temp.getServiceName());
+        }
+        System.out.println(treeSetNameVilla);
+    }
+
+    private void treeSetHouse() throws IOException {
+        fileReader = new FileReader(fileHouse);
+        bufferedReader = new BufferedReader(fileReader);
+        TreeSet<String> treeSetNameHouse = new TreeSet<>(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        while ((record = bufferedReader.readLine()) != null) {
+            House temp = createHouseObjFromArray(toStringArray(record));
+            treeSetNameHouse.add(temp.getServiceName());
+        }
+        System.out.println(treeSetNameHouse);
+    }
+
+    private void treeSetRoom() throws IOException {
+        fileReader = new FileReader(fileRoom);
+        bufferedReader = new BufferedReader(fileReader);
+        TreeSet<String> treeSetNameRoom = new TreeSet<>(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        while ((record = bufferedReader.readLine()) != null) {
+            Room temp = createRoomObjFromArray(toStringArray(record));
+            treeSetNameRoom.add(temp.getServiceName());
+        }
+        System.out.println(treeSetNameRoom);
+    }
+
+    //Task 5:
     public void addNewCustomer() throws Exception, IOException {
         Customer customer = new Customer();
         Scanner scanner = new Scanner(System.in);
@@ -236,6 +303,7 @@ public class SystemService {
         bufferedWriter.close();
     }
 
+    //Task 6:
     public void showInformationCustomer() throws IOException {
         scanner = new Scanner(System.in);
         fileReader = new FileReader(fileCustomer);
@@ -245,12 +313,18 @@ public class SystemService {
         while ((record = bufferedReader.readLine()) != null) {
             String[] array = record.split(",");
             count++;
-            createCustomerObjFromArray(array, count).showInfo();
+            Customer temp = createCustomerObjFromArray(array, count);
+            list.add(temp);
+        }
+        Collections.sort(list,new NameComparator());
+        for (Customer e : list){
+            e.showInfo();
             System.out.println(LINE_SEPARATOR);
         }
 
     }
 
+    //Task 7:
     public void addNewBooking() throws IOException {
         scanner = new Scanner(System.in);
         fileReader = new FileReader(fileCustomer);
@@ -345,6 +419,26 @@ public class SystemService {
         }
     }
 
+    //Task 9:
+    public void showInformationEmployee() throws IOException {
+        fileReader = new FileReader(fileEmployee);
+        bufferedReader = new BufferedReader(fileReader);
+        HashMap<Integer, Employee> mapEmployee = new HashMap<>();
+        int i = 0;
+        while ((record = bufferedReader.readLine()) != null) {
+            i++;
+            Employee temp = createEmpObjFromArray(toStringArray(record));
+            mapEmployee.put(i, temp);
+        }
+//        Show Map
+        for (Map.Entry<Integer, Employee> entry : mapEmployee.entrySet()) {
+            System.out.println(entry.getKey() + "\n" + LINE_SEPARATOR + "\n" + entry.getValue().toString()
+                    + "\n" + LINE_SEPARATOR + "\n");
+
+        }
+    }
+
+    //    Function Ho Tro:
     private Customer createCustomerObjFromArray(String[] array, int id) {
         Customer customer = new Customer();
         customer.setId(id);
@@ -471,9 +565,18 @@ public class SystemService {
         fileWriter.close();
     }
 
+    private Employee createEmpObjFromArray(String[] record) {
+        Employee employee = new Employee();
+        employee.setName(record[0]);
+        employee.setAge(record[1]);
+        employee.setAddress(record[2]);
+        return employee;
+    }
+
     public static String[] toStringArray(String in) {
         String[] string = in.split(",");
         return string;
     }
+//
 }
 

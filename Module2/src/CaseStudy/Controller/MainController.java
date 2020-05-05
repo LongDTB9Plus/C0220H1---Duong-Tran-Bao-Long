@@ -43,6 +43,7 @@ public class MainController extends SystemService {
                     addNewBooking();
                     break;
                 case 6:
+                    showInformationEmployee();
                     break;
                 case 7:
                     loopMain = false;
