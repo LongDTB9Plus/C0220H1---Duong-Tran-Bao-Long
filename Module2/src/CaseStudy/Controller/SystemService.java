@@ -1,17 +1,15 @@
 package CaseStudy.Controller;
 
 import CaseStudy.Controller.Comparator.NameComparator;
-import CaseStudy.Models.Customer;
-import CaseStudy.Models.House;
-import CaseStudy.Models.Room;
-import CaseStudy.Models.Villa;
-import CaseStudy.Models.Employee;
+import CaseStudy.Models.*;
+import CaseStudy.data.Cabinet;
 
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.BlockingQueue;
 
 public class SystemService {
-    protected int choiceMain;
+    protected String choiceMain;
     Scanner scanner = new Scanner(System.in);
     String record;
     static String filePath = new File("").getAbsolutePath();
@@ -20,8 +18,10 @@ public class SystemService {
     static final File fileRoom = new File(filePath + "/src/CaseStudy/data/room.csv");
     static final File fileCustomer = new File(filePath + "/src/CaseStudy/data/customer.csv");
     static final File fileBooking = new File(filePath + "/src/CaseStudy/data/booking.csv");
-    static final File fileEmployee = new File(filePath + "/src/CaseStudy/data/employee.csv");
+    static public final File fileEmployee = new File(filePath + "/src/CaseStudy/data/employee.csv");
     static public final String LINE_SEPARATOR = "------------------------------------------------------------";
+    static public final int TICKET_NUMBER = 10;
+    static public int ticketLeft = 10;
     FileWriter fileWriter = null;
     BufferedReader bufferedReader = null;
     Reader fileReader = null;
@@ -39,20 +39,20 @@ public class SystemService {
                     "3: Add New Room\n" +
                     "4: Back To Main Menu\n" +
                     "5: Exit ");
-            int choice = scanner.nextInt();
+            String choice = scanner.next();
             switch (choice) {
-                case 1:
+                case "1":
                     addVilla();
                     break;
-                case 2:
+                case "2":
                     addHouse();
                     break;
-                case 3:
+                case "3":
                     addRoom();
                     break;
-                case 5:
-                    this.choiceMain = 7;
-                case 4:
+                case "5":
+                    this.choiceMain = "7";
+                case "4":
                     loopNewService = false;
                     break;
                 default:
@@ -153,29 +153,29 @@ public class SystemService {
                     "6: Show All Room Not Duplicate\n" +
                     "7: Back To Main Menu\n" +
                     "8: Exit\n" + LINE_SEPARATOR);
-            int showChoice = scanner.nextInt();
+            String showChoice = scanner.next();
             switch (showChoice) {
-                case 1:
+                case "1":
                     showAllVilla();
                     break;
-                case 2:
+                case "2":
                     showAllHouse();
                     break;
-                case 3:
+                case "3":
                     showAllRoom();
                     break;
-                case 4:
+                case "4":
                     treeSetVilla();
                     break;
-                case 5:
+                case "5":
                     treeSetHouse();
                     break;
-                case 6:
+                case "6":
                     treeSetRoom();
                     break;
-                case 8:
-                    this.choiceMain = 7;
-                case 7:
+                case "8":
+                    this.choiceMain = "7";
+                case "7":
                     loopShowService = false;
                     break;
                 default:
@@ -316,8 +316,8 @@ public class SystemService {
             Customer temp = createCustomerObjFromArray(array, count);
             list.add(temp);
         }
-        Collections.sort(list,new NameComparator());
-        for (Customer e : list){
+        Collections.sort(list, new NameComparator());
+        for (Customer e : list) {
             e.showInfo();
             System.out.println(LINE_SEPARATOR);
         }
@@ -405,7 +405,7 @@ public class SystemService {
                     addHouseUser(listHouse, customer);
                     break;
                 case "5":
-                    this.choiceMain = 7;
+                    this.choiceMain = "7";
                 case "4":
                     loopServiceChoice = false;
                     break;
@@ -437,6 +437,58 @@ public class SystemService {
 
         }
     }
+
+    //    Task 10:
+    public void bookTicketCinema4D() {
+        Queue<String> customerList = new LinkedList<>();
+        while (true) {
+            System.out.println("Nhap Ten Cua Ban");
+            scanner = new Scanner(System.in);
+            String name = scanner.next();
+            if (customerList.size() < TICKET_NUMBER) {
+                customerList.add(name);
+                System.out.println("Book Ve Thanh Cong!!!");
+            } else {
+                System.out.println("Da Het Ve");
+                int chairNumber = 1;
+                while (true) {
+                    String temp = customerList.poll();
+                    if (temp == null) {
+                        break;
+                    }
+                    System.out.printf("So Ghe:%d\tTen:%s\n", chairNumber, temp);
+                    chairNumber++;
+                }
+                break;
+            }
+        }
+
+    }
+
+    //    Task 11:
+    public void findEmployee() throws IOException {
+        scanner = new Scanner(System.in);
+        Stack<Employee> employeeStack = Cabinet.getListEmployee();
+        System.out.println("Nhap Key Cua Ban:");
+        String idInput = scanner.next();
+        try {
+            while (true) {
+                boolean isFindId = employeeStack.peek().getId().contains(idInput);
+                if (!isFindId) {
+                    employeeStack.pop();
+                } else {
+                    System.out.printf("Customer With Key:\t%s\n", idInput);
+                    System.out.println(LINE_SEPARATOR);
+                    System.out.printf(employeeStack.peek().toString());
+                    System.out.println(LINE_SEPARATOR);
+                    break;
+                }
+            }
+        } catch (EmptyStackException ex) {
+            System.out.println(LINE_SEPARATOR + "\nInvalid Key\n" + LINE_SEPARATOR);
+        }
+    }
+
 
     //    Function Ho Tro:
     private Customer createCustomerObjFromArray(String[] array, int id) {
@@ -565,11 +617,12 @@ public class SystemService {
         fileWriter.close();
     }
 
-    private Employee createEmpObjFromArray(String[] record) {
+    static public Employee createEmpObjFromArray(String[] record) {
         Employee employee = new Employee();
-        employee.setName(record[0]);
-        employee.setAge(record[1]);
-        employee.setAddress(record[2]);
+        employee.setId(record[0]);
+        employee.setName(record[1]);
+        employee.setAge(record[2]);
+        employee.setAddress(record[3]);
         return employee;
     }
 

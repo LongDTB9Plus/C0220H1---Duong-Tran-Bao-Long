@@ -24,28 +24,36 @@ public class MainController extends SystemService {
                     "4: Show Information Of Customer\n" +
                     "5: Add New Booking\n" +
                     "6: Show Information Of Employee\n" +
-                    "7: Exit\n" + LINE_SEPARATOR);
-            this.choiceMain = scanner.nextInt();
+                    "7: Book Ticket Cinema 4D\n"+
+                    "8: Find Employee Information\n"+
+                    "9: Exit\n" + LINE_SEPARATOR);
+            this.choiceMain = scanner.next();
             switch (this.choiceMain) {
-                case 1:
+                case "1":
                     addNewService();
                     break;
-                case 2:
+                case "2":
                     showService();
                     break;
-                case 3:
+                case "3":
                     addNewCustomer();
                     break;
-                case 4:
+                case "4":
                     showInformationCustomer();
                     break;
-                case 5:
+                case "5":
                     addNewBooking();
                     break;
-                case 6:
+                case "6":
                     showInformationEmployee();
                     break;
-                case 7:
+                case "7":
+                    bookTicketCinema4D();
+                    break;
+                case "8":
+                    findEmployee();
+                    break;
+                case "9":
                     loopMain = false;
                     break;
                 default:

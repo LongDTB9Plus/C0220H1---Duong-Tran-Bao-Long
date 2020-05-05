@@ -1,6 +1,16 @@
 package CaseStudy.Models;
 
 public class Employee {
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     private String name;
     private String age;
     private String address;
@@ -8,7 +18,8 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String name, String age, String address) {
+    public Employee(String id,String name, String age, String address) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.address = address;
@@ -39,7 +50,8 @@ public class Employee {
     }
 
     public String toString() {
-        return ("Name:\t" + this.name + "\n" +
+        return ("ID:\t" + this.id + "\n" +
+                "Name:\t" + this.name + "\n" +
                 "Age:\t" + this.age + "\n" +
                 "Adress:\t" + this.address + "\n");
     }
