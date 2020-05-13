@@ -1,3 +1,4 @@
+use furama;
 -- 2.	Hiển thị thông tin của tất cả nhân viên có trong hệ thống có tên bắt đầu là một trong các ký tự “H”, “T” hoặc “K” và có tối đa 15 ký tự.
 SELECT * FROM furama.nhan_vien
 where ((char_length(Ho_ten)) < 15)
@@ -30,10 +31,12 @@ order by Luot_Dat_Phong asc;
 -- TongTien (Với TongTien được tính theo công thức như sau: ChiPhiThue + SoLuong*Gia, với SoLuong và Giá là từ bảng DichVuDiKem) 
 -- cho tất cả các Khách hàng đã từng đặt phỏng. (Những Khách hàng nào chưa từng đặt phòng cũng phải hiển thị ra). 
 
-select hop_dong.ID_khach_hang, Khach_hang.Ho_ten, loai_khach.Ten_loai_khach, Dich_vu.Ten_dich_vu, hop_dong.ID_hop_dong, hop_dong.Ngay_lam_hop_dong, hop_dong.Ngay_ket_thuc, (dich_vu.Chi_phi_thue + hop_dong_chi_tiet.So_luong * dich_vu_di_kem.gia) as Tong_tien
+select hop_dong.ID_khach_hang, Khach_hang.Ho_ten, loai_khach.Ten_loai_khach, hop_dong.ID_hop_dong, hop_dong.Ngay_lam_hop_dong, hop_dong.Ngay_ket_thuc, Dich_vu.Ten_dich_vu, (dich_vu.Chi_phi_thue + hop_dong_chi_tiet.So_luong * (dich_vu_di_kem.gia*1000)) as Tong_tien
 from  hop_dong
 left join khach_hang
 on (hop_dong.ID_khach_hang = khach_hang.ID_khach_hang)
+left join dich_vu
+on (hop_dong.ID_dich_vu = dich_vu.ID_dich_vu)
 left join loai_khach
 on (khach_hang.ID_loai_khach = loai_khach.ID_loai_khach)
 left join hop_dong_chi_tiet
