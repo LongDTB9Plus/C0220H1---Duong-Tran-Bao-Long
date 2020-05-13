@@ -39,7 +39,8 @@ So_CMND varchar(45) not null,
 SDT varchar(45) not null,
 Email varchar(45),
 Dia_chi varchar(45),
-foreign key (ID_loai_khach) references Loai_khach (ID_loai_khach)
+foreign key (ID_loai_khach) references Loai_khach (ID_loai_khach),
+constraint Email check (email like '%_@__%.__%')
 );
 
 create table Vi_tri (
@@ -65,7 +66,7 @@ ID_trinh_do int not null,
 ID_bo_phan int not null,
 Ngay_sinh date not null,
 So_CMND varchar(45) not null,
-Luong varchar(45) not null,
+Luong int not null,
 SDT varchar(45) not null,
 Email varchar(45) not null,
 Dia_chi varchar(45) not null,
