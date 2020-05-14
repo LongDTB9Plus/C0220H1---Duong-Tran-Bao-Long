@@ -31,10 +31,10 @@ order by Luot_Dat_Phong asc;
 -- TongTien (Với TongTien được tính theo công thức như sau: ChiPhiThue + SoLuong*Gia, với SoLuong và Giá là từ bảng DichVuDiKem) 
 -- cho tất cả các Khách hàng đã từng đặt phỏng. (Những Khách hàng nào chưa từng đặt phòng cũng phải hiển thị ra). 
 
-select hop_dong.ID_khach_hang, Khach_hang.Ho_ten, loai_khach.Ten_loai_khach, hop_dong.ID_hop_dong, hop_dong.Ngay_lam_hop_dong, hop_dong.Ngay_ket_thuc, Dich_vu.Ten_dich_vu, (dich_vu.Chi_phi_thue + hop_dong_chi_tiet.So_luong * (dich_vu_di_kem.gia*1000)) as Tong_tien
-from  hop_dong
-left join khach_hang
-on (hop_dong.ID_khach_hang = khach_hang.ID_khach_hang)
+select khach_hang.ID_khach_hang, Khach_hang.Ho_ten, loai_khach.Ten_loai_khach, hop_dong.ID_hop_dong, hop_dong.Ngay_lam_hop_dong, hop_dong.Ngay_ket_thuc, Dich_vu.Ten_dich_vu, (dich_vu.Chi_phi_thue + hop_dong_chi_tiet.So_luong * (dich_vu_di_kem.gia*1000)) as Tong_tien
+from  khach_hang
+left join hop_dong
+on (khach_hang.ID_khach_hang = hop_dong.ID_khach_hang )
 left join dich_vu
 on (hop_dong.ID_dich_vu = dich_vu.ID_dich_vu)
 left join loai_khach
@@ -45,3 +45,17 @@ left join dich_vu_di_kem
 on (hop_dong_chi_tiet.ID_dich_vu_di_kem = dich_vu_di_kem.ID_dich_vu_di_kem)
 group by hop_dong.ID_hop_dong
 order by hop_dong.ID_hop_dong asc;
+
+-- 6.	Hiển thị IDDichVu, TenDichVu, DienTich, ChiPhiThue, TenLoaiDichVu
+--  của tất cả các loại Dịch vụ chưa từng được Khách hàng thực hiện đặt từ quý 1 của năm 2019 (Quý 1 là tháng 1, 2, 3).
+
+select Dich_vu.ID_dich_vu, Dich_vu.Ten_dich_vu, Dich_vu.Dien_tich, Dich_vu.Chi_phi_thue, Loai_dich_vu.Ten_dich_vu ,ngay_lam_hop_dong
+from Dich_vu
+inner join Loai_dich_vu
+on (Dich_vu.ID_loai_dich_vu = Loai_dich_vu.ID_loai_dich_vu)
+left join hop_dong
+on (Dich_vu.ID_dich_vu = hop_dong.ID_dich_vu)
+group by Dich_vu.ID_dich_vu
+having (max(year(hop_dong.ngay_lam_hop_dong)) < 2019) or (hop_dong.ngay_lam_hop_dong is null)
+order by Dich_vu.ID_dich_vu asc;
+
