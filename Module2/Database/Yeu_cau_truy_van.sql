@@ -59,3 +59,50 @@ group by Dich_vu.ID_dich_vu
 having (max(year(hop_dong.ngay_lam_hop_dong)) < 2019) or (hop_dong.ngay_lam_hop_dong is null)
 order by Dich_vu.ID_dich_vu asc;
 
+-- 7.	Hiển thị thông tin IDDichVu, TenDichVu, DienTich, SoNguoiToiDa, ChiPhiThue, TenLoaiDichVu 
+-- của tất cả các loại dịch vụ đã từng được Khách hàng đặt phòng trong năm 2018 nhưng chưa từng được Khách hàng đặt phòng  trong năm 2019. 
+
+select Dich_vu.ID_dich_vu, Dich_vu.Ten_dich_vu, Dich_vu.Dien_tich, Dich_vu.Chi_phi_thue, Loai_dich_vu.Ten_dich_vu 
+from Dich_vu
+inner join Loai_dich_vu
+on (Dich_vu.ID_loai_dich_vu = Loai_dich_vu.ID_loai_dich_vu)
+left join hop_dong
+on (Dich_vu.ID_dich_vu = hop_dong.ID_dich_vu)
+group by Dich_vu.ID_dich_vu
+having (max(year(hop_dong.ngay_lam_hop_dong)) <= 2019)
+order by Dich_vu.ID_dich_vu asc;
+
+-- 8.	Hiển thị thông tin HoTenKhachHang có trong hệ thống, với yêu cầu HoThenKhachHang không trùng nhau.
+-- Học viên sử dụng theo 3 cách khác nhau để thực hiện yêu cầu trên
+
+-- Cach 1: su dung distinct
+select distinct Ho_ten from khach_hang; 
+
+-- Cach 2: su dung group by
+
+select Ho_ten from khach_hang
+group by Ho_ten; 
+
+-- Cach 3: su dung UNION
+select Ho_ten from khach_hang
+union
+select Ho_ten from khach_hang;
+
+-- 9.	Thực hiện thống kê doanh thu theo tháng, nghĩa là tương ứng với mỗi tháng trong năm 2019 thì sẽ có bao nhiêu khách hàng 
+-- thực hiện đặt phòng. 
+
+ select count(case ngay_lam_hop_dong when (month(ngay_lam_hop_dong) = 1) then 1 else null end) as Thang_1,
+ count(case ngay_lam_hop_dong when (month(ngay_lam_hop_dong) = 2) then 1 else null end) as Thang_2,
+ count(case ngay_lam_hop_dong when (month(ngay_lam_hop_dong) = 3) then 1 else null end) as Thang_3,
+ count(case ngay_lam_hop_dong when (month(ngay_lam_hop_dong) = 4) then 1 else null end) as Thang_4,
+ count(case ngay_lam_hop_dong when (month(ngay_lam_hop_dong) = 5) then 1 else null end) as Thang_5,
+ count(case ngay_lam_hop_dong when (month(ngay_lam_hop_dong) = 6) then 1 else null end) as Thang_6,
+ count(case ngay_lam_hop_dong when (month(ngay_lam_hop_dong) = 7) then 1 else null end) as Thang_7,
+ count(case ngay_lam_hop_dong when (month(ngay_lam_hop_dong) = 8) then 1 else null end) as Thang_8,
+ count(case ngay_lam_hop_dong when (month(ngay_lam_hop_dong) = 9) then 1 else null end) as Thang_9,
+ count(case ngay_lam_hop_dong when (month(ngay_lam_hop_dong) = 10) then 1 else null end) as Thang_10,
+ count(case ngay_lam_hop_dong when (month(ngay_lam_hop_dong) = 11) then 1 else null end) as Thang_11,
+ count(case ngay_lam_hop_dong when (month(ngay_lam_hop_dong) = 12) then 1 else null end) as Thang_12
+ from hop_dong
+ where year(ngay_lam_hop_dong) = 2019;
+ 
