@@ -82,6 +82,8 @@ INSERT INTO `furama`.`hop_dong` (`ID_hop_dong`, `ID_nhan_vien`, `ID_khach_hang`,
 INSERT INTO `furama`.`hop_dong` (`ID_hop_dong`, `ID_nhan_vien`, `ID_khach_hang`, `ID_dich_vu`, `Ngay_lam_hop_dong`, `Ngay_ket_thuc`, `Tien_dat_coc`, `Tong_tien`) VALUES ('7', '5', '1', '2', '2019-12-22', '2019-12-27', '1000000', '3000000');
 INSERT INTO `furama`.`hop_dong` (`ID_hop_dong`, `ID_nhan_vien`, `ID_khach_hang`, `ID_dich_vu`, `Ngay_lam_hop_dong`, `Ngay_ket_thuc`, `Tien_dat_coc`, `Tong_tien`) VALUES ('8', '5', '1', '3', '2020-07-12', '2020-08-10', '3000000', '20000000');
 INSERT INTO `furama`.`hop_dong` (`ID_hop_dong`, `ID_nhan_vien`, `ID_khach_hang`, `ID_dich_vu`, `Ngay_lam_hop_dong`, `Ngay_ket_thuc`, `Tien_dat_coc`, `Tong_tien`) VALUES ('9', '8', '2', '4', '2018-06-06', '2018-06-16', '2000000', '14000000');
+INSERT INTO `furama`.`hop_dong` (`ID_hop_dong`, `ID_nhan_vien`, `ID_khach_hang`, `ID_dich_vu`, `Ngay_lam_hop_dong`, `Ngay_ket_thuc`, `Tien_dat_coc`, `Tong_tien`) VALUES ('11', '5', '2', '1', '2019-11-21', '2019-11-23', '1000000', '3000000');
+INSERT INTO `furama`.`hop_dong` (`ID_hop_dong`, `ID_nhan_vien`, `ID_khach_hang`, `ID_dich_vu`, `Ngay_lam_hop_dong`, `Ngay_ket_thuc`, `Tien_dat_coc`, `Tong_tien`) VALUES ('12', '6', '3', '2', '2019-04-23', '2019-04-27', '1000000', '3000000');
 
 SELECT * FROM furama.hop_dong_chi_tiet;
 INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('1', '1', '2', '2');
@@ -92,5 +94,8 @@ INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`,
 INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('6', '6', '2', '2');
 INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('7', '6', '1', '1');
 INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('8', '6', '4', '3');
+INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('15', '11', '1', '2');
+INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('16', '12', '2', '3');
+INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('17', '12', '1', '5');
 
 
