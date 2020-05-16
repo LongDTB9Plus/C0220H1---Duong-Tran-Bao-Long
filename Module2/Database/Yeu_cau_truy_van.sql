@@ -25,6 +25,17 @@ on (khach_hang.ID_loai_khach = loai_khach.ID_loai_khach)
 where (loai_khach.Ten_loai_khach = 'Diamond')
 order by Luot_Dat_Phong asc;
 
+-- Su Dung Exist 
+select khach_hang.Ho_ten, count(hop_dong.ID_khach_hang) as Luot_Dat_Phong
+from khach_hang 
+left join hop_dong
+on (khach_hang.ID_khach_hang = hop_dong.ID_khach_hang) 
+where exists 
+	(select Ten_loai_khach from loai_khach
+	where (khach_hang.ID_loai_khach = loai_khach.ID_loai_khach) and (loai_khach.Ten_loai_khach = 'Diamond')
+    )
+order by Luot_Dat_Phong asc;
+
 -- 5.	Hiển thị IDKhachHang, HoTen, TenLoaiKhach, IDHopDong, TenDichVu, NgayLamHopDong, NgayKetThuc, 
 -- TongTien (Với TongTien được tính theo công thức như sau: ChiPhiThue + SoLuong*Gia, với SoLuong và Giá là từ bảng DichVuDiKem) 
 -- cho tất cả các Khách hàng đã từng đặt phỏng. (Những Khách hàng nào chưa từng đặt phòng cũng phải hiển thị ra). 
@@ -231,7 +242,7 @@ having (count(hop_dong.ID_nhan_vien) <= 3);
 delete nhan_vien from nhan_vien
 left join hop_dong
 on hop_dong.ID_nhan_vien = nhan_vien.ID_nhan_vien
-where (nhan_vien.ID_bo_phan = 1) and (hop_dong.ID_nhan_vien is null);
+where (nhan_vien.ID_bo_phan = 1) and (year(hop_dong.ID_nhan_vien) between 2017 and 2019);
 
 -- 17.	Cập nhật thông tin những khách hàng có TenLoaiKhachHang từ  Platinium lên Diamond, 
 -- chỉ cập nhật những khách hàng đã từng đặt phòng với tổng Tiền thanh toán trong năm 2019 là lớn hơn 10.000.000 VNĐ. 
@@ -284,4 +295,5 @@ from nhan_vien
 union
 select ID_khach_hang as ID,Ho_ten,Email,SDT,Ngay_sinh,Dia_chi
 from khach_hang;
+
 
