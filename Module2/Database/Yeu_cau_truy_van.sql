@@ -167,18 +167,103 @@ when (month(ngay_lam_hop_dong) = 12) then 1 else null end) as Thang_12
  -- 13.	Hiển thị thông tin các Dịch vụ đi kèm được sử dụng nhiều nhất bởi các Khách hàng đã đặt phòng. 
  -- (Lưu ý là có thể có nhiều dịch vụ có số lần sử dụng nhiều như nhau). 
 
- select ID,Dich_Vu_Di_Kem,max(So_Lan_Su_Dung) as maxSL from 
- (select ID,Dich_Vu_Di_Kem,max(So_Lan) So_Lan_Su_Dung
- from 
- ( select
-		dich_vu_di_kem.ID_dich_vu_di_kem as ID,dich_vu_di_kem.Ten_dich_vu_di_kem as Dich_Vu_Di_Kem,(sum(hop_dong_chi_tiet.so_luong)) as So_Lan
-        from hop_dong_chi_tiet
-        inner join dich_vu_di_kem
-        on dich_vu_di_kem.ID_dich_vu_di_kem = hop_dong_chi_tiet.ID_dich_vu_di_kem
-        group by dich_vu_di_kem.ID_dich_vu_di_kem
-        ) A
-group by ID) B
-inner join A
-on maxSL = A.So_Lan
-;
- 
+select hop_dong_chi_tiet.ID_dich_vu_di_kem,dich_vu_di_kem.Ten_dich_vu_di_kem,Sum_Table.SL So_Lan_Su_Dung 
+from
+(
+	 select sum(hop_dong_chi_tiet.so_luong) SL
+	 from hop_dong_chi_tiet
+	 group by hop_dong_chi_tiet.ID_dich_vu_di_kem
+     order by SL desc
+     limit 1
+	) as Sum_Table
+join hop_dong_chi_tiet
+left join dich_vu_di_kem
+on hop_dong_chi_tiet.ID_dich_vu_di_kem = dich_vu_di_kem.ID_dich_vu_di_kem
+group by hop_dong_chi_tiet.ID_dich_vu_di_kem
+having sum(hop_dong_chi_tiet.So_luong) = Sum_Table.SL
+order by hop_dong_chi_tiet.ID_dich_vu_di_kem asc;
+
+-- 14.	Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất.
+--  Thông tin hiển thị bao gồm IDHopDong, TenLoaiDichVu, TenDichVuDiKem, SoLanSuDung. 
+
+select hop_dong_chi_tiet.ID_hop_dong, dich_vu_di_kem.Ten_dich_vu_di_kem, hop_dong_chi_tiet.So_Luong
+from hop_dong_chi_tiet
+left join dich_vu_di_kem
+on hop_dong_chi_tiet.ID_dich_vu_di_kem = dich_vu_di_kem.ID_dich_vu_di_kem
+group by hop_dong_chi_tiet.ID_dich_vu_di_kem
+having count(hop_dong_chi_tiet.ID_dich_vu_di_kem) = 1
+and So_Luong = 1;
+
+-- 15.	Hiển thi thông tin của tất cả nhân viên bao gồm 
+-- IDNhanVien, HoTen, TrinhDo, TenBoPhan, SoDienThoai, DiaChi mới chỉ lập được tối đa 3 hợp đồng từ năm 2018 đến 2019. 
+
+select nhan_vien.ID_nhan_vien, nhan_vien.Ho_ten, trinh_do.Trinh_do, bo_phan.Ten_bo_phan, nhan_vien.Dia_chi, count(hop_dong.ID_nhan_vien) as So_hop_dong
+from nhan_vien
+left join hop_dong
+on nhan_vien.ID_nhan_vien = hop_dong.ID_nhan_vien
+inner join trinh_do
+on nhan_vien.ID_trinh_do = trinh_do.ID_trinh_do
+inner join bo_phan
+on nhan_vien.ID_bo_phan = bo_phan.ID_bo_phan
+where ((year(hop_dong.ngay_lam_hop_dong) between 2018 and 2019) or ((hop_dong.ngay_lam_hop_dong) is null))  and (nhan_vien.ID_bo_phan = 1 )
+group by nhan_vien.ID_nhan_vien
+having (count(hop_dong.ID_nhan_vien) <= 3);
+
+-- 16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2017 đến năm 2019.
+
+delete nhan_vien from nhan_vien
+left join hop_dong
+on hop_dong.ID_nhan_vien = nhan_vien.ID_nhan_vien
+where (nhan_vien.ID_bo_phan = 1) and (hop_dong.ID_nhan_vien is null);
+
+-- 17.	Cập nhật thông tin những khách hàng có TenLoaiKhachHang từ  Platinium lên Diamond, 
+-- chỉ cập nhật những khách hàng đã từng đặt phòng với tổng Tiền thanh toán trong năm 2019 là lớn hơn 10.000.000 VNĐ. 
+update khach_hang
+inner join
+(
+select hop_dong.ID_khach_hang ID, sum(dich_vu.Chi_phi_thue + hop_dong_chi_tiet.So_luong * (dich_vu_di_kem.gia*1000))  as Tong_tien
+from hop_dong
+left join hop_dong_chi_tiet 
+on hop_dong.ID_hop_dong = hop_dong_chi_tiet.ID_hop_dong
+left join dich_vu_di_kem
+on hop_dong_chi_tiet.ID_dich_vu_di_kem = dich_vu_di_kem.ID_dich_vu_di_kem
+left join dich_vu
+on hop_dong.ID_dich_vu = dich_vu.ID_dich_vu
+where (year(hop_dong.ngay_lam_hop_dong) = 2019)
+group by hop_dong.ID_khach_hang
+) Table_Tieu_Phi
+on khach_hang.ID_khach_hang = Table_Tieu_Phi.ID
+set khach_hang.ID_loai_khach = 1 
+where (khach_hang.ID_loai_khach = 2);
+
+-- 18.	Xóa những khách hàng có hợp đồng trước năm 2016 (chú ý ràngbuộc giữa các bảng).
+
+delete hop_dong_chi_tiet,hop_dong,khach_hang from khach_hang 
+inner join hop_dong
+on khach_hang.ID_khach_hang = hop_dong.ID_khach_hang
+inner join hop_dong_chi_tiet
+on hop_dong.ID_hop_dong = hop_dong_chi_tiet.ID_hop_dong
+where year(hop_dong.ngay_lam_hop_dong) <= 2016;
+
+-- 19.	Cập nhật giá cho các Dịch vụ đi kèm được sử dụng trên 10 lần trong năm 2019 lên gấp đôi.
+update dich_vu_di_kem
+left join
+(select hop_dong_chi_tiet.ID_dich_vu_di_kem ID, sum(hop_dong_chi_tiet.So_luong) as SL
+from hop_dong_chi_tiet
+left join hop_dong
+on hop_dong_chi_tiet.ID_hop_dong = hop_dong.ID_hop_dong
+where year(hop_dong.ngay_lam_hop_dong) = 2019
+group by hop_dong_chi_tiet.ID_dich_vu_di_kem 
+) as Table_SL
+on dich_vu_di_kem.ID_dich_vu_di_kem = Table_SL.ID
+set   dich_vu_di_kem.Gia = dich_vu_di_kem.Gia * 2
+where Table_SL.SL >= 10;
+
+-- 20.	Hiển thị thông tin của tất cả các Nhân viên và Khách hàng có trong hệ thống, thông tin hiển thị bao gồm
+--  ID (IDNhanVien, IDKhachHang), HoTen, Email, SoDienThoai, NgaySinh, DiaChi. 
+
+select ID_nhan_vien as ID,Ho_ten,Email,SDT,Ngay_sinh,Dia_chi
+from nhan_vien
+union
+select ID_khach_hang as ID,Ho_ten,Email,SDT,Ngay_sinh,Dia_chi
+from khach_hang;

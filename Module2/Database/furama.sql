@@ -39,7 +39,7 @@ So_CMND varchar(45) not null,
 SDT varchar(45) not null,
 Email varchar(45),
 Dia_chi varchar(45),
-foreign key (ID_loai_khach) references Loai_khach (ID_loai_khach),
+foreign key (ID_loai_khach) references Loai_khach (ID_loai_khach) ON DELETE CASCADE ,
 constraint Email check (email like '%_@__%.__%')
 );
 
@@ -91,10 +91,10 @@ ID_dich_vu int not null,
 Ngay_lam_hop_dong date not null,
 Ngay_ket_thuc date not null,
 Tien_dat_coc int not null,
-Tong_tien int not null,
-foreign key (ID_nhan_vien) references Nhan_vien (ID_nhan_vien),
-foreign key (ID_khach_hang) references Khach_hang (ID_khach_hang),
-foreign key (ID_dich_vu) references Dich_vu (ID_dich_vu)
+Tong_tien int,
+foreign key (ID_nhan_vien) references Nhan_vien (ID_nhan_vien) ON DELETE CASCADE ,
+foreign key (ID_khach_hang) references Khach_hang (ID_khach_hang) ON DELETE CASCADE ,
+foreign key (ID_dich_vu) references Dich_vu (ID_dich_vu) ON DELETE CASCADE 
 );
 
 create table Hop_dong_chi_tiet (
@@ -102,6 +102,6 @@ ID_hop_dong_chi_tiet int primary key not null,
 ID_hop_dong int not null,
 ID_dich_vu_di_kem int not null,
 So_luong int not null,
-foreign key (ID_hop_dong) references Hop_dong (ID_hop_dong),
-foreign key (ID_dich_vu_di_kem) references Dich_vu_di_kem (ID_dich_vu_di_kem)
+foreign key (ID_hop_dong) references Hop_dong (ID_hop_dong) ON DELETE CASCADE ,
+foreign key (ID_dich_vu_di_kem) references Dich_vu_di_kem (ID_dich_vu_di_kem) ON DELETE CASCADE 
 );
