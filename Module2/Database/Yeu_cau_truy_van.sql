@@ -23,8 +23,6 @@ on (khach_hang.ID_khach_hang = hop_dong.ID_khach_hang)
 left join loai_khach
 on (khach_hang.ID_loai_khach = loai_khach.ID_loai_khach)
 where (loai_khach.Ten_loai_khach = 'Diamond')
-group by
-khach_hang.ID_khach_hang
 order by Luot_Dat_Phong asc;
 
 -- 5.	Hiển thị IDKhachHang, HoTen, TenLoaiKhach, IDHopDong, TenDichVu, NgayLamHopDong, NgayKetThuc, 
@@ -137,20 +135,30 @@ when (month(ngay_lam_hop_dong) = 12) then 1 else null end) as Thang_12
  -- 11.	Hiển thị thông tin các Dịch vụ đi kèm đã được sử dụng bởi những Khách hàng có TenLoaiKhachHang là “Diamond” 
  -- và có địa chỉ là “Vinh” hoặc “Quảng Ngãi”. 
  
- select khach_hang.Ho_ten,khach_hang.Dia_chi,hop_dong_chi_tiet.ID_dich_vu_di_kem, hop_dong_chi_tiet.so_luong
+ select khach_hang.Ho_ten,
+	 khach_hang.Dia_chi,
+	 hop_dong_chi_tiet.ID_dich_vu_di_kem,
+	 hop_dong_chi_tiet.so_luong
  from hop_dong_chi_tiet
  inner join hop_dong
  on hop_dong_chi_tiet.ID_hop_dong = hop_dong.ID_hop_dong
  inner join khach_hang
  on hop_dong.ID_khach_hang = khach_hang.ID_khach_hang
- where khach_hang.Dia_chi = 'Da Nang' or khach_hang.Dia_chi = 'Quang Tri'
+ inner join loai_khach
+ on khach_hang.ID_loai_khach = loai_khach.ID_loai_khach
+ where (khach_hang.Dia_chi = 'Da Nang' or khach_hang.Dia_chi = 'Quang Tri') and (loai_khach.Ten_loai_khach = 'Diamond')
  order by khach_hang.Ho_ten asc;
  
  -- 12.	Hiển thị thông tin IDHopDong, TenNhanVien, TenKhachHang, SoDienThoaiKhachHang, TenDichVu, 
 --  SoLuongDichVuDikem (được tính dựa trên tổng Hợp đồng chi tiết), TienDatCoc của tất cả các dịch vụ 
  -- đã từng được khách hàng đặt vào 3 tháng cuối năm 2019 nhưng chưa từng được khách hàng đặt vào 6 tháng đầu năm 2019.
  
- select hop_dong.ID_hop_dong, nhan_vien.Ho_ten as 'Ten Nhan Vien', khach_hang.Ho_ten as 'Ten Khach Hang', khach_hang.SDT,dich_vu.Ten_dich_vu, sum(hop_dong_chi_tiet.so_luong) as 'So Dich Vu Di Kem Su Dung',hop_dong.Tien_dat_coc
+ select hop_dong.ID_hop_dong,
+		nhan_vien.Ho_ten as 'Ten Nhan Vien',
+		khach_hang.Ho_ten as 'Ten Khach Hang',
+        khach_hang.SDT,dich_vu.Ten_dich_vu,
+		sum(hop_dong_chi_tiet.so_luong) as 'So Dich Vu Di Kem Su Dung',
+        hop_dong.Tien_dat_coc
  from hop_dong
  inner join nhan_vien
  on hop_dong.ID_nhan_vien = nhan_vien.ID_nhan_vien
@@ -167,7 +175,9 @@ when (month(ngay_lam_hop_dong) = 12) then 1 else null end) as Thang_12
  -- 13.	Hiển thị thông tin các Dịch vụ đi kèm được sử dụng nhiều nhất bởi các Khách hàng đã đặt phòng. 
  -- (Lưu ý là có thể có nhiều dịch vụ có số lần sử dụng nhiều như nhau). 
 
-select hop_dong_chi_tiet.ID_dich_vu_di_kem,dich_vu_di_kem.Ten_dich_vu_di_kem,Sum_Table.SL So_Lan_Su_Dung 
+select hop_dong_chi_tiet.ID_dich_vu_di_kem,
+		dich_vu_di_kem.Ten_dich_vu_di_kem,
+		Sum_Table.SL So_Lan_Su_Dung 
 from
 (
 	 select sum(hop_dong_chi_tiet.so_luong) SL
@@ -186,7 +196,9 @@ order by hop_dong_chi_tiet.ID_dich_vu_di_kem asc;
 -- 14.	Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất.
 --  Thông tin hiển thị bao gồm IDHopDong, TenLoaiDichVu, TenDichVuDiKem, SoLanSuDung. 
 
-select hop_dong_chi_tiet.ID_hop_dong, dich_vu_di_kem.Ten_dich_vu_di_kem, hop_dong_chi_tiet.So_Luong
+select hop_dong_chi_tiet.ID_hop_dong,
+		 dich_vu_di_kem.Ten_dich_vu_di_kem,
+		 hop_dong_chi_tiet.So_Luong
 from hop_dong_chi_tiet
 left join dich_vu_di_kem
 on hop_dong_chi_tiet.ID_dich_vu_di_kem = dich_vu_di_kem.ID_dich_vu_di_kem
@@ -197,7 +209,12 @@ and So_Luong = 1;
 -- 15.	Hiển thi thông tin của tất cả nhân viên bao gồm 
 -- IDNhanVien, HoTen, TrinhDo, TenBoPhan, SoDienThoai, DiaChi mới chỉ lập được tối đa 3 hợp đồng từ năm 2018 đến 2019. 
 
-select nhan_vien.ID_nhan_vien, nhan_vien.Ho_ten, trinh_do.Trinh_do, bo_phan.Ten_bo_phan, nhan_vien.Dia_chi, count(hop_dong.ID_nhan_vien) as So_hop_dong
+select nhan_vien.ID_nhan_vien,
+	 nhan_vien.Ho_ten,
+	 trinh_do.Trinh_do,
+	 bo_phan.Ten_bo_phan,
+	 nhan_vien.Dia_chi,
+	 count(hop_dong.ID_nhan_vien) as So_hop_dong
 from nhan_vien
 left join hop_dong
 on nhan_vien.ID_nhan_vien = hop_dong.ID_nhan_vien
@@ -267,3 +284,4 @@ from nhan_vien
 union
 select ID_khach_hang as ID,Ho_ten,Email,SDT,Ngay_sinh,Dia_chi
 from khach_hang;
+
