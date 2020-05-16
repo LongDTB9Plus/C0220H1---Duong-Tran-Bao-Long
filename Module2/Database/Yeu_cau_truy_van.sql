@@ -205,7 +205,7 @@ inner join trinh_do
 on nhan_vien.ID_trinh_do = trinh_do.ID_trinh_do
 inner join bo_phan
 on nhan_vien.ID_bo_phan = bo_phan.ID_bo_phan
-where ((year(hop_dong.ngay_lam_hop_dong) between 2018 and 2019) or ((hop_dong.ngay_lam_hop_dong) is null))  and (nhan_vien.ID_bo_phan = 1 )
+where ((year(hop_dong.ngay_lam_hop_dong) between 2018 and 2019) or ((hop_dong.ngay_lam_hop_dong) is null))  and ((nhan_vien.ID_bo_phan = 4 ) or (nhan_vien.ID_bo_phan = 1 ))
 group by nhan_vien.ID_nhan_vien
 having (count(hop_dong.ID_nhan_vien) <= 3);
 
