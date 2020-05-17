@@ -23,6 +23,7 @@ on (khach_hang.ID_khach_hang = hop_dong.ID_khach_hang)
 left join loai_khach
 on (khach_hang.ID_loai_khach = loai_khach.ID_loai_khach)
 where (loai_khach.Ten_loai_khach = 'Diamond')
+group by khach_hang.ID_khach_hang
 order by Luot_Dat_Phong asc;
 
 -- Su Dung Exist 
@@ -78,8 +79,8 @@ inner join Loai_dich_vu
 on (Dich_vu.ID_loai_dich_vu = Loai_dich_vu.ID_loai_dich_vu)
 left join hop_dong
 on (Dich_vu.ID_dich_vu = hop_dong.ID_dich_vu)
+where (year(hop_dong.ngay_lam_hop_dong) = 2018) and (not year(hop_dong.ngay_lam_hop_dong) = 2019)
 group by Dich_vu.ID_dich_vu
-having (max(year(hop_dong.ngay_lam_hop_dong)) <= 2019)
 order by Dich_vu.ID_dich_vu asc;
 
 -- 8.	Hiển thị thông tin HoTenKhachHang có trong hệ thống, với yêu cầu HoThenKhachHang không trùng nhau.
@@ -130,7 +131,7 @@ when (month(ngay_lam_hop_dong) = 12) then 1 else null end) as Thang_12
  
  select month(ngay_lam_hop_dong) as Thang,count(ngay_lam_hop_dong) as Luot_Dat_Phong from hop_dong
  where (month(ngay_lam_hop_dong) between 1 and 12) and year(ngay_lam_hop_dong) = 2019
- group by ngay_lam_hop_dong;
+ group by Thang;
  
  -- 10.	Hiển thị thông tin tương ứng với từng Hợp đồng thì đã sử dụng bao nhiêu Dịch vụ đi kèm.
  -- Kết quả hiển thị bao gồm IDHopDong, NgayLamHopDong, NgayKetthuc, TienDatCoc, SoLuongDichVuDiKem 
