@@ -181,7 +181,7 @@ when (month(ngay_lam_hop_dong) = 12) then 1 else null end) as Thang_12
  inner join hop_dong_chi_tiet
  on hop_dong.ID_hop_dong = hop_dong_chi_tiet.ID_hop_dong
  where (month(hop_dong.ngay_lam_hop_dong) between 10 and 12) and (year(hop_dong.ngay_lam_hop_dong) = 2019)
- and (month(hop_dong.ngay_lam_hop_dong) not between 1 and 6) 
+ and not (month(hop_dong.ngay_lam_hop_dong) between 1 and 6) 
  order by hop_dong.ID_hop_dong asc;
  
  -- 13.	Hiển thị thông tin các Dịch vụ đi kèm được sử dụng nhiều nhất bởi các Khách hàng đã đặt phòng. 
@@ -258,8 +258,9 @@ left join dich_vu_di_kem
 on hop_dong_chi_tiet.ID_dich_vu_di_kem = dich_vu_di_kem.ID_dich_vu_di_kem
 left join dich_vu
 on hop_dong.ID_dich_vu = dich_vu.ID_dich_vu
-where (year(hop_dong.ngay_lam_hop_dong) = 2019)
+where (year(hop_dong.ngay_lam_hop_dong) = 2019) 
 group by hop_dong.ID_khach_hang
+having Tong_tien >= 10000000
 ) Table_Tieu_Phi
 on khach_hang.ID_khach_hang = Table_Tieu_Phi.ID
 set khach_hang.ID_loai_khach = 1 
