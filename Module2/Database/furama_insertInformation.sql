@@ -23,14 +23,14 @@ SELECT * FROM furama.nhan_vien;
 INSERT INTO `furama`.`nhan_vien` (`ID_nhan_vien`, `Ho_ten`, `ID_vi_tri`, `ID_trinh_do`, `ID_bo_phan`, `Ngay_sinh`, `So_CMND`, `Luong`, `SDT`, `Email`, `Dia_chi`) VALUES ('1', 'Charmion Seares', '6', '5', '3', '1984-01-25', '502-08-3288', '6000000', '283-740-4137', 'cseares0@studiopress.com', '88 American Ash Drive');
 INSERT INTO `furama`.`nhan_vien` (`ID_nhan_vien`, `Ho_ten`, `ID_vi_tri`, `ID_trinh_do`, `ID_bo_phan`, `Ngay_sinh`, `So_CMND`, `Luong`, `SDT`, `Email`, `Dia_chi`) VALUES ('2', 'Timmie Gower', '3', '2', '2', '1983-01-05', '395-56-1419', '10000000', '538-587-8150', 'tgower1@networkadvertising.org', '5820 Nancy Alley');
 INSERT INTO `furama`.`nhan_vien` (`ID_nhan_vien`, `Ho_ten`, `ID_vi_tri`, `ID_trinh_do`, `ID_bo_phan`, `Ngay_sinh`, `So_CMND`, `Luong`, `SDT`, `Email`, `Dia_chi`) VALUES ('3', 'Sybille Kempe', '3', '2', '2', '1992-02-02', '342-09-8101', '10000000', '635-837-4354', 'skempe2@hostgator.com', '0 Dawn Place');
-INSERT INTO `furama`.`nhan_vien` (`ID_nhan_vien`, `Ho_ten`, `ID_vi_tri`, `ID_trinh_do`, `ID_bo_phan`, `Ngay_sinh`, `So_CMND`, `Luong`, `SDT`, `Email`, `Dia_chi`) VALUES ('4', 'Hanna Spensley', '1', '4', '1', '1990-03-12', '721-04-6072', '28000000', '945-412-6367', 'hspensley3@dedecms.com', '3004 Transport Drive');
-INSERT INTO `furama`.`nhan_vien` (`ID_nhan_vien`, `Ho_ten`, `ID_vi_tri`, `ID_trinh_do`, `ID_bo_phan`, `Ngay_sinh`, `So_CMND`, `Luong`, `SDT`, `Email`, `Dia_chi`) VALUES ('5', 'Ethelbert Hadigate', '4', '3', '1', '1995-11-25', '649-83-3463', '15000000', '692-730-4741', 'ehadigate4@economist.com', '1 Lyons Trail');
-INSERT INTO `furama`.`nhan_vien` (`ID_nhan_vien`, `Ho_ten`, `ID_vi_tri`, `ID_trinh_do`, `ID_bo_phan`, `Ngay_sinh`, `So_CMND`, `Luong`, `SDT`, `Email`, `Dia_chi`) VALUES ('6', 'Andrey Galbreath', '4', '3', '1', '1998-02-19', '537-12-4748', '16000000', '377-115-1435', 'agalbreath5@simplemachines.org', '221 Farragut Pass');
+INSERT INTO `furama`.`nhan_vien` (`ID_nhan_vien`, `Ho_ten`, `ID_vi_tri`, `ID_trinh_do`, `ID_bo_phan`, `Ngay_sinh`, `So_CMND`, `Luong`, `SDT`, `Email`, `Dia_chi`) VALUES ('4', 'Hanna Spensley', '4', '4', '4', '1990-03-12', '721-04-6072', '18000000', '945-412-6367', 'hspensley3@dedecms.com', '3004 Transport Drive');
+INSERT INTO `furama`.`nhan_vien` (`ID_nhan_vien`, `Ho_ten`, `ID_vi_tri`, `ID_trinh_do`, `ID_bo_phan`, `Ngay_sinh`, `So_CMND`, `Luong`, `SDT`, `Email`, `Dia_chi`) VALUES ('5', 'Ethelbert Hadigate', '4', '3', '4', '1995-11-25', '649-83-3463', '15000000', '692-730-4741', 'ehadigate4@economist.com', '1 Lyons Trail');
+INSERT INTO `furama`.`nhan_vien` (`ID_nhan_vien`, `Ho_ten`, `ID_vi_tri`, `ID_trinh_do`, `ID_bo_phan`, `Ngay_sinh`, `So_CMND`, `Luong`, `SDT`, `Email`, `Dia_chi`) VALUES ('6', 'Andrey Galbreath', '4', '3', '4', '1998-02-19', '537-12-4748', '16000000', '377-115-1435', 'agalbreath5@simplemachines.org', '221 Farragut Pass');
 INSERT INTO `furama`.`nhan_vien` (`ID_nhan_vien`, `Ho_ten`, `ID_vi_tri`, `ID_trinh_do`, `ID_bo_phan`, `Ngay_sinh`, `So_CMND`, `Luong`, `SDT`, `Email`, `Dia_chi`) VALUES ('7', 'Carena Hayen', '5', '5', '2', '1992-04-29', '517-64-5758', '9000000', '863-538-1849', 'chayen6@arizona.edu', '84 Forest Dale Road');
-INSERT INTO `furama`.`nhan_vien` (`ID_nhan_vien`, `Ho_ten`, `ID_vi_tri`, `ID_trinh_do`, `ID_bo_phan`, `Ngay_sinh`, `So_CMND`, `Luong`, `SDT`, `Email`, `Dia_chi`) VALUES ('8', 'Jaime Leeson', '2', '4', '1', '1984-10-22', '467-46-6727', '26000000', '367-620-8835', 'jleeson7@slashdot.org', '1225 Carey Street');
-INSERT INTO `furama`.`nhan_vien` (`ID_nhan_vien`, `Ho_ten`, `ID_vi_tri`, `ID_trinh_do`, `ID_bo_phan`, `Ngay_sinh`, `So_CMND`, `Luong`, `SDT`, `Email`, `Dia_chi`) VALUES ('9', 'Addia Phare', '2', '4', '1', '1986-10-02', '501-37-7152', '22000000', '344-986-0121', 'aphare8@cornell.edu', '82045 Melvin Parkway');
+INSERT INTO `furama`.`nhan_vien` (`ID_nhan_vien`, `Ho_ten`, `ID_vi_tri`, `ID_trinh_do`, `ID_bo_phan`, `Ngay_sinh`, `So_CMND`, `Luong`, `SDT`, `Email`, `Dia_chi`) VALUES ('8', 'Jaime Leeson', '1', '4', '1', '1984-10-22', '467-46-6727', '26000000', '367-620-8835', 'jleeson7@slashdot.org', '1225 Carey Street');
+INSERT INTO `furama`.`nhan_vien` (`ID_nhan_vien`, `Ho_ten`, `ID_vi_tri`, `ID_trinh_do`, `ID_bo_phan`, `Ngay_sinh`, `So_CMND`, `Luong`, `SDT`, `Email`, `Dia_chi`) VALUES ('9', 'Addia Phare', '2', '4', '4', '1986-10-02', '501-37-7152', '22000000', '344-986-0121', 'aphare8@cornell.edu', '82045 Melvin Parkway');
 INSERT INTO `furama`.`nhan_vien` (`ID_nhan_vien`, `Ho_ten`, `ID_vi_tri`, `ID_trinh_do`, `ID_bo_phan`, `Ngay_sinh`, `So_CMND`, `Luong`, `SDT`, `Email`, `Dia_chi`) VALUES ('10', 'Mayne Hofer', '6', '1', '2', '1985-10-12', '649-27-1224', '8000000', '957-691-0535', 'mhofer9@tmall.com', '1280 Toban Lane');
-INSERT INTO `furama`.`nhan_vien` (`ID_nhan_vien`, `Ho_ten`, `ID_vi_tri`, `ID_trinh_do`, `ID_bo_phan`, `Ngay_sinh`, `So_CMND`, `Luong`, `SDT`, `Email`, `Dia_chi`) VALUES ('11', 'Kaline', '4', '3', '1', '1982-02-12', '546-23-6575', '17000000', '345-565-6767', 'kaline@gmail.com', '223 Nguyen Tat Thanh');
+INSERT INTO `furama`.`nhan_vien` (`ID_nhan_vien`, `Ho_ten`, `ID_vi_tri`, `ID_trinh_do`, `ID_bo_phan`, `Ngay_sinh`, `So_CMND`, `Luong`, `SDT`, `Email`, `Dia_chi`) VALUES ('11', 'Kaline', '4', '3', '4', '1982-02-12', '546-23-6575', '17000000', '345-565-6767', 'kaline@gmail.com', '223 Nguyen Tat Thanh');
 
 SELECT * FROM furama.loai_khach;
 INSERT INTO `furama`.`loai_khach` (`ID_loai_khach`, `Ten_loai_khach`) VALUES ('1', 'Diamond');
@@ -54,6 +54,7 @@ INSERT INTO `furama`.`dich_vu_di_kem` (`ID_dich_vu_di_kem`, `Ten_dich_vu_di_kem`
 INSERT INTO `furama`.`dich_vu_di_kem` (`ID_dich_vu_di_kem`, `Ten_dich_vu_di_kem`, `Gia`, `Don_vi`, `Trang_thai_kha_dung`) VALUES ('2', 'Karaoke', '200', '1000', 'Co');
 INSERT INTO `furama`.`dich_vu_di_kem` (`ID_dich_vu_di_kem`, `Ten_dich_vu_di_kem`, `Gia`, `Don_vi`, `Trang_thai_kha_dung`) VALUES ('3', 'Car', '200', '1000', 'Khong');
 INSERT INTO `furama`.`dich_vu_di_kem` (`ID_dich_vu_di_kem`, `Ten_dich_vu_di_kem`, `Gia`, `Don_vi`, `Trang_thai_kha_dung`) VALUES ('4', 'Drink', '300', '1000', 'Co');
+INSERT INTO `furama`.`dich_vu_di_kem` (`ID_dich_vu_di_kem`, `Ten_dich_vu_di_kem`, `Gia`, `Don_vi`, `Trang_thai_kha_dung`) VALUES ('5', 'Food', '300', '1000', 'Co');
 
 SELECT * FROM furama.dich_vu;
 INSERT INTO `furama`.`dich_vu` (`ID_dich_vu`, `Ten_dich_vu`, `Dien_tich`, `So_tang`, `So_nguoi_toi_da`, `Chi_phi_thue`, `ID_kieu_thue`, `ID_loai_dich_vu`, `Trang_thai`) VALUES ('1', 'Villa Canh Bien', '200', '2', '4', '2000000', '3', '1', 'Co');
@@ -71,6 +72,8 @@ INSERT INTO `furama`.`khach_hang` (`ID_khach_hang`, `ID_loai_khach`, `Ho_ten`, `
 INSERT INTO `furama`.`khach_hang` (`ID_khach_hang`, `ID_loai_khach`, `Ho_ten`, `Ngay_sinh`, `So_CMND`, `SDT`, `Email`, `Dia_chi`) VALUES ('5', '5', 'Nguyen Tien Thanh', '1985-04-26', '777-777-7777', '777777777777', 'tienThanhHN@gmail.com', 'Ha Noi');
 INSERT INTO `furama`.`khach_hang` (`ID_khach_hang`, `ID_loai_khach`, `Ho_ten`, `Ngay_sinh`, `So_CMND`, `SDT`, `Email`, `Dia_chi`) VALUES ('6', '1', 'Skadi', '1987-05-13', '777-777-777776', '45454545454', 'skadi@fgo.com', 'Da Nang');
 INSERT INTO `furama`.`khach_hang` (`ID_khach_hang`, `ID_loai_khach`, `Ho_ten`, `Ngay_sinh`, `So_CMND`, `SDT`, `Email`, `Dia_chi`) VALUES ('7', '2', 'Nguyen Thanh B', '1988-02-12', '454-545-545454', '6768623', 'thanhQT@gmail.com', 'Quang Tri');
+INSERT INTO `furama`.`khach_hang` (`ID_khach_hang`, `ID_loai_khach`, `Ho_ten`, `Ngay_sinh`, `So_CMND`, `SDT`, `Email`, `Dia_chi`) VALUES ('8', '2', 'Gilgamesh', '1980-03-12', '222-222-22222', '23423423', 'gilPikachu@gmail.com', 'Uruk');
+
 
 SELECT * FROM furama.hop_dong;
 INSERT INTO `furama`.`hop_dong` (`ID_hop_dong`, `ID_nhan_vien`, `ID_khach_hang`, `ID_dich_vu`, `Ngay_lam_hop_dong`, `Ngay_ket_thuc`, `Tien_dat_coc`, `Tong_tien`) VALUES ('1', '5', '1', '2', '2020-02-12', '2020-03-12', '2000000', '8000000');
@@ -84,10 +87,11 @@ INSERT INTO `furama`.`hop_dong` (`ID_hop_dong`, `ID_nhan_vien`, `ID_khach_hang`,
 INSERT INTO `furama`.`hop_dong` (`ID_hop_dong`, `ID_nhan_vien`, `ID_khach_hang`, `ID_dich_vu`, `Ngay_lam_hop_dong`, `Ngay_ket_thuc`, `Tien_dat_coc`, `Tong_tien`) VALUES ('9', '8', '2', '4', '2018-06-06', '2018-06-16', '2000000', '14000000');
 INSERT INTO `furama`.`hop_dong` (`ID_hop_dong`, `ID_nhan_vien`, `ID_khach_hang`, `ID_dich_vu`, `Ngay_lam_hop_dong`, `Ngay_ket_thuc`, `Tien_dat_coc`, `Tong_tien`) VALUES ('11', '5', '2', '1', '2019-11-21', '2019-11-23', '1000000', '3000000');
 INSERT INTO `furama`.`hop_dong` (`ID_hop_dong`, `ID_nhan_vien`, `ID_khach_hang`, `ID_dich_vu`, `Ngay_lam_hop_dong`, `Ngay_ket_thuc`, `Tien_dat_coc`, `Tong_tien`) VALUES ('12', '6', '3', '2', '2019-04-23', '2019-04-27', '1000000', '3000000');
+INSERT INTO `furama`.`hop_dong` (`ID_hop_dong`, `ID_nhan_vien`, `ID_khach_hang`, `ID_dich_vu`, `Ngay_lam_hop_dong`, `Ngay_ket_thuc`, `Tien_dat_coc`, `Tong_tien`) VALUES ('13', '6', '8', '2', '2016-01-02', '2016-02-01', '3000000', '2000000');
 
 SELECT * FROM furama.hop_dong_chi_tiet;
 INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('1', '1', '2', '2');
-INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('2', '2', '3', '2');
+INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('2', '2', '3', '1');
 INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('3', '3', '2', '2');
 INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('4', '4', '2', '1');
 INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('5', '5', '2', '3');
@@ -97,5 +101,9 @@ INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`,
 INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('15', '11', '1', '2');
 INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('16', '12', '2', '3');
 INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('17', '12', '1', '5');
+INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('18', '5', '1', '5');
+INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('19', '7', '4', '1');
+INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('20', '8', '4', '1');
+INSERT INTO `furama`.`hop_dong_chi_tiet` (`ID_hop_dong_chi_tiet`, `ID_hop_dong`, `ID_dich_vu_di_kem`, `So_luong`) VALUES ('21', '13', '4', '1');
 
 
