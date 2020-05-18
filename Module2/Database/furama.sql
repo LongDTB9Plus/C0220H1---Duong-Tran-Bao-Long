@@ -1,18 +1,19 @@
 create database furama;
 use furama;
 
+drop table if exists Hop_dong_chi_tiet;
+drop table if exists Hop_dong;
+drop table if exists Dich_vu;
+drop table if exists Khach_hang;
+drop table if exists Nhan_vien;
 drop table if exists Kieu_thue;
 drop table if exists Loai_dich_vu;
-drop table if exists Dich_vu;
 drop table if exists Loai_khach;
-drop table if exists Khach_hang;
 drop table if exists Vi_tri;
 drop table if exists Trinh_do;
 drop table if exists Bo_phan;
-drop table if exists Nhan_vien;
 drop table if exists Dich_vu_di_kem;
-drop table if exists Hop_dong;
-drop table if exists Hop_dong_chi_tiet;
+
 create table Kieu_thue (
 ID_kieu_thue int primary key not null,
 Ten_kieu_thue varchar(45) not null,
@@ -52,11 +53,7 @@ So_CMND varchar(45) not null,
 SDT varchar(45) not null,
 Email varchar(45),
 Dia_chi varchar(45),
-<<<<<<< HEAD
-foreign key (ID_loai_khach) references Loai_khach (ID_loai_khach) on delete cascade,
-=======
 foreign key (ID_loai_khach) references Loai_khach (ID_loai_khach) ON DELETE CASCADE ,
->>>>>>> 1daf535559b7f7d0b2cf1bba95eae2fdc44190d6
 constraint Email check (email like '%_@__%.__%')
 );
 
@@ -108,46 +105,46 @@ ID_dich_vu int not null,
 Ngay_lam_hop_dong date not null,
 Ngay_ket_thuc date not null,
 Tien_dat_coc int not null,
-<<<<<<< HEAD
 Tong_tien int not null,
 foreign key (ID_nhan_vien) references Nhan_vien (ID_nhan_vien) on delete cascade, 
 foreign key (ID_khach_hang) references Khach_hang (ID_khach_hang) on delete cascade,
 foreign key (ID_dich_vu) references Dich_vu (ID_dich_vu) on delete cascade,
-constraint ID_nhan_vien 
-check (ID_nhan_vien in
-(select ID_nhan_vien from nhan_vien
-where (nhan_vien.ID_bo_phan = 1) or (nhan_vien.ID_bo_phan = 4) 
-)) 
-=======
-Tong_tien int,
-foreign key (ID_nhan_vien) references Nhan_vien (ID_nhan_vien) ON DELETE CASCADE ,
-foreign key (ID_khach_hang) references Khach_hang (ID_khach_hang) ON DELETE CASCADE ,
-foreign key (ID_dich_vu) references Dich_vu (ID_dich_vu) ON DELETE CASCADE 
->>>>>>> 1daf535559b7f7d0b2cf1bba95eae2fdc44190d6
+constraint ID check (ID_nhan_vien in 
+								(select ID_nhan_vien from nhan_vien
+							)
+                                )
+
 );
+
+-- delimiter //
+-- create function check_ID (ID int)
+-- returns varchar(5)
+-- begin
+-- if ID in (select ID_nhan_vien from nhan_vien left join hop_dong
+-- 			on nhan_vien.ID_nhan_vien = hop_dong.ID_nhan_vien
+--             where (nhan_vien.ID_bo_phan = 1) or (nhan_vien.ID_bo_phan = 4))
+-- 	then return 'True!';
+-- 	else return 'False';
+-- 	end if;
+-- end //
+-- delimiter ;
+
 
 create table Hop_dong_chi_tiet (
 ID_hop_dong_chi_tiet int primary key not null,
 ID_hop_dong int not null,
 ID_dich_vu_di_kem int not null,
 So_luong int not null,
-<<<<<<< HEAD
 foreign key (ID_hop_dong) references Hop_dong (ID_hop_dong) on delete cascade,
 foreign key (ID_dich_vu_di_kem) references Dich_vu_di_kem (ID_dich_vu_di_kem) on delete cascade
 );
 
+
+
 create trigger check_Bo_phan 
 before insert on hop_dong  
 for each row
-	set new.ID_nhan_vien = if( 
-    (select count(ID_nhan_vien) from nhan_vien
-    where (ID_bo_phan = 1) or (ID_bo_phan = 4)
-    and new.ID_nhan_vien = nhan_vien.ID_nhan_vien
-    ) > 0,
-    new.ID_nhan_vien,
-    null
-=======
-foreign key (ID_hop_dong) references Hop_dong (ID_hop_dong) ON DELETE CASCADE ,
-foreign key (ID_dich_vu_di_kem) references Dich_vu_di_kem (ID_dich_vu_di_kem) ON DELETE CASCADE 
->>>>>>> 1daf535559b7f7d0b2cf1bba95eae2fdc44190d6
-);
+begin
+	set new.ID_nhan_vien = Call check_id(new.ID_nhan_vien)
+end $$
+delimiter ;
