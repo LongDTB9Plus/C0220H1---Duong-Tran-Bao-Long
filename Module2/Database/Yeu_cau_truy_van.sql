@@ -243,7 +243,7 @@ having (count(hop_dong.ID_nhan_vien) <= 3);
 delete nhan_vien from nhan_vien
 left join hop_dong
 on hop_dong.ID_nhan_vien = nhan_vien.ID_nhan_vien
-where (nhan_vien.ID_bo_phan = 1) and (year(hop_dong.ID_nhan_vien) between 2017 and 2019);
+where (nhan_vien.ID_bo_phan = 1) and (year(hop_dong.ngay_lam_hop_dong) between 2017 and 2019);
 
 -- 17.	Cập nhật thông tin những khách hàng có TenLoaiKhachHang từ  Platinium lên Diamond, 
 -- chỉ cập nhật những khách hàng đã từng đặt phòng với tổng Tiền thanh toán trong năm 2019 là lớn hơn 10.000.000 VNĐ. 

@@ -108,11 +108,11 @@ Tien_dat_coc int not null,
 Tong_tien int not null,
 foreign key (ID_nhan_vien) references Nhan_vien (ID_nhan_vien) on delete cascade, 
 foreign key (ID_khach_hang) references Khach_hang (ID_khach_hang) on delete cascade,
-foreign key (ID_dich_vu) references Dich_vu (ID_dich_vu) on delete cascade,
-constraint ID check (ID_nhan_vien in 
-								(select ID_nhan_vien from nhan_vien
-							)
-                                )
+foreign key (ID_dich_vu) references Dich_vu (ID_dich_vu) on delete cascade
+-- constraint ID check (ID_nhan_vien in 
+-- 								(select ID_nhan_vien from nhan_vien
+-- 							)
+--                                 )
 
 );
 
