@@ -35,6 +35,7 @@ where exists
 	(select Ten_loai_khach from loai_khach
 	where (khach_hang.ID_loai_khach = loai_khach.ID_loai_khach) and (loai_khach.Ten_loai_khach = 'Diamond')
     )
+group by khach_hang.ho_ten
 order by Luot_Dat_Phong asc;
 
 -- 5.	Hiển thị IDKhachHang, HoTen, TenLoaiKhach, IDHopDong, TenDichVu, NgayLamHopDong, NgayKetThuc, 
@@ -168,7 +169,6 @@ when (month(ngay_lam_hop_dong) = 12) then 1 else null end) as Thang_12
  select hop_dong.ID_hop_dong,
 		nhan_vien.Ho_ten as 'Ten Nhan Vien',
 		khach_hang.Ho_ten as 'Ten Khach Hang',
-        khach_hang.SDT,dich_vu.Ten_dich_vu,
 		sum(hop_dong_chi_tiet.so_luong) as 'So Dich Vu Di Kem Su Dung',
         hop_dong.Tien_dat_coc
  from hop_dong
@@ -181,7 +181,11 @@ when (month(ngay_lam_hop_dong) = 12) then 1 else null end) as Thang_12
  inner join hop_dong_chi_tiet
  on hop_dong.ID_hop_dong = hop_dong_chi_tiet.ID_hop_dong
  where (month(hop_dong.ngay_lam_hop_dong) between 10 and 12) and (year(hop_dong.ngay_lam_hop_dong) = 2019)
- and not (month(hop_dong.ngay_lam_hop_dong) between 1 and 6) 
+ group by hop_dong.ID_dich_vu
+ having hop_dong.ID_dich_vu not in 
+ (select ID_dich_vu from hop_dong
+ where (month(ngay_lam_hop_dong) between 1 and 6)
+ )
  order by hop_dong.ID_hop_dong asc;
  
  -- 13.	Hiển thị thông tin các Dịch vụ đi kèm được sử dụng nhiều nhất bởi các Khách hàng đã đặt phòng. 
@@ -240,10 +244,13 @@ having (count(hop_dong.ID_nhan_vien) <= 3);
 
 -- 16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2017 đến năm 2019.
 
-delete nhan_vien from nhan_vien
-left join hop_dong
-on hop_dong.ID_nhan_vien = nhan_vien.ID_nhan_vien
-where (nhan_vien.ID_bo_phan = 1) and (year(hop_dong.ngay_lam_hop_dong) between 2017 and 2019);
+delete from nhan_vien
+where (nhan_vien.ID_bo_phan = 4) 
+and (not exists (
+		select ID_nhan_vien from hop_dong
+        where (year(ngay_lam_hop_dong) between 2017 and 2019)
+        group by ID_nhan_vien
+));
 
 -- 17.	Cập nhật thông tin những khách hàng có TenLoaiKhachHang từ  Platinium lên Diamond, 
 -- chỉ cập nhật những khách hàng đã từng đặt phòng với tổng Tiền thanh toán trong năm 2019 là lớn hơn 10.000.000 VNĐ. 

@@ -109,26 +109,7 @@ Tong_tien int not null,
 foreign key (ID_nhan_vien) references Nhan_vien (ID_nhan_vien) on delete cascade, 
 foreign key (ID_khach_hang) references Khach_hang (ID_khach_hang) on delete cascade,
 foreign key (ID_dich_vu) references Dich_vu (ID_dich_vu) on delete cascade
--- constraint ID check (ID_nhan_vien in 
--- 								(select ID_nhan_vien from nhan_vien
--- 							)
---                                 )
-
 );
-
--- delimiter //
--- create function check_ID (ID int)
--- returns varchar(5)
--- begin
--- if ID in (select ID_nhan_vien from nhan_vien left join hop_dong
--- 			on nhan_vien.ID_nhan_vien = hop_dong.ID_nhan_vien
---             where (nhan_vien.ID_bo_phan = 1) or (nhan_vien.ID_bo_phan = 4))
--- 	then return 'True!';
--- 	else return 'False';
--- 	end if;
--- end //
--- delimiter ;
-
 
 create table Hop_dong_chi_tiet (
 ID_hop_dong_chi_tiet int primary key not null,
@@ -139,12 +120,82 @@ foreign key (ID_hop_dong) references Hop_dong (ID_hop_dong) on delete cascade,
 foreign key (ID_dich_vu_di_kem) references Dich_vu_di_kem (ID_dich_vu_di_kem) on delete cascade
 );
 
+drop function if exists check_ID;
+delimiter //
+create function check_ID (ID int)
+returns varchar(5)
+DETERMINISTIC
+READS SQL DATA
+begin
+if ID in (select nhan_vien.ID_nhan_vien from nhan_vien left join hop_dong
+			on nhan_vien.ID_nhan_vien = hop_dong.ID_nhan_vien
+            where (nhan_vien.ID_bo_phan = 1) or (nhan_vien.ID_bo_phan = 4))
+	then return 'True!';
+	else return 'False';
+	end if;
+end //
+delimiter ;
 
-
-create trigger check_Bo_phan 
+delimiter //
+create trigger check_Bo_phan_inser 
 before insert on hop_dong  
 for each row
 begin
-	set new.ID_nhan_vien = Call check_id(new.ID_nhan_vien)
-end $$
+	declare result varchar(5);
+    set result := check_ID(new.ID_nhan_vien);
+    if (result = 'False') then
+    SIGNAL SQLSTATE '45000'
+	SET MESSAGE_TEXT = 'An error occurred';
+    end if;
+end //
 delimiter ;
+
+delimiter //
+create trigger check_Bo_phan_update
+before update on hop_dong  
+for each row
+begin
+	declare result varchar(5);
+    set result := check_ID(new.ID_nhan_vien);
+    if (result = 'False') then
+    SIGNAL SQLSTATE '45000'
+	SET MESSAGE_TEXT = 'An error occurred';
+    end if;
+end //
+delimiter ;
+
+-- DELIMITER $$
+-- CREATE PROCEDURE createEmailList (
+-- 	INOUT emailList varchar(4000)
+-- )
+-- BEGIN
+-- 	DECLARE finished INTEGER DEFAULT 0;
+-- 	DECLARE emailAddress varchar(100) DEFAULT "";
+
+-- 	-- declare cursor for employee email
+-- 	DEClARE curEmail 
+-- 		CURSOR FOR 
+-- 			SELECT email FROM nhan_vien;
+
+-- 	-- declare NOT FOUND handler
+-- 	DECLARE CONTINUE HANDLER 
+--         FOR NOT FOUND SET finished = 1;
+
+-- 	OPEN curEmail;
+
+-- 	getEmail: LOOP
+-- 		FETCH curEmail INTO emailAddress;
+-- 		IF finished = 1 THEN 
+-- 			LEAVE getEmail;
+-- 		END IF;
+-- 		-- build email list
+-- 		SET emailList = CONCAT(emailAddress,";",emailList);
+-- 	END LOOP getEmail;
+-- 	CLOSE curEmail;
+
+-- END$$
+-- DELIMITER ;
+
+-- SET @emailList = ""; 
+-- CALL createEmailList(@emailList); 
+-- SELECT @emailList;
