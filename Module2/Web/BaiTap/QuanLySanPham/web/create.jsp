@@ -11,6 +11,7 @@
     <title>Create New Product</title>
 </head>
 <body>
+
 <form action="/menu" method="post">
 <label >ID</label>
 <input type="text" name="id"/><br>
@@ -20,5 +21,6 @@
 <input type="text" name="price"/><br>
 <input type="submit" value="create" name="submit"/>
 </form>
+
 </body>
 </html>

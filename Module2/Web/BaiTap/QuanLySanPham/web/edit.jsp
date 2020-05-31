@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="border-collapse" uri="http://jakarta.apache.org/taglibs/standard/permittedTaglibs" %>
 <%--
   Created by IntelliJ IDEA.
   User: Alex
@@ -12,15 +13,29 @@
     <title>Edit Product</title>
 </head>
 <body>
-<table>
-    <c:forEach var="product" items="${listProduct}">
-        <tr>
-            <td><c:out value="${product.getId()}"></c:out></td>
-            <td><c:out value="${product.getName()}"></c:out></td>
-            <td><c:out value="${product.getPrice()}"></c:out></td>
-            <td><input type="submit" name="submit" value="edit"></td>
-        </tr>
-    </c:forEach>
-</table>
+<form action="/menu" method="post">
+    <fieldset>
+        <h1>Product information</h1>
+        <table>
+            <tr>
+                <td>ID:</td>
+                <td><input type="text" name="id" value='${requestScope["product"].getId()}'></td>
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" name="name" value='${requestScope["product"].getName()}'></td>
+            </tr>
+            <tr>
+                <td>Price:</td>
+                <td><input type="text" name="price" value='${requestScope["product"].getPrice()}'></td>
+            </tr>
+            <tr>
+                <td>Are You Sure About Edit This Product's Information?</td>
+                <td><input type="submit" name="submit" value="edit">Yes</td>
+                <td><a href="/index.jsp">No</a></td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
 </body>
 </html>

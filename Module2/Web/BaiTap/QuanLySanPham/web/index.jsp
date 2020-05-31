@@ -16,10 +16,8 @@
   <form action="/menu" method=get >
   <label>Select</label>
   <select name="action">
-    <option value="Create">Create</option>
-    <option value="Edit">Edit</option>
-    <option value="Delete">Delete</option>
-    <option value="Show">Show</option>
+    <option value="create">Create</option>
+    <option value="show">Show</option>
   </select>
   <input type="submit" value="submit"/>
   </form>

@@ -22,12 +22,27 @@ public class ServicesImpl implements Services {
     }
 
     @Override
-    public List<Product> findAll() {
+    public ArrayList<Product> findAll() {
         return new ArrayList<>(productMap.values());
     }
 
     @Override
     public void save(Product product) {
         productMap.put(product.getId(), product);
+    }
+
+    @Override
+    public Product findByID(int id) {
+        return productMap.get(id);
+    }
+
+    @Override
+    public void update(int id, Product product) {
+        productMap.put(id, product);
+    }
+
+    @Override
+    public void remove(int id) {
+        productMap.remove(id);
     }
 }

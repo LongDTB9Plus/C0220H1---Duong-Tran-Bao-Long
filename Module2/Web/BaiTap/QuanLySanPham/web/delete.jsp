@@ -12,15 +12,30 @@
     <title>Delete Product</title>
 </head>
 <body>
-<table>
-    <c:forEach var="product" items="${listProduct}">
-        <tr>
-            <td><c:out value="${product.getId()}"></c:out></td>
-            <td><c:out value="${product.getName()}"></c:out></td>
-            <td><c:out value="${product.getPrice()}"></c:out></td>
-            <td><input type="submit" name="submit" value="delete"></td>
-        </tr>
-    </c:forEach>
-</table>
+<form action="/menu" method="post">
+    <fieldset>
+        <legend>Product information</legend>
+        <table>
+            <tr>
+                <td>ID:
+                    <input type="text" name="id" value="${requestScope["product"].getId()}" readonly/>
+                </td>
+            </tr>
+            <tr>
+                <td>Name: </td>
+                <td>${requestScope["product"].getName()}</td>
+            </tr>
+            <tr>
+                <td>Price: </td>
+                <td>${requestScope["product"].getPrice()}</td>
+            </tr>
+            <tr>
+                <td>Are You Sure About Delete This Product?</td>
+                <td><input type="submit" name="submit" value="delete">Yes</td>
+                <td><a href="/index.jsp">No</a></td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
 </body>
 </html>
