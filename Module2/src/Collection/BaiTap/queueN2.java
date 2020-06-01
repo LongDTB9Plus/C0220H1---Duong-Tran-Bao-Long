@@ -16,7 +16,7 @@ public class queueN2 {
         double time = scanner.nextInt();
 //        tính số vòng lặp toàn chuỗi đã qua
         int loopTime = 0;
-        for (int i = 1; i < time; i++){
+        for (int i = 0; i < time; i++){
             double a = Math.floor(Math.pow(2,i));
             double b = Math.floor((time+5)/5);
             if (a ==b){
