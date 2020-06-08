@@ -18,11 +18,12 @@ public class Sandwich {
 
     @PostMapping("/sandwich")
     public String process(@RequestParam Optional<String[]> ele,
-                          Model model){
+                          Model model) {
         if (ele.isPresent()) {
             model.addAttribute("AllElement", get.returnString(ele.get()));
-        }
-return "Element";
+        }else model.addAttribute("message","Not Found");
+        System.out.println();
+        return "Element";
     }
 
 }

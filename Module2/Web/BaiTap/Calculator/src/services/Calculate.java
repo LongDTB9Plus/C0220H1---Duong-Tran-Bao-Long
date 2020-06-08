@@ -1,5 +1,7 @@
 package services;
 
+import services.Models.NumberIn;
+
 public interface Calculate {
-    double Calculating(String using,Double a,Double b);
+    String Calculating(String using, NumberIn numberIn);
 }

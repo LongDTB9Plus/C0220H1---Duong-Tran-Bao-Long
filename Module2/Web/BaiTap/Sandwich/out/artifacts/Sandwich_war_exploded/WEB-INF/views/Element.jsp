@@ -11,6 +11,7 @@
     <title>All Element</title>
 </head>
 <body>
+<h2>${message}</h2>
 <h2>${AllElement}</h2>
 </body>
 </html>
