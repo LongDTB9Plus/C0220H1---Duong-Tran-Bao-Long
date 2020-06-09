@@ -16,6 +16,6 @@
       <input type="text" name="usd"/>
       <input type="submit" name="submit"/>
   </form>
-  <a href="/tudien">Change</a>
+  <a href="/TuDien.jsp">Change</a>
   </body>
 </html>

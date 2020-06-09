@@ -3,16 +3,7 @@ package Collection.BaiTap;
 import java.util.*;
 
 public class QueueBank {
-    static int priorityNumber = 0;
-    static ArrayDeque<Integer> customerQueue = new ArrayDeque<>();
-    static ArrayList<String> customerList = new ArrayList<>();
-    static TreeMap<Integer,String> tempCustomer = new TreeMap<>();
-    {
-        customerList.add("001");
-        customerList.add("002");
-        customerList.add("003");
-        customerList.add("004");
-    }
+    static TreeMap<Integer, String> tempCustomer = new TreeMap<Integer, String>();
 
     public static void main(String[] args) {
         boolean loop = true;
@@ -25,34 +16,34 @@ public class QueueBank {
         String service = scanner.nextLine();
         switch (service) {
             case "1":
-                if (customerQueue.isEmpty()){
-                    priorityNumber = 0;
-                }
                 System.out.println("Input Customer Code:");
                 scanner = new Scanner(System.in);
                 String code = scanner.nextLine();
-                for (String number:customerList
-                     ) {
-                    if (customerList.contains(code)){
-                        code = number;
-                        break;
-                    }
-                    code = "New Customer";
-                }
-                customerQueue.add(priorityNumber);
+                System.out.println("Input Customer Priority Number:");
+                scanner = new Scanner(System.in);
+                int priorityNumber = scanner.nextInt();
                 tempCustomer.put(priorityNumber,code);
                 System.out.printf("Welcome Customer Code:  %s\nYour Queue Number;  %d\n",code,priorityNumber);
-                priorityNumber++;
                 break;
             case "2":
-                int tempCode = customerQueue.poll();
-                System.out.printf("Queue Number Next:%d\nCustomer Code: %s\n",tempCode,tempCustomer.get(tempCode));
-                tempCustomer.remove(tempCode);
+                NavigableSet<Integer> customerQueue = tempCustomer.navigableKeySet();
+                if (customerQueue.isEmpty()){
+                    System.out.println("0");
+                    break;
+                }
+                int orderAsc =  customerQueue.first();
+                System.out.printf("Queue Number First:%d\nCustomer Code:%s",orderAsc,tempCustomer.get(orderAsc));
+                tempCustomer.remove(orderAsc);
                 break;
             case "3":
-                int tempCodeLast = customerQueue.pollLast();
-                System.out.printf("Queue Number Last:%d\nCustomer Code: %s\n",tempCodeLast,tempCustomer.get(tempCodeLast));
-                tempCustomer.remove(tempCodeLast);
+                NavigableSet<Integer> customerQueueDesc = tempCustomer.descendingKeySet();
+                if (customerQueueDesc.isEmpty()){
+                    System.out.println("0");
+                    break;
+                }
+                int orderDesc =  customerQueueDesc.first();
+                System.out.printf("Queue Number First:%d\nCustomer Code:%s",orderDesc,tempCustomer.get(orderDesc));
+                tempCustomer.remove(orderDesc);
                 break;
             case "0":
             default:
