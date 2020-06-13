@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Product</title>
+</head>
+<body>
+<h2>Are You Sure To Delete This Product?</h2>
+        <form action="/delete" method="post" th:object="${postBlog}">
+            <label>ID:</label>
+            <input th:field="*{id}" name="id" readonly><br>
+            <label>Title:</label>
+            <input th:field="*{title}" name="title"><br>
+            <label>Author:</label>
+            <input th:field="*{author}" name="name"><br>
+            <label>Date:</label>
+            <input th:field="*{date}" name="price"><br>
+            <input type="submit" value="confirm"/>
+        </form>
+</body>
+</html>
