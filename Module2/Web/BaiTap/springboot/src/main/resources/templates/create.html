@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Product</title>
+</head>
+<body>
+<form action="/create" method="post" th:object="${postBlog}">
+    <label>Title:</label>
+    <input  th:field="*{title}"/><br>
+    <label>Name:</label>
+    <input  th:field="*{author}"/><br>
+    <label>Date:</label>
+    <input th:field="*{date}"/><br>
+    <label>Description:</label>
+    <input  th:field="*{description}"/><br>
+    <label>Category</label>
+    <select name="category" id="category" th:field="*{blogCategory.id}">
+        <option th:each="post : ${listCategory}" th:value="${post.id}" th:text="${post.name}"></option>
+    </select>
+    <input type="submit" value="create"/>
+</form>
+</body>
+</html>

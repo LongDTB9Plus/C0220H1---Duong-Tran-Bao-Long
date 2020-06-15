@@ -1,0 +1,68 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+</head>
+<body>
+<label>Search Box:</label>
+<p th:text="${message}"></p>
+<form action="/search" method="get">
+    <input type="text" name="search" value="search"/>
+    Search By
+    <select name="searchType">
+        <option value="id">ID</option>
+        <option value="title">Title</option>
+        <option value="author">Author</option>
+        <option value="year">Year</option>
+    </select>
+    <input type="submit" value="submit"/>
+</form>
+<hr>
+<select onchange="orderPost(this)">
+    <option value="">Select</option>
+    <option value="asc">Ascending</option>
+    <option value="desc">Descending</option>
+</select>
+<hr>
+<table border="solid black" cellpadding="5px">
+    <tr>
+        <td>Title</td>
+        <td>Author</td>
+        <td>Date</td>
+        <td>Description</td>
+        <td>Category</td>
+        <td th:colspan="2">Action</td>
+    </tr>
+    <th:block th:each="post : ${postBlog}">
+        <tr>
+            <td th:text="${post.getTitle()}"></td>
+            <td th:text="${post.getAuthor()}"></td>
+            <td th:text="${post.getDate()}"></td>
+            <td><textarea th:width="200px" th:text="${post.getDescription()}" readonly></textarea></td>
+            <td th:text="${post.blogCategory.name}"></td>
+            <td><a th:href="@{/edit/{id}(id=${post.id})}">Edit</a></td>
+            <td><a th:href="@{/delete/{id}(id=${post.id})}">Delete</a></td>
+        </tr>
+    </th:block>
+</table>
+<hr>
+<a th:href="@{/create}">Create New Post</a>
+<select name="category" id="category" onchange="gotoPage(this)">
+    <option value="">Select</option>
+    <option th:each="post : ${listCategory}" th:text="${post.name}" th:value="${post.id}"></option>
+</select>
+<hr>
+
+<script type="text/javascript">
+    function gotoPage(select){
+        window.location = "/sort/" + select.value;
+    }
+</script>
+<script type="text/javascript">
+    function orderPost(select){
+        window.location = "/order/" + select.value;
+    }
+</script>
+</body>
+</html>
