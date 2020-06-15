@@ -8,9 +8,11 @@ import java.util.List;
 public interface BlogServices {
     BlogPost findById(Integer id);
 
-    String save(BlogPost blogPost);
+    String save(BlogPost postBlog);
 
     List<BlogPost> findAll();
 
-    void edit(BlogPost blogPost);
+    void edit(BlogPost postBlog);
+
+    void delete(BlogPost postBlog);
 }

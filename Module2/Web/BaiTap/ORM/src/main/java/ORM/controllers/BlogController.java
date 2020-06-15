@@ -43,4 +43,16 @@ public class BlogController {
         blogServices.edit(postBlog);
         return "redirect:/";
     }
+
+    @GetMapping("/delete/{id}")
+    public String getDelete(@PathVariable Integer id,Model model){
+        model.addAttribute("postBlog",blogServices.findById(id));
+        return "delete";
+    }
+
+    @PostMapping("/delete")
+    public String postDelete(@ModelAttribute BlogPost postBlog){
+        blogServices.delete(postBlog);
+        return "redirect:/";
+    }
 }

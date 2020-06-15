@@ -52,7 +52,7 @@
         <property name="entityManagerFactory" ref="myEmf" />
     </bean>
 
-    <tx:annotation-driven/>
+    <tx:annotation-driven/>   
 
     <bean id="persistenceExceptionTranslationPostProcessor" class=
             "org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />

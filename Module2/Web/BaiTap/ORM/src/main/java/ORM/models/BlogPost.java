@@ -14,14 +14,14 @@ public class BlogPost {
     private Integer id;
     private String title;
     private String author;
-    private Date date;
+    private java.sql.Date date;
     private String description;
 
     public BlogPost() {
 
     }
 
-    public BlogPost(Integer id,String title, String author, Date date, String description) {
+    public BlogPost(Integer id, String title, String author, java.sql.Date date, String description) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -57,7 +57,7 @@ public class BlogPost {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(java.sql.Date date) {
         this.date = date;
     }
 

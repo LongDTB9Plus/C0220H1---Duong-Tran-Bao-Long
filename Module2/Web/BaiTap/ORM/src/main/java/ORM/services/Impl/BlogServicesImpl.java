@@ -19,8 +19,8 @@ public class BlogServicesImpl implements BlogServices {
     }
 
     @Override
-    public String save(BlogPost blogPost) {
-        return blogRepository.save(blogPost);
+    public String save(BlogPost postBlog) {
+        return blogRepository.save(postBlog);
     }
 
     @Override
@@ -31,5 +31,10 @@ public class BlogServicesImpl implements BlogServices {
     @Override
     public void edit(BlogPost postBlog) {
         blogRepository.edit(postBlog);
+    }
+
+    @Override
+    public void delete(BlogPost postBlog) {
+        blogRepository.delete(postBlog);
     }
 }

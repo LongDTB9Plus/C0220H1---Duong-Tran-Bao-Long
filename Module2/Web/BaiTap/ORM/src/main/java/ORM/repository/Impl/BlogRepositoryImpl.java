@@ -3,11 +3,11 @@ package ORM.repository.Impl;
 import ORM.models.BlogPost;
 import ORM.repository.BlogRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -27,8 +27,8 @@ public class BlogRepositoryImpl implements BlogRepository {
     }
 
     @Override
-    public String save(BlogPost blogPost) {
-        entityManager.persist(blogPost);
+    public String save(BlogPost postBlog) {
+        entityManager.persist(postBlog);
         return "Done!";
     }
 
@@ -42,5 +42,10 @@ public class BlogRepositoryImpl implements BlogRepository {
     @Override
     public void edit(BlogPost postBlog) {
         entityManager.merge(postBlog);
+    }
+
+    @Override
+    public void delete(BlogPost postBlog) {
+        entityManager.remove(postBlog);
     }
 }
