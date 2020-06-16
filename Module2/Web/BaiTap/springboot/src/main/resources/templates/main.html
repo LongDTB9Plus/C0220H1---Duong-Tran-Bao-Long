@@ -36,9 +36,9 @@
     </tr>
     <th:block th:each="post : ${postBlog}">
         <tr>
-            <td th:text="${post.getTitle()}"></td>
-            <td th:text="${post.getAuthor()}"></td>
-            <td th:text="${post.getDate()}"></td>
+            <td th:text="${post.title}"></td>
+            <td th:text="${post.author}"></td>
+            <td th:text="${post.date}"></td>
             <td><textarea th:width="200px" th:text="${post.getDescription()}" readonly></textarea></td>
             <td th:text="${post.blogCategory.name}"></td>
             <td><a th:href="@{/edit/{id}(id=${post.id})}">Edit</a></td>

@@ -5,10 +5,10 @@ import com.springboot.repository.BlogPostRepository;
 import com.springboot.services.BlogServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.util.calendar.BaseCalendar;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
 
 @Service
 public class BlogServicesImpl implements BlogServices {
@@ -71,21 +71,23 @@ public class BlogServicesImpl implements BlogServices {
 //    }
 
     @Override
-    public Optional<BlogPost> search(String type, String search) {
-        Optional<BlogPost> blogPostList = null;
+    public List<BlogPost> search(String type, String search) {
+        List<BlogPost> blogPostList = null;
         switch (type) {
             case "id":
                 Integer searchID = Integer.parseInt(search);
-                blogPostList = blogPostRepository.findById(searchID);
+                List<Integer> searchIDs = new ArrayList<>();
+                searchIDs.add(searchID);
+                blogPostList = blogPostRepository.findAllById(searchIDs);
                 break;
             case "title":
-                blogPostList = blogPostRepository.findDistinctByTitleContainingIgnoreCase(search);
+                blogPostList = blogPostRepository.findBlogPostsByTitleContainingOrderByIdAsc(search);
                 break;
             case "author":
-                blogPostList = blogPostRepository.findDistinctByAuthorContainingIgnoreCase(search);
+                blogPostList = blogPostRepository.findBlogPostsByAuthorContainingOrderByIdAsc(search);
                 break;
             case "year":
-//                blogPostList = blogPostRepository.findByDate_Year(Integer.parseInt(search));
+//                blogPostList = blogPostRepository.findBlogPostsByDateContainingOrderByIdAsc(searchIDf);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + type);

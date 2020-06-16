@@ -28,6 +28,6 @@ public interface BlogServices {
 //    List<BlogPost> findDistinctByTitleContainingIgnoreCase(String search);
 
     //    List<BlogPost> findByDate_Year (Integer search);
-    Optional<BlogPost> search(String type, String search);
+    List<BlogPost> search(String type, String search);
 
 }

@@ -35,23 +35,25 @@ public class BlogController {
     }
 
     @GetMapping("/search")
-    public  String getSearch(@RequestParam String searchType,@RequestParam String search,Model model){
-        Optional<BlogPost> blogPostList = blogServices.search(searchType,search);
-        if (!blogPostList.isPresent()){
-            model.addAttribute("message","Not Found!");
-        }else model.addAttribute("postBlog",blogPostList);
+    public String getSearch(@RequestParam String searchType, @RequestParam String search, Model model) {
+        List<BlogPost> blogPostList = blogServices.search(searchType, search);
+        if (blogPostList.isEmpty()) {
+            model.addAttribute("message", "Not Found!");
+        } else {
+            model.addAttribute("postBlog", blogPostList);
+        }
         model.addAttribute("listCategory", blogCategoryServices.findAll());
         return "main";
     }
 
     @GetMapping("/order/{type}")
-    public String getSortBlogByOrder(@PathVariable String type,Model model){
-        switch (type){
+    public String getSortBlogByOrder(@PathVariable String type, Model model) {
+        switch (type) {
             case "asc":
-                model.addAttribute("postBlog",blogServices.findByOrderByDateAsc());
+                model.addAttribute("postBlog", blogServices.findByOrderByDateAsc());
                 break;
             case "desc":
-                model.addAttribute("postBlog",blogServices.findByOrderByDateDesc());
+                model.addAttribute("postBlog", blogServices.findByOrderByDateDesc());
                 break;
         }
         model.addAttribute("listCategory", blogCategoryServices.findAll());
