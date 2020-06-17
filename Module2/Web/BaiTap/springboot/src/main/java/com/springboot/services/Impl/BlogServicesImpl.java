@@ -86,15 +86,7 @@ public class BlogServicesImpl implements BlogServices {
                 blogPostList = blogPostRepository.findBlogPostsByTitleContainingOrderByIdAsc(search);
                 break;
             case "author":
-<<<<<<< HEAD
-<<<<<<< HEAD
-                blogPostList = blogPostRepository.findBlogPostByAuthorContaining(search);
-=======
                 blogPostList = blogPostRepository.findBlogPostsByAuthorContainingOrderByIdAsc(search);
->>>>>>> b4ddfa530fcff0a5133a89886667e6305e9c7990
-=======
-                blogPostList = blogPostRepository.findBlogPostsByAuthorContainingOrderByIdAsc(search);
->>>>>>> b4ddfa530fcff0a5133a89886667e6305e9c7990
                 break;
             case "year":
 //                blogPostList = blogPostRepository.findBlogPostsByDateContainingOrderByIdAsc(searchIDf);
