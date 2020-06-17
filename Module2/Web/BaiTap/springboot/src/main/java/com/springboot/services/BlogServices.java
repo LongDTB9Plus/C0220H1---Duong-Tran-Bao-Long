@@ -19,17 +19,17 @@ public interface BlogServices {
 
     void delete(BlogPost postBlog);
 
-    List<BlogPost> findByBlogCategory_Id(Integer id);
+    Page<BlogPost> findByBlogCategory_Id(Pageable pageable,Integer id);
 
-    List<BlogPost> findByOrderByDateAsc();
+    Page<BlogPost> findByOrderByDateAsc(Pageable pageable);
 
-    List<BlogPost> findByOrderByDateDesc();
+    Page<BlogPost> findByOrderByDateDesc(Pageable pageable);
 
 //    List<BlogPost> findDistinctByAuthorContainingIgnoreCase(String search);
 //
 //    List<BlogPost> findDistinctByTitleContainingIgnoreCase(String search);
 
     //    List<BlogPost> findByDate_Year (Integer search);
-    List<BlogPost> search(String type, String search);
+    Page<BlogPost> search(String type, String search,Pageable pageable);
 
 }

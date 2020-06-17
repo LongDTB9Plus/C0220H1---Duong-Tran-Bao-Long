@@ -5,11 +5,10 @@ import com.springboot.repository.BlogPostRepository;
 import com.springboot.services.BlogServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import sun.util.calendar.BaseCalendar;
 
-import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -43,18 +42,18 @@ public class BlogServicesImpl implements BlogServices {
     }
 
     @Override
-    public List<BlogPost> findByBlogCategory_Id(Integer id) {
-        return blogPostRepository.findByBlogCategory_Id(id);
+    public Page<BlogPost> findByBlogCategory_Id(Pageable pageable,Integer id) {
+        return blogPostRepository.findByBlogCategory_Id(pageable,id);
     }
 
     @Override
-    public List<BlogPost> findByOrderByDateAsc() {
-        return blogPostRepository.findByOrderByDateAsc();
+    public Page<BlogPost> findByOrderByDateAsc(Pageable pageable) {
+        return blogPostRepository.findByOrderByDateAsc(pageable);
     }
 
     @Override
-    public List<BlogPost> findByOrderByDateDesc() {
-        return blogPostRepository.findByOrderByDateDesc();
+    public Page<BlogPost> findByOrderByDateDesc(Pageable pageable) {
+        return blogPostRepository.findByOrderByDateDesc(pageable);
     }
 
 //    @Override
@@ -73,20 +72,22 @@ public class BlogServicesImpl implements BlogServices {
 //    }
 
     @Override
-    public List<BlogPost> search(String type, String search) {
-        List<BlogPost> blogPostList = null;
+    public Page<BlogPost> search(String type, String search,Pageable pageable) {
+        Page<BlogPost> blogPostList = null;
         switch (type) {
             case "id":
                 Integer searchID = Integer.parseInt(search);
-                List<Integer> searchIDs = new ArrayList<>();
-                searchIDs.add(searchID);
-                blogPostList = blogPostRepository.findAllById(searchIDs);
+//                List<Integer> searchIDs = new ArrayList<>();
+//                searchIDs.add(searchID);
+                List<BlogPost> blogPost = new ArrayList<>();
+                blogPost.add(blogPostRepository.findById(searchID).get());
+                blogPostList = new PageImpl<>(blogPost, pageable, 1);
                 break;
             case "title":
-                blogPostList = blogPostRepository.findBlogPostsByTitleContainingOrderByIdAsc(search);
+                blogPostList = blogPostRepository.findBlogPostsByTitleContainingOrderByIdAsc(search,pageable);
                 break;
             case "author":
-                blogPostList = blogPostRepository.findBlogPostsByAuthorContainingOrderByIdAsc(search);
+                blogPostList = blogPostRepository.findBlogPostsByAuthorContainingOrderByIdAsc(search,pageable);
                 break;
             case "year":
 //                blogPostList = blogPostRepository.findBlogPostsByDateContainingOrderByIdAsc(searchIDf);

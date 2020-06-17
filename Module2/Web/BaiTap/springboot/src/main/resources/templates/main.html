@@ -8,7 +8,7 @@
 <label>Search Box:</label>
 <p th:text="${message}"></p>
 <form action="/search" method="get">
-    <input type="text" name="search" value="search"/>
+    <input type="text" name="search"/>
     Search By
     <select name="searchType">
         <option value="id">ID</option>
@@ -19,7 +19,7 @@
     <input type="submit" value="submit"/>
 </form>
 <hr>
-<select onchange="orderPost(this)">
+<select name="type" onchange="orderPost(this)">
     <option value="">Select</option>
     <option value="asc">Ascending</option>
     <option value="desc">Descending</option>
@@ -47,25 +47,27 @@
     </th:block>
 </table>
 <div>
-    <a th:if="${postBlog.hasPrevious()}" th:href="@{/(page=${postBlog.number - 1})}">Previous</a>
+    <a th:if="${postBlog.hasPrevious()}" th:href="@{/(page=${postBlog.number - 1},type =${type},
+     search = ${search},searchType = ${searchType},category = ${category})}">Previous</a>
     <span th:text="${postBlog.number + 1}"></span>/<span th:text="${postBlog.totalPages}"></span>
-    <a th:if="${postBlog.hasNext()}" th:href="@{/(page=${postBlog.number + 1})}">Next</a>
+    <a th:if="${postBlog.hasNext()}" th:href="@{/(page=${postBlog.number + 1},type =${type},
+     search = ${search},searchType = ${searchType},category = ${category})}">Next</a>
 </div>
 <hr>
 <a th:href="@{/create}">Create New Post</a>
 <select name="category" id="category" onchange="gotoPage(this)">
-    <option value="">Select</option>
+    <option>Select</option>
     <option th:each="post : ${listCategory}" th:text="${post.name}" th:value="${post.id}"></option>
 </select>
 <hr>
 
 <script type="text/javascript">
-    function gotoPage(select){
+    function gotoPage(select) {
         window.location = "/sort/" + select.value;
     }
 </script>
 <script type="text/javascript">
-    function orderPost(select){
+    function orderPost(select) {
         window.location = "/order/" + select.value;
     }
 </script>
