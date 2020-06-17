@@ -2,6 +2,8 @@ package com.springboot.services;
 
 
 import com.springboot.models.BlogPost;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +13,7 @@ public interface BlogServices {
 
     void save(BlogPost postBlog);
 
-    List<BlogPost> findAll();
+    Page<BlogPost> findAll(Pageable pageable);
 
     void edit(BlogPost postBlog);
 
@@ -28,6 +30,6 @@ public interface BlogServices {
 //    List<BlogPost> findDistinctByTitleContainingIgnoreCase(String search);
 
     //    List<BlogPost> findByDate_Year (Integer search);
-    Optional<BlogPost> search(String type, String search);
+    List<BlogPost> search(String type, String search);
 
 }

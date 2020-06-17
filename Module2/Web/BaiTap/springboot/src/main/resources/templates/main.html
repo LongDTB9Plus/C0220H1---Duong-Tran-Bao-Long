@@ -34,11 +34,11 @@
         <td>Category</td>
         <td th:colspan="2">Action</td>
     </tr>
-    <th:block th:each="post : ${postBlog}">
+    <th:block th:each="post : ${postBlog.content}">
         <tr>
-            <td th:text="${post.getTitle()}"></td>
-            <td th:text="${post.getAuthor()}"></td>
-            <td th:text="${post.getDate()}"></td>
+            <td th:text="${post.title}"></td>
+            <td th:text="${post.author}"></td>
+            <td th:text="${post.date}"></td>
             <td><textarea th:width="200px" th:text="${post.getDescription()}" readonly></textarea></td>
             <td th:text="${post.blogCategory.name}"></td>
             <td><a th:href="@{/edit/{id}(id=${post.id})}">Edit</a></td>
@@ -46,6 +46,11 @@
         </tr>
     </th:block>
 </table>
+<div>
+    <a th:if="${postBlog.hasPrevious()}" th:href="@{/(page=${postBlog.number - 1})}">Previous</a>
+    <span th:text="${postBlog.number + 1}"></span>/<span th:text="${postBlog.totalPages}"></span>
+    <a th:if="${postBlog.hasNext()}" th:href="@{/(page=${postBlog.number + 1})}">Next</a>
+</div>
 <hr>
 <a th:href="@{/create}">Create New Post</a>
 <select name="category" id="category" onchange="gotoPage(this)">

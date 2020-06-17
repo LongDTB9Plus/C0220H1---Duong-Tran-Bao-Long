@@ -5,6 +5,8 @@ import com.springboot.models.BlogPost;
 import com.springboot.services.BlogCategoryServices;
 import com.springboot.services.BlogServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +23,8 @@ public class BlogController {
     BlogCategoryServices blogCategoryServices;
 
     @GetMapping("/")
-    public String getBlog(Model model) {
-        model.addAttribute("postBlog", blogServices.findAll());
+    public String getBlog(Model model, @PageableDefault(size = 2)Pageable pageable) {
+        model.addAttribute("postBlog", blogServices.findAll(pageable));
         model.addAttribute("listCategory", blogCategoryServices.findAll());
         return "main";
     }
@@ -35,23 +37,25 @@ public class BlogController {
     }
 
     @GetMapping("/search")
-    public  String getSearch(@RequestParam String searchType,@RequestParam String search,Model model){
-        Optional<BlogPost> blogPostList = blogServices.search(searchType,search);
-        if (!blogPostList.isPresent()){
-            model.addAttribute("message","Not Found!");
-        }else model.addAttribute("postBlog",blogPostList);
+    public String getSearch(@RequestParam String searchType, @RequestParam String search, Model model) {
+        List<BlogPost> blogPostList = blogServices.search(searchType, search);
+        if (blogPostList.isEmpty()) {
+            model.addAttribute("message", "Not Found!");
+        } else {
+            model.addAttribute("postBlog", blogPostList);
+        }
         model.addAttribute("listCategory", blogCategoryServices.findAll());
         return "main";
     }
 
     @GetMapping("/order/{type}")
-    public String getSortBlogByOrder(@PathVariable String type,Model model){
-        switch (type){
+    public String getSortBlogByOrder(@PathVariable String type, Model model) {
+        switch (type) {
             case "asc":
-                model.addAttribute("postBlog",blogServices.findByOrderByDateAsc());
+                model.addAttribute("postBlog", blogServices.findByOrderByDateAsc());
                 break;
             case "desc":
-                model.addAttribute("postBlog",blogServices.findByOrderByDateDesc());
+                model.addAttribute("postBlog", blogServices.findByOrderByDateDesc());
                 break;
         }
         model.addAttribute("listCategory", blogCategoryServices.findAll());
