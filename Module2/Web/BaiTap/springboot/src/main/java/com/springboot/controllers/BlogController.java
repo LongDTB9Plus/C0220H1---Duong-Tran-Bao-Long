@@ -6,7 +6,9 @@ import com.springboot.services.BlogCategoryServices;
 import com.springboot.services.BlogServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +33,7 @@ public class BlogController {
                           @RequestParam Optional<String> type, @RequestParam Optional<Integer> page) {
         if (category.isPresent()) {
             Integer id = category.get();
-            return ("redirect:/sort/" + id + "/" + page.get());
+            return ("redirect:/sort/" + id + "?page=" + page.get());
         }
         if ((searchType.isPresent()) && (search.isPresent())) {
             if ((!searchType.get().isEmpty()) && (!search.get().isEmpty())) {
@@ -39,7 +41,9 @@ public class BlogController {
             }
         }
         if (type.isPresent()) {
-            return ("redirect:/order/" + type.get() + "/" + page.get());
+            if (!type.get().isEmpty()) {
+                return ("redirect:/order/" + type.get() + "?page=" + page.get());
+            }
         }
         model.addAttribute("postBlog", blogServices.findAll(pageable));
         model.addAttribute("listCategory", blogCategoryServices.findAll());
@@ -48,7 +52,9 @@ public class BlogController {
 
     @GetMapping("/sort/{id}")
     public String getSortBlogByCategory(@PathVariable Integer id, Model model,
-                                        @PageableDefault(size = 2) Pageable pageable) {
+                                        @RequestParam(required = false) Integer page,
+                                        @RequestParam(required = false) Integer pageSize ) {
+        Pageable pageable = PageRequest.of((page == null ? 0 : page), (pageSize == null ? 2 : pageSize));
         model.addAttribute("postBlog", blogServices.findByBlogCategory_Id(pageable, id));
         model.addAttribute("listCategory", blogCategoryServices.findAll());
         model.addAttribute("category", id);
@@ -71,7 +77,10 @@ public class BlogController {
     }
 
     @GetMapping("/order/{type}")
-    public String getSortBlogByOrder(@PathVariable String type, Model model, @PageableDefault(size = 2) Pageable pageable) {
+    public String getSortBlogByOrder(@PathVariable String type, Model model,
+                                     @RequestParam(required = false) Integer page,
+                                     @RequestParam(required = false) Integer pageSize ) {
+        Pageable pageable = PageRequest.of((page == null ? 0 : page), (pageSize == null ? 2 : pageSize));
         switch (type) {
             case "asc":
                 model.addAttribute("postBlog", blogServices.findByOrderByDateAsc(pageable));
