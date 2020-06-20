@@ -16,5 +16,4 @@ public interface BlogPostRepository extends JpaRepository<BlogPost,Integer> {
     Page<BlogPost> findBlogPostsByAuthorContainingOrderByIdAsc (String search,Pageable pageable);
     Page<BlogPost> findBlogPostsByTitleContainingOrderByIdAsc (String search,Pageable pageable);
     List<BlogPost> findBlogPostsByDateContainingOrderByIdAsc (Date search);
-
 }
