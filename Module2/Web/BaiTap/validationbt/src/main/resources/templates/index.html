@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Sign Up</h2>
+<form action="/" method="post" accept-charset="UTF-8" th:object="${user}">
+    <label>First Name:</label>
+    <input  th:field="*{firstName}"/>
+    <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+    <label>Last Name:</label>
+    <input  th:field="*{lastName}"/>
+    <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+    <label>Age:</label>
+    <input  th:field="*{age}"/>
+    <p th:if="${#fields.hasErrors('Age')}" th:errors="*{age}"></p>
+    <label>Email:</label>
+    <input  th:field="*{email}"/>
+    <p th:if="${#fields.hasErrors('Email')}" th:errors="*{email}"></p>
+    <input type="submit" value="SignUp">
+</form>
+</body>
+</html>
