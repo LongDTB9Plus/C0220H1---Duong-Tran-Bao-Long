@@ -1,10 +1,12 @@
-<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Main Menu</title>
 </head>
 <body>
-
+<p th:text="${message}"></p>
+<a th:href="@{/createProduct}">Create Product</a><br>
+<a th:href="@{/shopping}">Shopping</a><br>
 </body>
 </html>

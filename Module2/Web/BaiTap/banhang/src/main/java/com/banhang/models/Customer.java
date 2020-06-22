@@ -1,15 +1,28 @@
 package com.banhang.models;
 
+import net.bytebuddy.build.ToStringPlugin;
+
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
+
 @Entity
-public class Customer {
+public class Customer{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotEmpty(message = "Ten Dang Nhap Khong Duoc De Trong")
+    @Size(min = 5,max = 21)
+    @Column(unique = true)
     private String username;
+    @NotEmpty
+    @Size(min = 5,max = 21)
     private String passWord;
-    @ManyToMany
+    @ManyToMany(mappedBy = "customerList")
+    @ToStringPlugin.Exclude
     List<Product> productList;
 
     public Customer() {
@@ -34,5 +47,13 @@ public class Customer {
 
     public void setPassWord(String passWord) {
         this.passWord = passWord;
+    }
+
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
 }

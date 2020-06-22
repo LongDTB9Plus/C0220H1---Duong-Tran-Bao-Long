@@ -1,8 +1,10 @@
 package com.banhang.models;
 
+import net.bytebuddy.build.ToStringPlugin;
 import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Entity
@@ -10,17 +12,25 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String detail;
-    @ManyToMany
+    @NotEmpty
+    private Double price;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "history",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "customer_id"))
     List<Customer> customerList;
 
     public Product() {
     }
 
-    public Product(String name, String detail) {
+    public Product(String name, String detail,Double price) {
         this.name = name;
         this.detail = detail;
+        this.price = price;
     }
 
     public Integer getId() {
@@ -45,5 +55,21 @@ public class Product {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    public List<Customer> getCustomerList() {
+        return customerList;
+    }
+
+    public void setCustomerList(List<Customer> customerList) {
+        this.customerList = customerList;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }
