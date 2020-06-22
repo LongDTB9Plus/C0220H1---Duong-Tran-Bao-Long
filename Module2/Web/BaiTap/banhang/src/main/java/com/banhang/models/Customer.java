@@ -5,7 +5,6 @@ import net.bytebuddy.build.ToStringPlugin;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class Customer{
     private String username;
     @NotEmpty
     @Size(min = 5,max = 21)
-    private String passWord;
+    private String password;
     @ManyToMany(mappedBy = "customerList")
     @ToStringPlugin.Exclude
     List<Product> productList;
@@ -28,9 +27,9 @@ public class Customer{
     public Customer() {
     }
 
-    public Customer(String username, String passWord) {
+    public Customer(String username, String password) {
         this.username = username;
-        this.passWord = passWord;
+        this.password = password;
     }
 
     public String getUsername() {
@@ -41,12 +40,12 @@ public class Customer{
         this.username = username;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<Product> getProductList() {
@@ -55,5 +54,13 @@ public class Customer{
 
     public void setProductList(List<Product> productList) {
         this.productList = productList;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

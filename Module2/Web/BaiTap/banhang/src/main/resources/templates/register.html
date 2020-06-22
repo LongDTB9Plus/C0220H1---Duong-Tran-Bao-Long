@@ -10,8 +10,8 @@
     <input th:field="*{username}"><br>
     <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
     <label>Password</label>
-    <input type="password" th:field="*{passWord}"><br>
-    <p th:if="${#fields.hasErrors('passWord')}" th:errors="*{passWord}"></p>
+    <input type="password" th:field="*{password}"><br>
+    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
     <input type="submit" value="Register">
 </form>
 </body>

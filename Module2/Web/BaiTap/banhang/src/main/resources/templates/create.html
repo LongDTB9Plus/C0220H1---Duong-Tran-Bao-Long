@@ -5,14 +5,15 @@
     <title>Create Product</title>
 </head>
 <body>
-<form action="/create" method="get" th:object="product">
+<form action="/create" method="get" th:object="${product}">
     <label>Name:</label>
     <input th:field="*{name}"><br>
     <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
     <label>Detail</label>
     <input th:field="*{detail}"><br>
     <p th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></p>
-    <input th:field="*{price}"><br>
+    <label>Price</label>
+    <input type="text" th:field="*{price}"><br>
     <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
     <input type="submit" value="Create">
 </form>

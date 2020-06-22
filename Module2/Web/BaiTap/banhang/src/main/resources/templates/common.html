@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header th:fragment="headerCustomer">
+    <ul>
+        Tên Đăng Nhập:
+        <span th:text="${account.getUsername()}"></span>
+        Giỏ Hàng:
+        <span th:if="${account.getProductList() != null}" th:text="${account.getProductList().size()}"></span>
+    </ul>
+    <hr>
+</header>
+
+<footer th:fragment="footerCustomer">
+    <hr>
+    <a style="float: right" th:href="@{/checkout}">Check Out</a>
+    <a style="float: right" th:href="@{/logout}">Log Out</a>
+</footer>
+</body>
+</html>

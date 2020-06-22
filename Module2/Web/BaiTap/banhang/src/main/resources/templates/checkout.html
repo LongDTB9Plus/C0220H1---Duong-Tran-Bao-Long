@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Check out</title>
+</head>
+<body>
+<table cellpadding="10px", border="solid black" align="center" border-collapse="collapse">
+    <tr>
+        <td>Name</td>
+        <td>Detail</td>
+        <td>Price</td>
+        <td>Image</td>
+        <td>Action</td>
+    </tr>
+    <tr th:each="product : ${account.getProductList()}">
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.detail}"></td>
+        <td th:text="${product.price}"></td>
+        <td></td>
+        <td><a th:href="@{/remove(id=${product.id})}">Remove</a></td>
+    </tr>
+</table>
+<form action="/checkout" method="post">
+    <input type="submit" value="CheckOut"/>
+</form>
+</body>
+</html>

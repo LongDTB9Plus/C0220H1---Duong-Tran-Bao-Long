@@ -1,8 +1,5 @@
 package com.banhang.models;
 
-import net.bytebuddy.build.ToStringPlugin;
-import org.hibernate.annotations.ManyToAny;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
@@ -16,7 +13,6 @@ public class Product {
     private String name;
     @NotEmpty
     private String detail;
-    @NotEmpty
     private Double price;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "history",
@@ -31,6 +27,12 @@ public class Product {
         this.name = name;
         this.detail = detail;
         this.price = price;
+    }
+
+    public Product(String name, String detail,String price) {
+        this.name = name;
+        this.detail = detail;
+        this.price = Double.parseDouble(price);
     }
 
     public Integer getId() {
@@ -71,5 +73,9 @@ public class Product {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public void setPrice(String price) {
+        this.price = Double.parseDouble(price);
     }
 }

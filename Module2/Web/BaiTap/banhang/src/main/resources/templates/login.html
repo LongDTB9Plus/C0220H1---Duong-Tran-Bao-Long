@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link type="text/css" href="css/style.css" rel="stylesheet"/>
 </head>
-<body>
+<body id="login">
 <p th:text="${registerMessage}"></p>
-<form action="/login" method="post" th:object="${account}">
-    <label>Username:</label>
+<form action="/login" method="post" th:object="${customer}">
+    <label>Username :</label>
     <input th:field="*{username}"><br>
-    <label>Password</label>
-    <input type="password" th:field="*{passWord}"><br>
-    <p th:text="${message}"></p>
+    <br>
+    <label>Password : </label>
+    <input type="password" th:field="*{password}"><br>
+    <p th:text="${message}" style="color: red"></p>
     <input type="submit" value="Login">
 </form>
 <a th:href="@{/register}">Register New Account!</a>

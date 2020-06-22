@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping</title>
+    <link type="text/css" href="css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<header th:replace="common :: headerCustomer"></header>
+<hr>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Detail</th>
+        <th>Price</th>
+        <th>Image</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.detail}"></td>
+        <td th:text="${product.price}"></td>
+        <td></td>
+        <td><a th:href="@{/add(id=${product.id})}">Add</a></td>
+    </tr>
+</table>
+<footer th:replace="common :: footerCustomer"></footer>
+</body>
+</html>

@@ -5,8 +5,10 @@
     <title>Main Menu</title>
 </head>
 <body>
+<header th:replace="common :: headerCustomer"></header>
 <p th:text="${message}"></p>
 <a th:href="@{/createProduct}">Create Product</a><br>
 <a th:href="@{/shopping}">Shopping</a><br>
+<footer th:replace="common :: footerCustomer"></footer>
 </body>
 </html>

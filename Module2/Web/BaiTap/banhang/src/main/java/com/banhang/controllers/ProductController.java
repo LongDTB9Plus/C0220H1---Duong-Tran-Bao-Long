@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.validation.Valid;
@@ -23,7 +24,7 @@ public class ProductController {
     CustomerServices customerServices;
 
     @GetMapping("/createProduct")
-    public String getCreateProduct(@ModelAttribute Customer account, Model model) {
+    public String getCreateProduct(@SessionAttribute Customer account, Model model) {
         if (customerServices.checkPermission(account)) {
             model.addAttribute("product", new Product());
             return "create";
