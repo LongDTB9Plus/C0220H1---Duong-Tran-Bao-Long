@@ -1,6 +1,8 @@
 package com.banhang.models;
 
 import net.bytebuddy.build.ToStringPlugin;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
 
 import javax.persistence.*;
@@ -9,19 +11,18 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-public class Customer{
+public class Customer implements Validator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotEmpty(message = "Ten Dang Nhap Khong Duoc De Trong")
-    @Size(min = 5,max = 21)
+    @Size(min = 5, max = 21)
     @Column(unique = true)
     private String username;
     @NotEmpty
-    @Size(min = 5,max = 21)
+    @Size(min = 5, max = 21)
     private String password;
-    @ManyToMany(mappedBy = "customerList",cascade = CascadeType.ALL)
-//    @ToStringPlugin.Exclude
+    @ManyToMany(mappedBy = "customerList", cascade = CascadeType.ALL)
     List<Product> productList;
 
     public Customer() {
@@ -62,5 +63,21 @@ public class Customer{
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        Customer customer = (Customer) target;
+        if (!customer.username.matches("^[a-zA-Z]")) {
+            errors.rejectValue("username", "customer.name");
+        }
+        if (!customer.password.matches("^[A-Z]")){
+            errors.rejectValue("password","");
+        }
     }
 }
