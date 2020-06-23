@@ -14,7 +14,7 @@ public class Product {
     @NotEmpty
     private String detail;
     private Double price;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = Customer.class)
     @JoinTable(name = "history",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "customer_id"))
@@ -78,4 +78,5 @@ public class Product {
     public void setPrice(String price) {
         this.price = Double.parseDouble(price);
     }
+
 }

@@ -7,5 +7,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Locale;
 
 public interface BlogCategoryRepository extends JpaRepository<BlogCategory,Integer> {
-    Page<BlogCategory> findAllByBlogPostList(BlogCategory blogCategory);
 }

@@ -5,7 +5,7 @@
     <title>Create Product</title>
 </head>
 <body>
-<form action="/create" method="get" th:object="${product}">
+<form action="/create" method="get" th:object="${product}" enctype="multipart/form-data">
     <label>Name:</label>
     <input th:field="*{name}"><br>
     <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
@@ -14,7 +14,7 @@
     <p th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}"></p>
     <label>Price</label>
     <input type="text" th:field="*{price}"><br>
-    <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
+    <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p><br>
     <input type="submit" value="Create">
 </form>
 </body>

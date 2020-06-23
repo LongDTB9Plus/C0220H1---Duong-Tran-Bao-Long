@@ -11,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @SessionAttributes("account")
 public class CustomerController {
@@ -33,6 +36,9 @@ public class CustomerController {
 
     @GetMapping("/checkout")
     public String getCheckOut(@SessionAttribute Customer account) {
+        List<Customer> listC = new ArrayList<>();
+        listC.add(account);
+        account.getProductList().get(0).setCustomerList(listC);
         customerServices.save(account);
         return "checkout";
     }

@@ -20,8 +20,8 @@ public class Customer{
     @NotEmpty
     @Size(min = 5,max = 21)
     private String password;
-    @ManyToMany(mappedBy = "customerList")
-    @ToStringPlugin.Exclude
+    @ManyToMany(mappedBy = "customerList",cascade = CascadeType.ALL)
+//    @ToStringPlugin.Exclude
     List<Product> productList;
 
     public Customer() {
