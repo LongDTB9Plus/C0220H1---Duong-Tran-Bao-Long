@@ -4,12 +4,15 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "trinh_do")
 public class TrinhDo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_trinh_do")
     private Integer id;
+    @Column(name="Trinh_do")
     private String TrinhDo;
-    @OneToMany(mappedBy = "trinhDo")
+    @OneToMany(mappedBy = "trinhDo",cascade = CascadeType.ALL)
     private List<NhanVien> nhanVienList;
 
     public TrinhDo() {

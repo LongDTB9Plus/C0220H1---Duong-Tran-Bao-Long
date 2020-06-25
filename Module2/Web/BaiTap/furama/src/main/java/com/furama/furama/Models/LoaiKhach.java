@@ -5,12 +5,15 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Table(name = "loai_khach")
 public class LoaiKhach {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_loai_khach")
     private Integer id;
+    @Column(name = "Ten_loai_khach")
     private String Ten;
-    @OneToMany(mappedBy = "loaiKhach")
+    @OneToMany(mappedBy = "loaiKhach",cascade = CascadeType.ALL)
     List<KhachHang> khachHangList;
 
     public List<KhachHang> getKhachHangList() {

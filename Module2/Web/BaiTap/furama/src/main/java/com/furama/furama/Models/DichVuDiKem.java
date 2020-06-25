@@ -4,16 +4,22 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "dich_vu_di_kem")
 public class DichVuDiKem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_dich_vu_di_kem")
     private Integer id;
+    @Column(name = "Ten_dich_vu_di_kem")
     private String name;
+    @Column(name = "Gia")
     private Double price;
+    @Column(name = "Don_vi")
     private Integer unit;
+    @Column(name = "Trang_thai_kha_dung")
     private Boolean status;
-    @OneToMany(mappedBy = "dichVuDiKem")
-    List<ContractDetail> contractDetailList;
+    @OneToMany(mappedBy = "dichVuDiKem",cascade = CascadeType.ALL)
+    List<HopDongChiTiet> hopDongChiTietList;
 
     public DichVuDiKem() {
     }
@@ -65,11 +71,11 @@ public class DichVuDiKem {
         this.status = status;
     }
 
-    public List<ContractDetail> getContractDetailList() {
-        return contractDetailList;
+    public List<HopDongChiTiet> getHopDongChiTietList() {
+        return hopDongChiTietList;
     }
 
-    public void setContractDetailList(List<ContractDetail> contractDetailList) {
-        this.contractDetailList = contractDetailList;
+    public void setHopDongChiTietList(List<HopDongChiTiet> hopDongChiTietList) {
+        this.hopDongChiTietList = hopDongChiTietList;
     }
 }

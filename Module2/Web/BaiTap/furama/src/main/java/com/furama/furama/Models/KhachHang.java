@@ -1,23 +1,38 @@
 package com.furama.furama.Models;
 
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
-public class KhachHang {
+@Table(name = "khach_hang")
+public class KhachHang implements Validator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_khach_hang")
     private Integer id;
+    @Column(name = "Ho_ten")
     private String name;
+    @Column(name = "Ngay_sinh")
     private Date birthDay;
+    @Column(name = "So_CMND")
     private String cmnd;
+    @Column(name = "SDT")
     private String phoneNumber;
+    @Column(name = "Email")
     private String Email;
+    @Column(name = "Dia_chi")
     private String Address;
 
     @ManyToOne
-    @JoinColumn(name = "id_loai_khach")
+    @JoinColumn(name = "ID_loai_khach")
     private LoaiKhach loaiKhach;
+
+    @OneToMany(mappedBy = "khachHang",cascade = CascadeType.ALL)
+    List<HopDong> listHopDongKhachHang;
 
     public KhachHang() {
     }
@@ -95,5 +110,15 @@ public class KhachHang {
 
     public void setLoaiKhach(LoaiKhach loaiKhach) {
         this.loaiKhach = loaiKhach;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        KhachHang khachHang = (KhachHang) target;
     }
 }

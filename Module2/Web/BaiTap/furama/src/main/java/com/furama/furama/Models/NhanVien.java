@@ -1,37 +1,49 @@
 package com.furama.furama.Models;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.List;
 
 @Entity
+@Table(name = "nhan_vien")
 public class NhanVien {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_nhan_vien")
     private Integer id;
+    @Column(name = "Ho_ten")
     private String Name;
-    private Date birthDay;
+    @Column(name = "Ngay_sinh")
+    private String birthDay;
+    @Column(name = "So_CMND")
     private String cmnd;
+    @Column(name = "Luong")
     private Double Luong;
+    @Column(name = "SDT")
     private String phoneNumber;
+    @Column(name = "Email")
     private String Email;
+    @Column(name = "Dia_chi")
     private String Address;
 
     @ManyToOne
-    @JoinColumn(name = "id_bo_phan")
+    @JoinColumn(name = "ID_bo_phan")
     BoPhan boPhan;
 
     @ManyToOne
-    @JoinColumn(name = "id_vi_tri")
+    @JoinColumn(name = "ID_vi_tri")
     ViTri viTri;
 
     @ManyToOne
-    @JoinColumn(name = "id_trinh_do")
+    @JoinColumn(name = "ID_trinh_do")
     TrinhDo trinhDo;
+
+    @OneToMany(mappedBy = "nhanVien",cascade = CascadeType.ALL)
+    List<HopDong> listHopDongNhanVien;
 
     public NhanVien() {
     }
 
-    public NhanVien(String name, Date birthDay, String cmnd, Double luong,
+    public NhanVien(String name, String birthDay, String cmnd, Double luong,
                     String phoneNumber, String email, String address, BoPhan boPhan,
                     ViTri viTri, TrinhDo trinhDo) {
         Name = name;
@@ -62,11 +74,11 @@ public class NhanVien {
         Name = name;
     }
 
-    public Date getBirthDay() {
+    public String getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(Date birthDay) {
+    public void setBirthDay(String birthDay) {
         this.birthDay = birthDay;
     }
 
