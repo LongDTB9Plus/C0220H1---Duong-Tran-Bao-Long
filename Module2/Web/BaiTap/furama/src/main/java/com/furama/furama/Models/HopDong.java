@@ -4,6 +4,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @Entity
@@ -19,6 +20,7 @@ public class HopDong implements Validator {
     @Column(name = "Ngay_ket_thuc")
     private String dateEnd;
     @Column(name = "Tien_dat_coc")
+    @Min(value = 0)
     private Double datCoc;
     @Column(name = "Tong_tien")
     private Double tongTien;

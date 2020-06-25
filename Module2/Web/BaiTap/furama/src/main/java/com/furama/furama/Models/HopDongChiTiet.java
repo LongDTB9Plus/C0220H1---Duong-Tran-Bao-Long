@@ -1,6 +1,7 @@
 package com.furama.furama.Models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "hop_dong_chi_tiet")
@@ -10,6 +11,7 @@ public class HopDongChiTiet {
     @Column(name = "ID_hop_dong_chi_tiet")
     private Integer id;
     @Column(name = "So_luong")
+    @Min(value = 0)
     private Integer amount;
     @ManyToOne
     @JoinColumn(name = "ID_dich_vu_di_kem")

@@ -4,6 +4,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @Entity
@@ -20,6 +21,7 @@ public class DichVu implements Validator {
     @Column(name = "Dien_tich")
     private Double area;
     @Column(name = "So_tang")
+    @Min(value = 0)
     private Integer floor;
     @Column(name = "So_nguoi_toi_da")
     private Integer maxPeople;

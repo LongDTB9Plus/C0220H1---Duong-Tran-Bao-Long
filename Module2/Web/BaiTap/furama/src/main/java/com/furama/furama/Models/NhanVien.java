@@ -1,6 +1,7 @@
 package com.furama.furama.Models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @Entity
@@ -17,6 +18,7 @@ public class NhanVien {
     @Column(name = "So_CMND")
     private String cmnd;
     @Column(name = "Luong")
+    @Min(value = 0)
     private Double Luong;
     @Column(name = "SDT")
     private String phoneNumber;

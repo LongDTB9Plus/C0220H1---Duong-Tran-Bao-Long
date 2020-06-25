@@ -14,4 +14,6 @@ public interface KhachHangRepository extends JpaRepository<KhachHang,Integer> {
             "on (khach_hang.id_khach_hang = hop_dong.id_khach_hang) " +
             "where hop_dong.ngay_ket_thuc > ?1",nativeQuery = true)
     List<KhachHang> findAllStillActive(LocalDateTime date);
+
+    List<KhachHang> findKhachHangByCode (String code);
 }

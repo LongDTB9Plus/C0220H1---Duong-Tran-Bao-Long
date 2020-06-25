@@ -1,6 +1,7 @@
 package com.furama.furama.Models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @Entity
@@ -13,8 +14,10 @@ public class DichVuDiKem {
     @Column(name = "Ten_dich_vu_di_kem")
     private String name;
     @Column(name = "Gia")
+    @Min(value = 0)
     private Double price;
     @Column(name = "Don_vi")
+    @Min(value = 0)
     private Integer unit;
     @Column(name = "Trang_thai_kha_dung")
     private Boolean status;
