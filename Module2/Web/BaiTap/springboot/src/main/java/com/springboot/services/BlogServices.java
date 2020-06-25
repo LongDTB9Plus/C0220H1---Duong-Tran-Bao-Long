@@ -13,6 +13,8 @@ public interface BlogServices {
 
     void save(BlogPost postBlog);
 
+    List<BlogPost> findAll();
+
     Page<BlogPost> findAll(Pageable pageable);
 
     void edit(BlogPost postBlog);
@@ -20,6 +22,8 @@ public interface BlogServices {
     void delete(BlogPost postBlog);
 
     Page<BlogPost> findByBlogCategory_Id(Pageable pageable,Integer id);
+
+    List<BlogPost> findByBlogCategory_Id(Integer id);
 
     Page<BlogPost> findByOrderByDateAsc(Pageable pageable);
 
