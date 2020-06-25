@@ -13,6 +13,8 @@ public class DichVu implements Validator {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_dich_vu")
     private Integer id;
+    @Column(name="ma_dich_vu")
+    private String code;
     @Column(name = "Ten_dich_vu")
     private String name;
     @Column(name = "Dien_tich")
@@ -34,9 +36,10 @@ public class DichVu implements Validator {
     @OneToMany(mappedBy = "dichVu", cascade = CascadeType.ALL)
     List<HopDong> listHopDong;
 
-    public DichVu(String name, Double area, Integer floor,
+    public DichVu(String code,String name, Double area, Integer floor,
                   Integer maxPeople, Double price, String status,
                   LoaiDichVu loaiDichVu, KieuThue kieuThue, List<HopDong> listHopDong) {
+        this.code = code;
         this.name = name;
         this.area = area;
         this.floor = floor;
@@ -129,6 +132,14 @@ public class DichVu implements Validator {
 
     public void setListHopDong(List<HopDong> listHopDong) {
         this.listHopDong = listHopDong;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Override

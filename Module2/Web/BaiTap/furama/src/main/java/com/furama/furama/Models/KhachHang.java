@@ -14,6 +14,8 @@ public class KhachHang implements Validator {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_khach_hang")
     private Integer id;
+    @Column(name = "ma_khach_hang")
+    private String code;
     @Column(name = "Ho_ten")
     private String name;
     @Column(name = "Ngay_sinh")
@@ -37,8 +39,9 @@ public class KhachHang implements Validator {
     public KhachHang() {
     }
 
-    public KhachHang(String name, Date birthDay, String cmnd, String phoneNumber,
+    public KhachHang(String code,String name, Date birthDay, String cmnd, String phoneNumber,
                      String email, String address, LoaiKhach loaiKhach) {
+        this.code = code;
         this.name = name;
         this.birthDay = birthDay;
         this.cmnd = cmnd;
@@ -46,6 +49,22 @@ public class KhachHang implements Validator {
         Email = email;
         Address = address;
         this.loaiKhach = loaiKhach;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public List<HopDong> getListHopDongKhachHang() {
+        return listHopDongKhachHang;
+    }
+
+    public void setListHopDongKhachHang(List<HopDong> listHopDongKhachHang) {
+        this.listHopDongKhachHang = listHopDongKhachHang;
     }
 
     public Integer getId() {
