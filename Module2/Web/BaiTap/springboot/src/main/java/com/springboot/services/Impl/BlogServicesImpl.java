@@ -27,6 +27,11 @@ public class BlogServicesImpl implements BlogServices {
     }
 
     @Override
+    public List<BlogPost> findAll() {
+        return blogPostRepository.findAll();
+    }
+
+    @Override
     public Page<BlogPost> findAll(Pageable pageable) {
         return blogPostRepository.findAll(pageable);
     }
@@ -44,6 +49,11 @@ public class BlogServicesImpl implements BlogServices {
     @Override
     public Page<BlogPost> findByBlogCategory_Id(Pageable pageable,Integer id) {
         return blogPostRepository.findByBlogCategory_Id(pageable,id);
+    }
+
+    @Override
+    public List<BlogPost> findByBlogCategory_Id(Integer id) {
+        return blogPostRepository.findByBlogCategory_Id(id);
     }
 
     @Override

@@ -49,6 +49,7 @@ public class LoginController {
 
     @PostMapping("/register")
     public String postRegister(@Valid @ModelAttribute Customer customer, BindingResult result, RedirectAttributes attributes, HttpServletResponse response) {
+        new Customer().validate(customer,result);
         if (result.hasFieldErrors()) {
             return "register";
         } else {

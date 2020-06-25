@@ -1,10 +1,15 @@
 package com.springboot.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class BlogPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +21,7 @@ public class BlogPost {
 
     @ManyToOne
     @JoinColumn(name = "blog_category_id")
+    @JsonIdentityReference(alwaysAsId = true)
     private BlogCategory blogCategory;
 
     public BlogPost() {

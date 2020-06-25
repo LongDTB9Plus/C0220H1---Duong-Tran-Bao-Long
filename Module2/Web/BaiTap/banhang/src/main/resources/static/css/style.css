@@ -1,3 +1,17 @@
+body{
+    width: 100%;
+    height: auto;
+}
+
+form{
+    margin: 100px auto;
+    height: 120px;
+    width: 400px;
+    background: lightblue;
+    text-align: center;
+    padding: 10px;
+}
+
 table {
     border: 1px solid green;
     border-collapse: collapse;
@@ -22,45 +36,4 @@ table td {
 table tr:hover {
     background-color: aquamarine;
     color: white;
-
-}
-
-form {
-    background-color: grey;
-    align-self: center;
-align-content: center;
-    border: 1px solid black;
-    width: 400px;
-    height: 170px;
-    padding: 10px;
-}
-form input{
-    margin: 10px;
-    vertical-align: auto;
-    align-self: center;
-}
-
-form label{
-    font-style: initial;
-    vertical-align: auto;
-    align-self: center;
-    padding: 10px;
-}
-
-input:focus{
-    border: 3px solid #555;
-}
-form input[type=submit]{
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 8px 16px;
-    text-decoration: none;
-    margin: 4px 2px;
-    cursor: pointer;
-    float: right;
-}
-
-a {
-    color: blue;
 }
