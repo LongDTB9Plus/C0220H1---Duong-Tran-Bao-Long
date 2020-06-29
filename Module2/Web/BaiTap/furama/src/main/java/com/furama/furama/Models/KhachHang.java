@@ -139,5 +139,15 @@ public class KhachHang implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         KhachHang khachHang = (KhachHang) target;
+        if (!(khachHang.phoneNumber.matches("((^|, )(090|091|\\(84\\)\\+|\\(84\\)\\+))+[0-9]{7}$"))) {
+            errors.rejectValue("phoneNumber", "errorPhoneNumber");
+        }
+        if(!(khachHang.cmnd.matches("^((\\d{9})|(\\d{12}))$"))){
+            errors.rejectValue("cmnd","errorCmnd");
+        }
+        if ((!khachHang.code.matches("^(KH-)[0-9]{4}$"))){
+            errors.rejectValue("code","errorCodeKhachHang");
+        }
+
     }
 }

@@ -55,8 +55,5 @@ public class KhachHangServicesImpl implements KhachHangServices{
         if ((!this.findKhachHangByCode(khachHang))){
             errors.rejectValue("code","error");
         }
-        if ((!khachHang.getCode().matches("KH-[0-9]{4}"))){
-            errors.rejectValue("code","code");
-        }
     }
 }

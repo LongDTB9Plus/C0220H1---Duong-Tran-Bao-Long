@@ -19,13 +19,16 @@ public class DichVu implements Validator {
     @Column(name = "Ten_dich_vu")
     private String name;
     @Column(name = "Dien_tich")
+    @Min(value = 0)
     private Double area;
     @Column(name = "So_tang")
     @Min(value = 0)
     private Integer floor;
     @Column(name = "So_nguoi_toi_da")
+    @Min(value = 0)
     private Integer maxPeople;
     @Column(name = "Chi_phi_thue")
+    @Min(value = 0)
     private Double price;
     @Column(name = "Trang_thai")
     private String status;
@@ -152,5 +155,8 @@ public class DichVu implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         DichVu dichVu = (DichVu) target;
+        if ((!dichVu.code.matches("^(DV-)[0-9]{4}$"))){
+            errors.rejectValue("code","errorCodeDichVu");
+        }
     }
 }

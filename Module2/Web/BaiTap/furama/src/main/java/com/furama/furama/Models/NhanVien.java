@@ -1,12 +1,15 @@
 package com.furama.furama.Models;
 
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.util.List;
 
 @Entity
 @Table(name = "nhan_vien")
-public class NhanVien {
+public class NhanVien implements Validator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_nhan_vien")
@@ -39,7 +42,7 @@ public class NhanVien {
     @JoinColumn(name = "ID_trinh_do")
     TrinhDo trinhDo;
 
-    @OneToMany(mappedBy = "nhanVien",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "nhanVien", cascade = CascadeType.ALL)
     List<HopDong> listHopDongNhanVien;
 
     public NhanVien() {
@@ -146,5 +149,22 @@ public class NhanVien {
 
     public void setTrinhDo(TrinhDo trinhDo) {
         this.trinhDo = trinhDo;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        NhanVien nhanVien = (NhanVien) target;
+        if (!(nhanVien.phoneNumber.matches("((^|, )(090|091|\\(84\\)\\+|\\(84\\)\\+))+[0-9]{7}$"))) {
+            errors.rejectValue("phoneNumber", "errorPhoneNumber");
+        }
+        if(!(nhanVien.cmnd.matches("^((\\d{9})|(\\d{12}))$"))){
+            errors.rejectValue("cmnd","errorCmnd");
+        }
+
     }
 }
