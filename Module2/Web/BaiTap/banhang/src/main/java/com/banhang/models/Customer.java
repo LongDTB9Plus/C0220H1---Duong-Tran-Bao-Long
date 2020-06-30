@@ -77,7 +77,7 @@ public class Customer implements Validator {
             errors.rejectValue("username", "customer.name");
         }
         if (!customer.password.matches("^[A-Z]")){
-            errors.rejectValue("password","");
+            errors.rejectValue("password","customer.password");
         }
     }
 }

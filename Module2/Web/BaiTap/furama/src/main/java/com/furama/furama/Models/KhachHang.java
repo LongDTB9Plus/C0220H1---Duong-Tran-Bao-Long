@@ -36,6 +36,10 @@ public class KhachHang implements Validator {
     @OneToMany(mappedBy = "khachHang",cascade = CascadeType.ALL)
     List<HopDong> listHopDongKhachHang;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userName",referencedColumnName = "userName")
+    private User user;
+
     public KhachHang() {
     }
 

@@ -1,6 +1,7 @@
 package com.furama.furama.Controllers;
 
 import com.furama.furama.Models.KhachHang;
+import com.furama.furama.Models.User;
 import com.furama.furama.Services.KhachHangServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -46,6 +47,12 @@ public class KhachHangController {
     @GetMapping("/active-customer")
     public String getActiveCustomer(Model model){
         model.addAttribute("ListKhachHang",khachHangServices.findAllStillActive());
+        return "";
+    }
+
+    @GetMapping("/login")
+    public String getLogin(Model model){
+        model.addAttribute("account",new User());
         return "";
     }
 }

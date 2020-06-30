@@ -42,6 +42,10 @@ public class NhanVien implements Validator {
     @JoinColumn(name = "ID_trinh_do")
     TrinhDo trinhDo;
 
+    @OneToOne
+    @JoinColumn(name = "userName")
+    private User user;
+
     @OneToMany(mappedBy = "nhanVien", cascade = CascadeType.ALL)
     List<HopDong> listHopDongNhanVien;
 
@@ -165,6 +169,10 @@ public class NhanVien implements Validator {
         if(!(nhanVien.cmnd.matches("^((\\d{9})|(\\d{12}))$"))){
             errors.rejectValue("cmnd","errorCmnd");
         }
+        if(!(nhanVien.getEmail().matches("^[A-Za-z][a-zA-Z0-9]+@[a-zA-Z]{3}\\.[a-zA-Z]{3}$"))){
+            errors.rejectValue("email","errorEmail");
+        }
+
 
     }
 }

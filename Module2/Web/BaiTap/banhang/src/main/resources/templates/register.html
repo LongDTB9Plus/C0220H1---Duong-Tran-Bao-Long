@@ -6,14 +6,16 @@
     <link type="text/css" href="css/style.css" rel="stylesheet" />
 </head>
 <body>
+<h2 th:text="#{register.messageTest}"></h2>
 <div class="formClass">
-    <form action="/register" method="post" th:object="${customer}">
+    <form action="/register" method="post" th:accept-charset="UTF-8" th:object="${customer}">
+        <h2 th:text="#{register.messageTest}"></h2>
         <label>Username:</label>
         <input th:field="*{username}"><br>
-        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+        <p th:if="${#fields.hasErrors('username')}" th:accept-charset="UTF-8" th:errors="*{username}"></p>
         <label>Password</label>
         <input type="password" th:field="*{password}"><br>
-        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+        <p th:if="${#fields.hasErrors('password')}" th:accept-charset="UTF-8" th:errors="*{password}"></p>
         <input type="submit" value="Register">
     </form>
 </div>
