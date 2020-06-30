@@ -50,9 +50,5 @@ public class KhachHangController {
         return "";
     }
 
-    @GetMapping("/login")
-    public String getLogin(Model model){
-        model.addAttribute("account",new User());
-        return "";
-    }
+
 }

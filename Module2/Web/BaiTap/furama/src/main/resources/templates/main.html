@@ -7,7 +7,23 @@
 </head>
 <body>
 <img th:src="@{/image/furama.jpg}">
-<a th:href="@{/register-customer}"> Đăng Ký</a>
-<a th:href="@{/login}">Đăng Nhập</a>
+<a th:unless="${userInformation}" th:href="@{/register-user}"> Đăng Ký</a>
+<a th:unless="${userInformation}"  th:href="@{/login}">Đăng Nhập</a>
+<p th:if="${userInformation}" th:text="${userInformation.username}"></p>
+<div>
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/}">Dịch Vụ</a>
+    <a th:href="@{/}">Tìm Kiếm</a>
+    <a th:href="@{/}">Review</a>
+</div>
+<div>
+
+</div>
+<div>
+
+</div>
+<div>
+
+</div>
 </body>
 </html>

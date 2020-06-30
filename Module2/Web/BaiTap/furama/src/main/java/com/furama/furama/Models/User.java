@@ -1,20 +1,30 @@
 package com.furama.furama.Models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "userName")
-    private String userName;
+    @NotNull(message = "Không được để trống")
+    private String username;
+    @Size(min = 6,max = 12,message = "Mật khẩu phải chứa từ 6 tới 12 kí tự")
     private String password;
+
+    @OneToOne
+    @JoinColumn(name = "id_role")
+    private Role role;
 
     public User() {
     }
 
-    public User(String userName, String password) {
-        this.userName = userName;
+    public User(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
@@ -26,12 +36,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -40,5 +50,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
