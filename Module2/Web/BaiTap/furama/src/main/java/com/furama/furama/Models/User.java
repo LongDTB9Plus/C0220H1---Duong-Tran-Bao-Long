@@ -16,7 +16,7 @@ public class User {
     @Size(min = 6,max = 12,message = "Mật khẩu phải chứa từ 6 tới 12 kí tự")
     private String password;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_role")
     private Role role;
 
