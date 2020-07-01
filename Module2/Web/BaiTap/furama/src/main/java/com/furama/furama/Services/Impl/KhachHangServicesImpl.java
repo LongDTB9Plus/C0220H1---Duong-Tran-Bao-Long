@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -42,6 +41,11 @@ public class KhachHangServicesImpl implements KhachHangServices{
         if (khachHangs.isEmpty()){
             return true;
         }else return false ;
+    }
+
+    @Override
+    public Page<KhachHang> searchAll(String keyword, Pageable pageable) {
+        return khachHangRepository.findAllByAddressContainingOrBirthDayContainingOrNameContainingOrPhoneNumberContainingOrCmndContainingOrEmailContainingOrCodeContaining(keyword,keyword,keyword,keyword,keyword,keyword,keyword,pageable);
     }
 
     @Override

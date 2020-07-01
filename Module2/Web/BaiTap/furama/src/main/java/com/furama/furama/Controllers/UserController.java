@@ -33,6 +33,7 @@ public class UserController {
 
     @PostMapping("/register-user")
     public String postRegisterUser(@Valid @ModelAttribute User user, BindingResult result, Model model) {
+        userServices.validate(user,result);
         if (result.hasFieldErrors()) {
             return "register";
         }
@@ -48,8 +49,8 @@ public class UserController {
 
     @GetMapping("/checklogin")
     public String postLogin(Principal principal, Model model) {
-        User user = (User) ((Authentication) principal).getPrincipal();
+        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) ((Authentication) principal).getPrincipal();
         model.addAttribute("userInformation", user);
-        return "login";
+        return "main";
     }
 }

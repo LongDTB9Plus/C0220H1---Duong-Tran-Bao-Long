@@ -40,14 +40,26 @@ public class KhachHangController {
 
     @GetMapping("/customer")
     public String getCustomerList(@PageableDefault(size = 5) Pageable pageable, Model model) {
-        model.addAttribute("ListKhachHang", khachHangServices.findAll(pageable));
+        model.addAttribute("list", khachHangServices.findAll(pageable));
         return "";
     }
 
     @GetMapping("/active-customer")
     public String getActiveCustomer(Model model){
-        model.addAttribute("ListKhachHang",khachHangServices.findAllStillActive());
-        return "";
+        model.addAttribute("list",khachHangServices.findAllStillActive());
+        return "main";
+    }
+
+    @GetMapping("/search-key")
+    public String getSearch(String keyword,Model model,
+                            @PageableDefault(value = 5) Pageable pageable){
+        model.addAttribute("listSearch",khachHangServices.searchAll(keyword,pageable));
+        return "search";
+    }
+
+    @GetMapping("/search")
+    public String getSearch(){
+        return "search";
     }
 
 
