@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+<form action="" method="get">
+    <input type="text" th:name="keyword" >
+    <input type="submit" th:value="Search">
+</form>
+<table th:if="${listSearch}">
+    <tr>
+        <td>ID</td>
+        <td>Tên</td>
+        <td>Mã Khách Hàng</td>
+        <td>Địa Chỉ</td>
+        <td>Email</td>
+        <td>Ngày Sinh</td>
+        <td>Số Điện Thoại</td>
+    </tr>
+    <tr th:each="KhachHang : ${listSearch}">
+        <td th:text="${KhachHang.id}"></td>
+        <td th:text="${KhachHang.name}"></td>
+        <td th:text="${KhachHang.code}"></td>
+        <td th:text="${KhachHang.address}"></td>
+        <td th:text="${KhachHang.email}"></td>
+        <td th:text="${KhachHang.birthDay}"></td>
+        <td th:text="${KhachHang.phoneNumber}"></td>
+    </tr>
+</table>
+</body>
+</html>

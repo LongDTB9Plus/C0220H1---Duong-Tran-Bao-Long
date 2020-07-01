@@ -13,7 +13,7 @@ public class User {
     @Column(name = "userName")
     @NotNull(message = "Không được để trống")
     private String username;
-    @Size(min = 6,max = 12,message = "Mật khẩu phải chứa từ 6 tới 12 kí tự")
+    @NotNull
     private String password;
 
     @OneToOne

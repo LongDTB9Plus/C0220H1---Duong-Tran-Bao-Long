@@ -4,7 +4,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -19,7 +18,7 @@ public class KhachHang implements Validator {
     @Column(name = "Ho_ten")
     private String name;
     @Column(name = "Ngay_sinh")
-    private Date birthDay;
+    private String birthDay;
     @Column(name = "So_CMND")
     private String cmnd;
     @Column(name = "SDT")
@@ -43,7 +42,7 @@ public class KhachHang implements Validator {
     public KhachHang() {
     }
 
-    public KhachHang(String code,String name, Date birthDay, String cmnd, String phoneNumber,
+    public KhachHang(String code, String name, String birthDay, String cmnd, String phoneNumber,
                      String email, String address, LoaiKhach loaiKhach) {
         this.code = code;
         this.name = name;
@@ -87,11 +86,11 @@ public class KhachHang implements Validator {
         this.name = name;
     }
 
-    public Date getBirthDay() {
+    public String getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(Date birthDay) {
+    public void setBirthDay(String birthDay) {
         this.birthDay = birthDay;
     }
 

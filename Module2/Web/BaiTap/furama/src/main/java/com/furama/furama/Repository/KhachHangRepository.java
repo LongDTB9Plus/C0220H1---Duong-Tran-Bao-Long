@@ -1,6 +1,8 @@
 package com.furama.furama.Repository;
 import com.furama.furama.Models.HopDong;
 import com.furama.furama.Models.KhachHang;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -16,4 +18,5 @@ public interface KhachHangRepository extends JpaRepository<KhachHang,Integer> {
     List<KhachHang> findAllStillActive(LocalDateTime date);
 
     List<KhachHang> findKhachHangByCode (String code);
+    Page<KhachHang> findAllByAddressContainingOrBirthDayContainingOrNameContainingOrPhoneNumberContainingOrCmndContainingOrEmailContainingOrCodeContaining(String address, String birthDay, String name, String phoneNumber, String cmnd, String email, String code, Pageable pageable);
 }
