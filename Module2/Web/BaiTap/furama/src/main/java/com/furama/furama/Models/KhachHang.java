@@ -24,9 +24,9 @@ public class KhachHang implements Validator {
     @Column(name = "SDT")
     private String phoneNumber;
     @Column(name = "Email")
-    private String Email;
+    private String email;
     @Column(name = "Dia_chi")
-    private String Address;
+    private String address;
 
     @ManyToOne
     @JoinColumn(name = "ID_loai_khach")
@@ -35,7 +35,7 @@ public class KhachHang implements Validator {
     @OneToMany(mappedBy = "khachHang",cascade = CascadeType.ALL)
     List<HopDong> listHopDongKhachHang;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "userName",referencedColumnName = "userName")
     private User user;
 
@@ -49,8 +49,8 @@ public class KhachHang implements Validator {
         this.birthDay = birthDay;
         this.cmnd = cmnd;
         this.phoneNumber = phoneNumber;
-        Email = email;
-        Address = address;
+        this.email = email;
+        this.address = address;
         this.loaiKhach = loaiKhach;
     }
 
@@ -111,19 +111,19 @@ public class KhachHang implements Validator {
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
     }
 
     public LoaiKhach getLoaiKhach() {
@@ -132,6 +132,14 @@ public class KhachHang implements Validator {
 
     public void setLoaiKhach(LoaiKhach loaiKhach) {
         this.loaiKhach = loaiKhach;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

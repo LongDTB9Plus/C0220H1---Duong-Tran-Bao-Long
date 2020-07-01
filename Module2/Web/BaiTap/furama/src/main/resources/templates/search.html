@@ -6,10 +6,11 @@
     <title>Search</title>
 </head>
 <body>
-<form action="" method="get">
+<form action="/search-key" method="get">
     <input type="text" th:name="keyword" >
     <input type="submit" th:value="Search">
 </form>
+<p th:text="${message}"></p>
 <table th:if="${listSearch}">
     <tr>
         <td>ID</td>

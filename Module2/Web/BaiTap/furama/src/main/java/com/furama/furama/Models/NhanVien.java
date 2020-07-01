@@ -43,7 +43,7 @@ public class NhanVien implements Validator {
     TrinhDo trinhDo;
 
     @OneToOne
-    @JoinColumn(name = "userName")
+    @JoinColumn(name = "username")
     private User user;
 
     @OneToMany(mappedBy = "nhanVien", cascade = CascadeType.ALL)

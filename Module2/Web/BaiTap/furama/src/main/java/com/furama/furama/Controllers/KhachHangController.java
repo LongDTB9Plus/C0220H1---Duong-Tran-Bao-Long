@@ -4,6 +4,7 @@ import com.furama.furama.Models.KhachHang;
 import com.furama.furama.Models.User;
 import com.furama.furama.Services.KhachHangServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -12,8 +13,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class KhachHangController {
@@ -51,9 +55,18 @@ public class KhachHangController {
     }
 
     @GetMapping("/search-key")
-    public String getSearch(String keyword,Model model,
+    public String getSearch(@RequestParam Optional<String> keyword, Model model,
                             @PageableDefault(value = 5) Pageable pageable){
-        model.addAttribute("listSearch",khachHangServices.searchAll(keyword,pageable));
+
+        if ((keyword.isPresent()) && (!(keyword.get().isEmpty()))){
+            Page<KhachHang> listFound = khachHangServices.searchAll(keyword.get(),pageable);
+            if (listFound.hasContent()){
+                model.addAttribute("listSearch",listFound);
+            }else {
+                model.addAttribute("message","Not Found !");
+            }
+            return "search";
+        }
         return "search";
     }
 
@@ -61,6 +74,5 @@ public class KhachHangController {
     public String getSearch(){
         return "search";
     }
-
 
 }
