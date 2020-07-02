@@ -21,12 +21,12 @@ public class DichVuController {
 
     @GetMapping("/create-services")
     public String getCreateServices(Model model){
-        model.addAttribute("DichVu", new DichVu());
-        return "";
+        model.addAttribute("dichVu", new DichVu());
+        return "main";
     }
 
     @PostMapping("/create-services")
-    public String postCreateServices(@Valid @ModelAttribute(value = "DichVu") DichVu dichVu, BindingResult result,
+    public String postCreateServices(@Valid @ModelAttribute(value = "dichVu") DichVu dichVu, BindingResult result,
                                      Model model){
         new DichVu().validate(dichVu,result);
         if (result.hasFieldErrors()){
@@ -40,7 +40,8 @@ public class DichVuController {
 
     @GetMapping("/services")
     public String getServicesList(@PageableDefault(size = 5)Pageable pageable,Model model){
-        model.addAttribute("ListDichVu",dichVuServices.findAll(pageable));
-        return "";
+        model.addAttribute("listDichVu",dichVuServices.findAll(pageable));
+        return "main";
     }
+
 }

@@ -24,6 +24,11 @@ public class KhachHangServicesImpl implements KhachHangServices{
     }
 
     @Override
+    public KhachHang findById(Integer id) {
+        return khachHangRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public Page<KhachHang> findAll(Pageable pageable) {
         return khachHangRepository.findAll(pageable);
     }

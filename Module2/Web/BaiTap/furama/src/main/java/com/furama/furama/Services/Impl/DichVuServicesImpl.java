@@ -33,6 +33,11 @@ public class DichVuServicesImpl implements DichVuServices {
     }
 
     @Override
+    public List<DichVu> findAll() {
+        return dichVuRepository.findAll();
+    }
+
+    @Override
     public boolean supports(Class<?> clazz) {
         return false;
     }
