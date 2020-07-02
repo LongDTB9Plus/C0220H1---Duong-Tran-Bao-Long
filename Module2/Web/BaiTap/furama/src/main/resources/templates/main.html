@@ -22,6 +22,13 @@
     <a th:href="@{/register-customer}">Thêm Mới Khách Hàng</a>
     <a th:href="@{/create-services}">Thêm Mới Dịch Vụ</a>
 </div>
+<div th:if="${message}" th:id="mess" >
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var message = /*[[${message}]]*/ 'default' ;
+        window.alert(message);
+    </script>
+</div>
 <div>
     <table th:if="${list}" th:unless="${listDichVu}">
         <tr>
@@ -34,7 +41,7 @@
             <td>Số Điện Thoại</td>
             <td>Số CMND</td>
             <td>Email</td>
-            <td>Thao tác</td>
+            <td colspan="2">Thao tác</td>
 
         </tr>
         <tr th:each="customer : ${list}">
@@ -62,7 +69,7 @@
             <td>Số người</td>
             <td>Giá</td>
             <td>Trạng thái</td>
-            <td>Thao tác</td>
+            <td colspan="2">Thao tác</td>
         </tr>
         <tr th:each="service : ${listDichVu}">
             <td th:text="${service.id}"></td>
@@ -79,13 +86,32 @@
         </tr>
     </table>
     <form th:if="${khachHangMoi}" action="/register-customer" method="post" th:object="${khachHangMoi}">
-        <input type="text" th:field="*{code}">
-        <input type="text" th:field="*{name}">
-        <input type="text" th:field="*{address}">
-        <input type="text" th:field="*{email}">
-        <input type="text" th:field="*{phoneNumber}">
-        <input type="text" th:field="*{cmnd}">
-
+    <input type="text" th:field="*{code}"><br>
+    <input type="text" th:field="*{name}"><br>
+    <input type="text" th:field="*{address}"><br>
+    <input type="text" th:field="*{email}"><br>
+    <input type="text" th:field="*{phoneNumber}"><br>
+    <input type="text" th:field="*{cmnd}"><br>
+    <select name="select" th:field="*{loaiKhach.id}">
+        <option th:each="loai : ${listDichVuDangKy}" th:value="${loai.id}" th:text="${loai.name}"></option>
+    </select><br>
+        <input type="submit" th:value="Register">
+</form>
+    <form th:if="${dichVu}" action="/create-services" method="post" th:object="${dichVu}">
+        <input type="text" th:field="*{code}"><br>
+        <input type="text" th:field="*{name}"><br>
+        <input type="text" th:field="*{area}"><br>
+        <input type="text" th:field="*{floor}"><br>
+        <input type="text" th:field="*{maxPeople}"><br>
+        <input type="text" th:field="*{price}"><br>
+        <input type="text" th:field="*{status}"><br>
+        <select name="select" th:field="*{kieuThue.id}">
+            <option th:each="kieuThue : ${listKieuThue}" th:value="${kieuThue.id}" th:text="${kieuThue.name}"></option>
+        </select><br>
+        <select name="select" th:field="*{loaiDichVu.id}">
+            <option th:each="loaiDichVu : ${listLoaiDichVu}" th:value="${loaiDichVu.id}" th:text="${loaiDichVu.name}"></option>
+        </select><br>
+        <input type="submit" th:value="Add">
     </form>
 </div>
 <div>

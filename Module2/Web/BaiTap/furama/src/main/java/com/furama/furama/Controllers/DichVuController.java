@@ -2,6 +2,8 @@ package com.furama.furama.Controllers;
 
 import com.furama.furama.Models.DichVu;
 import com.furama.furama.Services.DichVuServices;
+import com.furama.furama.Services.KieuThueService;
+import com.furama.furama.Services.LoaiDichVuServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -19,9 +21,17 @@ public class DichVuController {
     @Autowired
     DichVuServices dichVuServices;
 
+    @Autowired
+    KieuThueService kieuThueService;
+
+    @Autowired
+    LoaiDichVuServices loaiDichVuServices;
+
     @GetMapping("/create-services")
     public String getCreateServices(Model model){
         model.addAttribute("dichVu", new DichVu());
+        model.addAttribute("listKieuThue",kieuThueService.findAll());
+        model.addAttribute("listLoaiDichVu",loaiDichVuServices.findAll());
         return "main";
     }
 
@@ -30,11 +40,11 @@ public class DichVuController {
                                      Model model){
         new DichVu().validate(dichVu,result);
         if (result.hasFieldErrors()){
-            return "";
+            return "main";
         }else {
             dichVuServices.save(dichVu);
             model.addAttribute("message","Tao Dich Vu Moi Thanh Cong!");
-            return "";
+            return "main";
         }
     }
 

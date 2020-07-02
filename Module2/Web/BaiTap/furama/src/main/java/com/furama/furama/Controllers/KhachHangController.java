@@ -32,19 +32,19 @@ public class KhachHangController {
     @GetMapping("/register-customer")
     public String getRegister(Model model) {
         model.addAttribute("khachHangMoi", new KhachHang());
-        model.addAttribute("listDichVu",dichVuServices.findAll());
+        model.addAttribute("listDichVuDangKy",dichVuServices.findAll());
         return "main";
     }
 
     @PostMapping("/register-customer")
-    public String postRegister(@Valid @ModelAttribute(value = "KhachHang") KhachHang khachHang, BindingResult result, Model model) {
+    public String postRegister(@Valid @ModelAttribute(value = "khachHangMoi") KhachHang khachHang, BindingResult result, Model model) {
         new KhachHang().validate(khachHang, result);
         if (result.hasFieldErrors()) {
-            return "";
+            return "redirect:/register-customer";
         } else {
             khachHangServices.save(khachHang);
             model.addAttribute("message", "Dang Ki Thanh Cong!");
-            return "";
+            return "main";
         }
     }
 
@@ -110,7 +110,7 @@ public class KhachHangController {
     @GetMapping("/delete-customer")
     public String getDeleteCustomer(@RequestParam Integer id,Model model){
         KhachHang khachHang = khachHangServices.findById(id);
-        model.addAttribute("khachHang",khachHang);
-        return "delete";
+        model.addAttribute("message","Xóa thành công!");
+        return "main";
     }
 }
