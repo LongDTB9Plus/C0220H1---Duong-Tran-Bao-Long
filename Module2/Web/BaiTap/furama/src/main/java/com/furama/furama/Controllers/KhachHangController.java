@@ -68,7 +68,7 @@ public class KhachHangController {
     }
 
     @GetMapping("/search-key")
-    public String getSearch(@ModelAttribute Optional<HopDong> hopDong,@RequestParam Optional<String> keyword, Model model,
+    public String getSearch(@ModelAttribute("mark") Optional<String> mark,@RequestParam Optional<String> keyword, Model model,
                             @PageableDefault(value = 5) Pageable pageable){
 
         if ((keyword.isPresent()) && (!(keyword.get().isEmpty()))){
@@ -79,16 +79,16 @@ public class KhachHangController {
                 model.addAttribute("message","Not Found !");
             }
         }
-        if (hopDong.isPresent()){
-            model.addAttribute("hopDong",hopDong.get());
+        if (!(mark.get().isEmpty())){
+            model.addAttribute("hopDong",mark.get());
         }
         return "search";
     }
 
     @GetMapping("/search")
-    public String getSearch(@ModelAttribute Optional<HopDong> hopDong,Model model){
-        if (hopDong.isPresent()){
-            model.addAttribute("hopDong",hopDong);
+    public String getSearch(@ModelAttribute("mark") Optional<String> mark,Model model){
+        if (!(mark.get().isEmpty())){
+            model.addAttribute("mark",mark.get());
         }
         return "search";
     }

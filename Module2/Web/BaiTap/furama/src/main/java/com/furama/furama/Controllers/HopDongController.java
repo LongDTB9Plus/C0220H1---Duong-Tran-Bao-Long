@@ -31,7 +31,8 @@ public class HopDongController {
             model.addAttribute("HopDong",new HopDong());
             return "main";
         }
-        redirectAttributes.addFlashAttribute("hopDong",new HopDong());
+        String mark = "create-contract";
+        redirectAttributes.addFlashAttribute("mark",mark);
         return "redirect:/search";
     }
 

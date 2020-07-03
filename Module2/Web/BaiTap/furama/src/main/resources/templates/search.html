@@ -8,6 +8,7 @@
 <body>
 <form action="/search-key" method="get">
     <input type="text" th:name="keyword" >
+    <input th:if="${mark}" th:value="${mark}" th:name="mark" type="hidden">
     <input type="submit" th:value="Search">
 </form>
 <p th:text="${message}"></p>
@@ -29,7 +30,7 @@
         <td th:text="${KhachHang.email}"></td>
         <td th:text="${KhachHang.birthDay}"></td>
         <td th:text="${KhachHang.phoneNumber}"></td>
-        <td th:if="${hopDong}"><a th:if="${hopDong}" th:href="@{/create-contract(id=${KhachHang.id})}">Thêm Hợp Đồng</a></td>
+        <td><a th:if="${hopDong}" th:href="@{/create-contract(id=${KhachHang.id})}">Thêm Hợp Đồng</a></td>
         <td><a th:href="@{/edit-customer(id= ${KhachHang.id})}">Edit</a></td>
         <td><a onclick="return confirm_delete()" th:href="@{/delete-customer(id= ${KhachHang.id})}">Delete</a></td>
     </tr>
