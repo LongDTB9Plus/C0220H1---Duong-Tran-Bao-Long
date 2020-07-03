@@ -1,10 +1,84 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Edit</title>
 </head>
 <body>
-<form action=""></form>
+<form th:if="${khachHang}" action="/edit-customer" method="post" th:object="${khachHang}">
+    <p>ID
+        <input type="text" readonly th:field="*{id}">
+    </p>
+    <p th:if="${#fields.hasErrors()}" th:errors=""></p>
+    <p>Mã Khách Hàng
+        <input type="text" readonly th:field="*{code}">
+    </p>
+    <p>Họ Tên
+        <input type="text" th:field="*{name}">
+    </p>
+    <p>Email
+        <input type="text" th:field="*{email}">
+    </p>
+    <p>Địa Chỉ
+        <input type="text" th:field="*{address}">
+    </p>
+    <p>Số Điện Thoại
+        <input type="text" th:field="*{phoneNumber}">
+    </p>
+    <p>Ngày Sinh
+        <input type="date" th:field="*{birthDay}">
+    </p>
+    <p>Tên Tài Khoản
+        <input type="text" readonly th:field="*{user.username}">
+    </p>
+    <p>Chứng minh nhân dân
+        <input type="text" th:field="*{cmnd}">
+    </p>
+    <p>Loại Khách
+        <select name="select" th:field="*{loaiKhach.id}">
+            <option th:each="loai : ${listDichVuDangKy}" th:value="${loai.id}" th:text="${loai.name}"></option>
+        </select>
+    </p>
+    <input type="submit" value="Edit">
+</form>
+<form th:if="${dichVu}" action="/edit-services" method="post" th:object="${dichVu}">
+    <p>ID
+        <input type="text" readonly th:field="*{id}">
+    </p>
+    <p th:if="${#fields.hasErrors()}" th:errors=""></p>
+    <p>Mã Dịch Vụ
+        <input type="text" readonly th:field="*{code}">
+    </p>
+    <p>Tên Dịch Vụ
+        <input type="text" th:field="*{name}">
+    </p>
+    <p>Diện Tích
+        <input type="text" th:field="*{area}">
+    </p>
+    <p>Số Tầng
+        <input type="text" th:field="*{floor}">
+    </p>
+    <p>Số Khách Tối Đa
+        <input type="text" th:field="*{maxPeople}">
+    </p>
+    <p>Giá
+        <input type="text" th:field="*{price}">
+    </p>
+    <p>Trạng thái
+        <input type="text" th:field="*{status}">
+    </p>
+    <p>Kiểu Thuê
+        <select name="select" th:field="*{kieuThue.id}">
+            <option th:each="loai : ${listKieuThue}" th:value="${loai.id}" th:text="${loai.name}"></option>
+        </select>
+    </p>
+    <p>Loại Dịch Vụ
+        <select name="select" th:field="*{loaiDichVu.id}">
+            <option th:each="loai : ${listLoaiDichVu}" th:value="${loai.id}" th:text="${loai.name}"></option>
+        </select>
+    </p>
+    <input type="submit" value="Edit">
+</form>
 </body>
 </html>

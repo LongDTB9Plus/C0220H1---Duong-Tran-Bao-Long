@@ -39,6 +39,7 @@ public class UserController {
         }
         userServices.save(user);
         model.addAttribute("userInformation", user);
+        model.addAttribute("message","Welcome " + user.getUsername());
         return "main";
     }
 
@@ -51,6 +52,7 @@ public class UserController {
     public String postLogin(Principal principal, Model model) {
         org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) ((Authentication) principal).getPrincipal();
         model.addAttribute("userInformation", user);
+        model.addAttribute("message","Welcome " + user.getUsername());
         return "main";
     }
 }

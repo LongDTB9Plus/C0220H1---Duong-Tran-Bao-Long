@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 public interface KhachHangServices extends Validator {
     void save(KhachHang khachHang);
+    void remove(KhachHang khachHang);
     KhachHang findById(Integer id);
 
     Page<KhachHang> findAll(Pageable pageable);

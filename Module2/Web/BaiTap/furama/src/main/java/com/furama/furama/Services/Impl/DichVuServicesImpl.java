@@ -38,6 +38,16 @@ public class DichVuServicesImpl implements DichVuServices {
     }
 
     @Override
+    public void remove(DichVu dichVu) {
+        dichVuRepository.delete(dichVu);
+    }
+
+    @Override
+    public DichVu findById(Integer id) {
+        return dichVuRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public boolean supports(Class<?> clazz) {
         return false;
     }

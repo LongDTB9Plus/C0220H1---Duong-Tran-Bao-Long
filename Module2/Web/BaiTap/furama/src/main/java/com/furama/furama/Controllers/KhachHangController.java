@@ -1,5 +1,6 @@
 package com.furama.furama.Controllers;
 
+import com.furama.furama.Models.HopDong;
 import com.furama.furama.Models.KhachHang;
 import com.furama.furama.Models.User;
 import com.furama.furama.Services.DichVuServices;
@@ -67,7 +68,7 @@ public class KhachHangController {
     }
 
     @GetMapping("/search-key")
-    public String getSearch(@RequestParam Optional<String> keyword, Model model,
+    public String getSearch(@ModelAttribute Optional<HopDong> hopDong,@RequestParam Optional<String> keyword, Model model,
                             @PageableDefault(value = 5) Pageable pageable){
 
         if ((keyword.isPresent()) && (!(keyword.get().isEmpty()))){
@@ -77,13 +78,18 @@ public class KhachHangController {
             }else {
                 model.addAttribute("message","Not Found !");
             }
-            return "search";
+        }
+        if (hopDong.isPresent()){
+            model.addAttribute("hopDong",hopDong.get());
         }
         return "search";
     }
 
     @GetMapping("/search")
-    public String getSearch(){
+    public String getSearch(@ModelAttribute Optional<HopDong> hopDong,Model model){
+        if (hopDong.isPresent()){
+            model.addAttribute("hopDong",hopDong);
+        }
         return "search";
     }
 
@@ -91,6 +97,7 @@ public class KhachHangController {
     public String getEdit(@RequestParam Integer id, Model model){
         KhachHang khachHang = khachHangServices.findById(id);
         model.addAttribute("khachHang",khachHang);
+        model.addAttribute("listDichVuDangKy",dichVuServices.findAll());
         return "edit";
     }
 
@@ -98,10 +105,11 @@ public class KhachHangController {
     public String postEdit(@Valid @ModelAttribute KhachHang khachHang,BindingResult result,
                            RedirectAttributes redirectAttributes){
         new KhachHang().validate(khachHang,result);
-        khachHangServices.validate(khachHang,result);
         if (result.hasFieldErrors()){
-            return "edit";
+            return "redirect:/edit-customer?id=" + khachHang.getId();
         }
+        List<HopDong> hopDongList = khachHangServices.findById(khachHang.getId()).getListHopDongKhachHang();
+        khachHang.setListHopDongKhachHang(hopDongList);
         khachHangServices.save(khachHang);
         redirectAttributes.addFlashAttribute("message","Chỉnh sửa thành công");
         return "redirect:/customer-list";
@@ -110,6 +118,7 @@ public class KhachHangController {
     @GetMapping("/delete-customer")
     public String getDeleteCustomer(@RequestParam Integer id,Model model){
         KhachHang khachHang = khachHangServices.findById(id);
+        khachHangServices.remove(khachHang);
         model.addAttribute("message","Xóa thành công!");
         return "main";
     }

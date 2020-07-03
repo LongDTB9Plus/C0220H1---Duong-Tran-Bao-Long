@@ -12,7 +12,14 @@ import java.util.Optional;
 
 public interface DichVuServices extends Validator {
     void save(DichVu dichVu);
+
     Page<DichVu> findAll(Pageable pageable);
-    List<DichVu> findDichVuByCode (String code);
+
+    List<DichVu> findDichVuByCode(String code);
+
     List<DichVu> findAll();
+
+    void remove(DichVu dichVu);
+
+    DichVu findById(Integer id);
 }

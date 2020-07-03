@@ -24,6 +24,11 @@ public class KhachHangServicesImpl implements KhachHangServices{
     }
 
     @Override
+    public void remove(KhachHang khachHang) {
+        khachHangRepository.delete(khachHang);
+    }
+
+    @Override
     public KhachHang findById(Integer id) {
         return khachHangRepository.findById(id).orElse(null);
     }
