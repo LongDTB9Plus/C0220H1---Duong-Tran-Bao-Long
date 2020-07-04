@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/dashboard.css"/>
+    <script src="js/jquery-3.5.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/dashboard.js"></script>
+</head>
+<body>
+<nav th:replace="common :: navigateBar"></nav>
+<div th:replace="common :: sideBar"></div>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <form action="/create-employee" th:accept-charset="UTF-8" method="post"
+          th:object="${nhanVien}" class="form-horizontal">
+        <fieldset>
+            <div id="legend">
+                <legend class="">Register</legend>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="name">Họ và Tên</label>
+                <div class="controls">
+                    <input type="text" id="name" name="name" th:field="*{name}" placeholder=""
+                           class="input-xlarge">
+                    <p class="help-block"></p>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="address">Address</label>
+                <div class="controls">
+                    <input type="text" id="address" name="address" th:field="*{address}" placeholder=""
+                           class="input-xlarge">
+                    <p class="help-block"></p>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="email">Email</label>
+                <div class="controls">
+                    <input type="text" id="email" name="email" th:field="*{email}" placeholder=""
+                           class="input-xlarge">
+                    <p th:if="${#fields.hasErrors('email')}" style="color: red" th:accept-charset="UTF-8"
+                       th:errors="*{email}"
+                       class="help-block">Example: abc@abc.com</p>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="phoneNumber">Số Điện Thoại</label>
+                <div class="controls">
+                    <input type="text" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}"
+                           placeholder="" class="input-xlarge">
+                    <p th:if="${#fields.hasErrors('phoneNumber')}" style="color: red" th:accept-charset="UTF-8"
+                       th:errors="*{phoneNumber}" class="help-block">Example: 0912345678</p>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="cmnd">Số Chứng Minh Nhân Dân</label>
+                <div class="controls">
+                    <input type="text" id="cmnd" name="cmnd" th:field="*{cmnd}" placeholder=""
+                           class="input-xlarge">
+                    <p th:if="${#fields.hasErrors('cmnd')}" style="color: red" th:accept-charset="UTF-8"
+                       th:errors="*{cmnd}"
+                       class="help-block">Example: 123456789</p>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="birthDay">Ngày Sinh</label>
+                <div class="controls">
+                    <input type="date" th:field="*{birthDay}" id="birthDay" name="birthDay" placeholder=""
+                           class="input-xlarge">
+                    <p class="help-block"></p>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="luong">Lương</label>
+                <div class="controls">
+                    <input type="text" th:field="*{luong}" id="luong" name="luong" placeholder=""
+                           class="input-xlarge">
+                    <p class="help-block"></p>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="boPhan">Bộ Phận</label>
+                <div class="controls">
+                    <select class="dropdown" id="boPhan" name="boPhan" th:field="*{boPhan.id}">
+                        <option th:each="loai : ${listBoPhan}" th:value="${loai.id}"
+                                th:text="${loai.boPhan}"></option>
+                    </select>
+                    <p class="help-block"></p>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="viTri">Vị Trí</label>
+                <div class="controls">
+                    <select class="dropdown" id="viTri" name="viTri" th:field="*{viTri.id}">
+                        <option th:each="loai : ${listViTri}" th:value="${loai.id}"
+                                th:text="${loai.viTri}"></option>
+                    </select>
+                    <p class="help-block"></p>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="trinhDo">Trình Độ</label>
+                <div class="controls">
+                    <select class="dropdown" id="trinhDo" name="trinhDo" th:field="*{trinhDo.id}">
+                        <option th:each="loai : ${listTrinhDo}" th:value="${loai.id}"
+                                th:text="${loai.trinhDo}"></option>
+                    </select>
+                    <p class="help-block"></p>
+                </div>
+            </div>
+            <div class="control-group">
+                <!-- Button -->
+                <div class="controls">
+                    <button class="btn btn-success">Register</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</main>
+</body>
+</html>

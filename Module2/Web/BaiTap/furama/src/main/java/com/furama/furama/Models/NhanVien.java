@@ -5,6 +5,7 @@ import org.springframework.validation.Validator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Entity
@@ -15,20 +16,22 @@ public class NhanVien implements Validator {
     @Column(name = "ID_nhan_vien")
     private Integer id;
     @Column(name = "Ho_ten")
-    private String Name;
+    private String name;
     @Column(name = "Ngay_sinh")
     private String birthDay;
     @Column(name = "So_CMND")
     private String cmnd;
     @Column(name = "Luong")
     @Min(value = 0)
-    private Double Luong;
+    private Double luong;
     @Column(name = "SDT")
     private String phoneNumber;
     @Column(name = "Email")
-    private String Email;
+    @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$",
+            message = "Email không được bắt đầu bằng số và không chứa kí tự đặc biệt.")
+    private String email;
     @Column(name = "Dia_chi")
-    private String Address;
+    private String address;
 
     @ManyToOne
     @JoinColumn(name = "ID_bo_phan")
@@ -55,13 +58,13 @@ public class NhanVien implements Validator {
     public NhanVien(String name, String birthDay, String cmnd, Double luong,
                     String phoneNumber, String email, String address, BoPhan boPhan,
                     ViTri viTri, TrinhDo trinhDo) {
-        Name = name;
+        this.name = name;
         this.birthDay = birthDay;
         this.cmnd = cmnd;
-        Luong = luong;
+        this.luong = luong;
         this.phoneNumber = phoneNumber;
-        Email = email;
-        Address = address;
+        this.email = email;
+        this.address = address;
         this.boPhan = boPhan;
         this.viTri = viTri;
         this.trinhDo = trinhDo;
@@ -76,11 +79,11 @@ public class NhanVien implements Validator {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getBirthDay() {
@@ -100,11 +103,11 @@ public class NhanVien implements Validator {
     }
 
     public Double getLuong() {
-        return Luong;
+        return luong;
     }
 
     public void setLuong(Double luong) {
-        Luong = luong;
+        this.luong = luong;
     }
 
     public String getPhoneNumber() {
@@ -116,19 +119,19 @@ public class NhanVien implements Validator {
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
     }
 
     public BoPhan getBoPhan() {
@@ -164,15 +167,10 @@ public class NhanVien implements Validator {
     public void validate(Object target, Errors errors) {
         NhanVien nhanVien = (NhanVien) target;
         if (!(nhanVien.phoneNumber.matches("((^|, )(090|091|\\(84\\)\\+|\\(84\\)\\+))+[0-9]{7}$"))) {
-            errors.rejectValue("phoneNumber", "errorPhoneNumber");
+            errors.rejectValue("phoneNumber", "KhachHang.phoneNumber");
         }
         if(!(nhanVien.cmnd.matches("^((\\d{9})|(\\d{12}))$"))){
-            errors.rejectValue("cmnd","errorCmnd");
+            errors.rejectValue("cmnd","KhachHang.cmnd");
         }
-        if(!(nhanVien.getEmail().matches("^[A-Za-z][a-zA-Z0-9]+@[a-zA-Z]{3}\\.[a-zA-Z]{3}$"))){
-            errors.rejectValue("email","errorEmail");
-        }
-
-
     }
 }

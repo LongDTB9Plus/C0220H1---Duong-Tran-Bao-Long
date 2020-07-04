@@ -10,4 +10,5 @@ public interface NhanVienServices {
     List<NhanVien> findAll ();
     Page<NhanVien> findAll(Pageable pageable);
     NhanVien findById (Integer id);
+    void save(NhanVien nhanVien);
 }

@@ -27,4 +27,9 @@ public class NhanVienServicesImpl implements com.furama.furama.Services.NhanVien
     public NhanVien findById(Integer id) {
         return  nhanVienRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public void save(NhanVien nhanVien) {
+        nhanVienRepository.save(nhanVien);
+    }
 }

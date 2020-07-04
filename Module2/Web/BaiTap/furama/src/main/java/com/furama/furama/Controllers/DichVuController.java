@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@SessionAttributes("dichVu")
+@SessionAttributes({"listKieuThue", "listLoaiDichVu"})
 public class DichVuController {
     @Autowired
     DichVuServices dichVuServices;
@@ -30,12 +30,9 @@ public class DichVuController {
     @Autowired
     LoaiDichVuServices loaiDichVuServices;
 
-    @ModelAttribute("dichVu")
-    public DichVu getDichVu() {
-        return new DichVu();
-    }
     @GetMapping("/create-services")
     public String getCreateServices(Model model){
+        model.addAttribute("dichVu",new DichVu());
         model.addAttribute("listKieuThue",kieuThueService.findAll());
         model.addAttribute("listLoaiDichVu",loaiDichVuServices.findAll());
         return "main";
@@ -48,13 +45,14 @@ public class DichVuController {
         new DichVu().validate(dichVu,result);
         dichVuServices.validate(dichVu,result);
         if (result.hasFieldErrors()){
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.dichVu", result);
-            return "redirect:/create-services";
-        }else {
+            model.addAttribute("org.springframework.validation.BindingResult.dichVu", result);
+            model.addAttribute("dichVu",dichVu);
+            return "main";
+        }
             dichVuServices.save(dichVu);
             model.addAttribute("message","Tao Dich Vu Moi Thanh Cong!");
             return "main";
-        }
+
     }
 
     @GetMapping("/services")

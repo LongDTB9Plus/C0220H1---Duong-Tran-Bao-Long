@@ -17,13 +17,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
-@SessionAttributes("khachHangMoi")
+@SessionAttributes("listLoaiKhach")
 public class KhachHangController {
     @Autowired
     KhachHangServices khachHangServices;
@@ -35,12 +34,15 @@ public class KhachHangController {
     LoaiKhachServices loaiKhachServices;
 
     @GetMapping("/register")
-    public String getSessionRegister(HttpSession httpSession){
-        httpSession.setAttribute("khachHangMoi",new KhachHang());
+    public String getSessionRegister(RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("khachHangMoi",new KhachHang());
         return "redirect:/register-customer";
     }
     @GetMapping("/register-customer")
-    public String getRegister(Model model) {
+    public String getRegister(Model model,@ModelAttribute("khachHangMoi") Optional<KhachHang> khachHang) {
+        if (khachHang.isPresent()){
+            model.addAttribute("khachHangMoi",khachHang.get());
+        }
         model.addAttribute("listLoaiKhach", loaiKhachServices.findAll());
         return "main";
     }
@@ -52,8 +54,9 @@ public class KhachHangController {
         new KhachHang().validate(khachHang, result);
         khachHangServices.validate(khachHang, result);
         if (result.hasFieldErrors()) {
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.khachHangMoi", result);
-            return "redirect:/register-customer";
+            model.addAttribute("org.springframework.validation.BindingResult.khachHangMoi", result);
+            model.addAttribute("khachHangMoi",khachHang);
+            return "main";
         }
         khachHangServices.save(khachHang);
         model.addAttribute("message", "Dang Ki Thanh Cong!");
