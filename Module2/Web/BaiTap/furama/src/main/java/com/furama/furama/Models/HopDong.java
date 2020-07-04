@@ -20,9 +20,10 @@ public class HopDong implements Validator {
     @Column(name = "Ngay_ket_thuc")
     private String dateEnd;
     @Column(name = "Tien_dat_coc")
-    @Min(value = 0)
+    @Min(value = 0,message = "Phải là số nguyên dương")
     private Double datCoc;
     @Column(name = "Tong_tien")
+    @Min(value = 0 , message = "Phải là số nguyên dương")
     private Double tongTien;
     @OneToMany(mappedBy = "hopDong", cascade = CascadeType.ALL)
     List<HopDongChiTiet> listHopDongChiTiet;

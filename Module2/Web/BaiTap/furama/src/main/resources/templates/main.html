@@ -60,46 +60,7 @@
                             Thêm Mới Hợp Đồng
                         </a>
                     </li>
-                    <!--                    <li class="nav-item">-->
-                    <!--                        <a class="nav-link" href="#">-->
-                    <!--                            <span data-feather="layers"></span>-->
-                    <!--                            Integrations-->
-                    <!--                        </a>-->
-                    <!--                    </li>-->
                 </ul>
-
-                <!--                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">-->
-                <!--                    <span>Saved reports</span>-->
-                <!--                    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">-->
-                <!--                        <span data-feather="plus-circle"></span>-->
-                <!--                    </a>-->
-                <!--                </h6>-->
-                <!--                <ul class="nav flex-column mb-2">-->
-                <!--                    <li class="nav-item">-->
-                <!--                        <a class="nav-link" href="#">-->
-                <!--                            <span data-feather="file-text"></span>-->
-                <!--                            Current month-->
-                <!--                        </a>-->
-                <!--                    </li>-->
-                <!--                    <li class="nav-item">-->
-                <!--                        <a class="nav-link" href="#">-->
-                <!--                            <span data-feather="file-text"></span>-->
-                <!--                            Last quarter-->
-                <!--                        </a>-->
-                <!--                    </li>-->
-                <!--                    <li class="nav-item">-->
-                <!--                        <a class="nav-link" href="#">-->
-                <!--                            <span data-feather="file-text"></span>-->
-                <!--                            Social engagement-->
-                <!--                        </a>-->
-                <!--                    </li>-->
-                <!--                    <li class="nav-item">-->
-                <!--                        <a class="nav-link" href="#">-->
-                <!--                            <span data-feather="file-text"></span>-->
-                <!--                            Year-end sale-->
-                <!--                        </a>-->
-                <!--                    </li>-->
-                <!--                </ul>-->
             </div>
         </nav>
 
@@ -214,6 +175,85 @@
                     </div>
                 </fieldset>
             </form>
+            <form th:if="${HopDong}" action="/create-contract" method="post" accept-charset="UTF-8"
+                  th:object="${HopDong}" class="form-horizontal">
+                <fieldset>
+                    <div id="resHopDong">
+                        <legend class="">Thêm Mới Hợp Đồng</legend>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="khachHangHD">Khách Hàng</label>
+                        <div class="controls">
+                            <input type="text" id="khachHangHD" name="khachHangHD"
+                                   th:field="*{khachHang.id}" th:value="${khachHangLamHopDong.id}"
+                                   placeholder="" readonly
+                                   class="input-xlarge">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="dateStart">Ngày Làm Hợp Động</label>
+                        <div class="controls">
+                            <input type="date" id="dateStart" name="dateStart" th:field="*{dateStart}" placeholder=""
+                                   class="input-xlarge">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="area">Ngày Kết Thúc</label>
+                        <div class="controls">
+                            <input type="date" id="dateEnd" name="dateEnd" th:field="*{dateEnd}" placeholder=""
+                                   class="input-xlarge">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="datCoc">Tiền Đặt Cọc</label>
+                        <div class="controls">
+                            <input type="text" id="datCoc" name="datCoc" th:field="*{datCoc}" placeholder=""
+                                   class="input-xlarge">
+                            <p th:if="${#fields.hasErrors('datCoc')}" style="color: red" th:accept-charset="UTF-8"
+                               th:errors="*{datCoc}"
+                               class="help-block">Example: abc@abc.com</p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="tongTien">Tổng Tiền</label>
+                        <div class="controls">
+                            <input type="text" id="tongTien" name="tongTien" th:field="*{tongTien}" placeholder=""
+                                   class="input-xlarge">
+                            <p th:if="${#fields.hasErrors('tongTien')}" style="color: red" th:accept-charset="UTF-8"
+                               th:errors="*{tongTien}" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="dichVuHD">Dịch Vụ Thuê</label>
+                        <div class="controls">
+                            <select id="dichVuHD" name="dichVuHD" th:field="*{dichVu.id}">
+                                <option th:each="dichVu : ${listDichVuLamHopDong}" th:value="${dichVu.id}"
+                                        th:text="${dichVu.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="nhanVienHD">Nhân Viên</label>
+                        <div class="controls">
+                            <select id="nhanVienHD" name="nhanVienHD" th:field="*{nhanVien.id}">
+                                <option th:each="nhanVien : ${listNhanVienLamHopDong}" th:value="${nhanVien.id}"
+                                        th:text="${nhanVien.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <!-- Button -->
+                        <div class="controls">
+                            <button class="btn btn-success">Register</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
             <form th:if="${dichVu}" action="/create-services" method="post" accept-charset="UTF-8" th:object="${dichVu}"
                   class="form-horizontal">
                 <fieldset>
@@ -313,7 +353,6 @@
                     </div>
                 </fieldset>
             </form>
-
             <h2>Section title</h2>
             <div th:if="${list}" th:unless="${listDichVu}" class="table-responsive">
                 <table class="table table-striped table-sm">
