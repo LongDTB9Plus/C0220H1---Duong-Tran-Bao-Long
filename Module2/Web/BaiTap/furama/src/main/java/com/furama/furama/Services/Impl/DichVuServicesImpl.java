@@ -57,11 +57,7 @@ public class DichVuServicesImpl implements DichVuServices {
         DichVu dichVu = (DichVu) target;
         List<DichVu> optionalDichVus = findDichVuByCode(dichVu.getCode());
         if (!optionalDichVus.isEmpty()){
-            errors.rejectValue("codeDV","codeDV");
+            errors.rejectValue("codeDV","DichVu.codeDuplicate");
         }
-        if(!dichVu.getCode().matches("DV-[0-9]{4}")){
-            errors.rejectValue("codeDVpattern","codeDVpattern");
-        }
-
     }
 }

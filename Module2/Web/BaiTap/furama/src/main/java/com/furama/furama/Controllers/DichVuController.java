@@ -12,16 +12,14 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@SessionAttributes("dichVu")
 public class DichVuController {
     @Autowired
     DichVuServices dichVuServices;
@@ -32,9 +30,12 @@ public class DichVuController {
     @Autowired
     LoaiDichVuServices loaiDichVuServices;
 
+    @ModelAttribute("dichVu")
+    public DichVu getDichVu() {
+        return new DichVu();
+    }
     @GetMapping("/create-services")
     public String getCreateServices(Model model){
-        model.addAttribute("dichVu", new DichVu());
         model.addAttribute("listKieuThue",kieuThueService.findAll());
         model.addAttribute("listLoaiDichVu",loaiDichVuServices.findAll());
         return "main";
@@ -42,10 +43,13 @@ public class DichVuController {
 
     @PostMapping("/create-services")
     public String postCreateServices(@Valid @ModelAttribute(value = "dichVu") DichVu dichVu, BindingResult result,
+                                     RedirectAttributes redirectAttributes,
                                      Model model){
         new DichVu().validate(dichVu,result);
+        dichVuServices.validate(dichVu,result);
         if (result.hasFieldErrors()){
-            return "main";
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.dichVu", result);
+            return "redirect:/create-services";
         }else {
             dichVuServices.save(dichVu);
             model.addAttribute("message","Tao Dich Vu Moi Thanh Cong!");

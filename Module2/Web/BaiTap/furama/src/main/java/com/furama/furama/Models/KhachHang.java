@@ -4,6 +4,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Entity
@@ -24,6 +25,8 @@ public class KhachHang implements Validator {
     @Column(name = "SDT")
     private String phoneNumber;
     @Column(name = "Email")
+    @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$",
+            message = "Email không được bắt đầu bằng số và không chứa kí tự đặc biệt.")
     private String email;
     @Column(name = "Dia_chi")
     private String address;
@@ -151,13 +154,13 @@ public class KhachHang implements Validator {
     public void validate(Object target, Errors errors) {
         KhachHang khachHang = (KhachHang) target;
         if (!(khachHang.phoneNumber.matches("((^|, )(090|091|\\(84\\)\\+|\\(84\\)\\+))+[0-9]{7}$"))) {
-            errors.rejectValue("phoneNumber", "errorPhoneNumber");
+            errors.rejectValue("phoneNumber", "KhachHang.phoneNumber");
         }
         if(!(khachHang.cmnd.matches("^((\\d{9})|(\\d{12}))$"))){
-            errors.rejectValue("cmnd","errorCmnd");
+            errors.rejectValue("cmnd","KhachHang.cmnd");
         }
-        if ((!khachHang.code.matches("^(KH-)[0-9]{4}$"))){
-            errors.rejectValue("code","errorCodeKhachHang");
+        if (!(khachHang.code.matches("^(KH-)[0-9]{4}$"))){
+            errors.rejectValue("code","KhachHang.code");
         }
 
     }

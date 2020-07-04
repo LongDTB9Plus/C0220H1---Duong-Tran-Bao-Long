@@ -1,28 +1,410 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Furama</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/dashboard.css"/>
+    <script src="js/jquery-3.5.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/dashboard.js"></script>
 </head>
 <body>
-<img th:src="@{/image/furama.jpg}">
-<a th:unless="${userInformation}" th:href="@{/register-user}"> Đăng Ký</a>
-<a th:unless="${userInformation}" th:href="@{/login}">Đăng Nhập</a>
-<p th:if="${userInformation}" th:text="${userInformation.username}"></p>
-<div>
-    <a th:href="@{/}">Home</a>
-    <a th:href="@{/}">Dịch Vụ</a>
-    <a th:href="@{/search}">Tìm Kiếm</a>
-    <a th:href="@{/}">Review</a>
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" th:href="@{/}">Home</a>
+    <input class="form-control form-control-dark w-75" type="text" placeholder="Search" aria-label="Search">
+    <ul th:unless="${userInformation}" class="navbar-nav px-4">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" th:href="@{/login}">Đăng Nhập</a>
+        </li>
+    </ul>
+    <ul th:unless="${userInformation}" class="navbar-nav px-4">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" th:href="@{/register-user}">Đăng ký</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/customer-list}">
+                            <span data-feather="home"></span>
+                            List Khách Hàng <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/services}">
+                            <span data-feather="file"></span>
+                            List Dịch Vụ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/register}">
+                            <span data-feather="users"></span>
+                            Thêm Mới Khách Hàng
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/create-services}">
+                            <span data-feather="users"></span>
+                            Thêm Mới Dịch Vụ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/create-contract}">
+                            <span data-feather="bar-chart-2"></span>
+                            Thêm Mới Hợp Đồng
+                        </a>
+                    </li>
+                    <!--                    <li class="nav-item">-->
+                    <!--                        <a class="nav-link" href="#">-->
+                    <!--                            <span data-feather="layers"></span>-->
+                    <!--                            Integrations-->
+                    <!--                        </a>-->
+                    <!--                    </li>-->
+                </ul>
+
+                <!--                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">-->
+                <!--                    <span>Saved reports</span>-->
+                <!--                    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">-->
+                <!--                        <span data-feather="plus-circle"></span>-->
+                <!--                    </a>-->
+                <!--                </h6>-->
+                <!--                <ul class="nav flex-column mb-2">-->
+                <!--                    <li class="nav-item">-->
+                <!--                        <a class="nav-link" href="#">-->
+                <!--                            <span data-feather="file-text"></span>-->
+                <!--                            Current month-->
+                <!--                        </a>-->
+                <!--                    </li>-->
+                <!--                    <li class="nav-item">-->
+                <!--                        <a class="nav-link" href="#">-->
+                <!--                            <span data-feather="file-text"></span>-->
+                <!--                            Last quarter-->
+                <!--                        </a>-->
+                <!--                    </li>-->
+                <!--                    <li class="nav-item">-->
+                <!--                        <a class="nav-link" href="#">-->
+                <!--                            <span data-feather="file-text"></span>-->
+                <!--                            Social engagement-->
+                <!--                        </a>-->
+                <!--                    </li>-->
+                <!--                    <li class="nav-item">-->
+                <!--                        <a class="nav-link" href="#">-->
+                <!--                            <span data-feather="file-text"></span>-->
+                <!--                            Year-end sale-->
+                <!--                        </a>-->
+                <!--                    </li>-->
+                <!--                </ul>-->
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Dashboard</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group mr-2">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                        <span data-feather="calendar"></span>
+                        This week
+                    </button>
+                </div>
+            </div>
+            <form th:if="${khachHangMoi}" action="/register-customer" th:accept-charset="UTF-8" method="post"
+                  th:object="${khachHangMoi}" class="form-horizontal">
+                <fieldset>
+                    <div id="legend">
+                        <legend class="">Register</legend>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="code">Mã Khách Hàng</label>
+                        <div class="controls">
+                            <input type="text" id="code" name="code" th:field="*{code}" placeholder=""
+                                   class="input-xlarge">
+                            <p th:if="${#fields.hasErrors('code')}" style="color: red" th:accept-charset="UTF-8"
+                               th:errors="*{code}" class="help-block">Example: KH-1234</p>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="name">Họ và Tên</label>
+                        <div class="controls">
+                            <input type="text" id="name" name="name" th:field="*{name}" placeholder=""
+                                   class="input-xlarge">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="address">Address</label>
+                        <div class="controls">
+                            <input type="text" id="address" name="address" th:field="*{address}" placeholder=""
+                                   class="input-xlarge">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="email">Email</label>
+                        <div class="controls">
+                            <input type="text" id="email" name="email" th:field="*{email}" placeholder=""
+                                   class="input-xlarge">
+                            <p th:if="${#fields.hasErrors('email')}" style="color: red" th:accept-charset="UTF-8"
+                               th:errors="*{email}"
+                               class="help-block">Example: abc@abc.com</p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="phoneNumber">Số Điện Thoại</label>
+                        <div class="controls">
+                            <input type="text" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}"
+                                   placeholder="" class="input-xlarge">
+                            <p th:if="${#fields.hasErrors('phoneNumber')}" style="color: red" th:accept-charset="UTF-8"
+                               th:errors="*{phoneNumber}" class="help-block">Example: 0912345678</p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="cmnd">Số Chứng Minh Nhân Dân</label>
+                        <div class="controls">
+                            <input type="text" id="cmnd" name="cmnd" th:field="*{cmnd}" placeholder=""
+                                   class="input-xlarge">
+                            <p th:if="${#fields.hasErrors('cmnd')}" style="color: red" th:accept-charset="UTF-8"
+                               th:errors="*{cmnd}"
+                               class="help-block">Example: 123456789</p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="address">Address</label>
+                        <div class="controls">
+                            <input type="text" id="address" name="address" th:field="*{address}" placeholder=""
+                                   class="input-xlarge">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="birthDay">Ngày Sinh</label>
+                        <div class="controls">
+                            <input type="date" th:field="*{birthDay}" id="birthDay" name="birthDay" placeholder=""
+                                   class="input-xlarge">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="birthDay">Loại Khách</label>
+                        <div class="controls">
+                            <select class="dropdown" name="select" th:field="*{loaiKhach.id}">
+                                <option th:each="loai : ${listLoaiKhach}" th:value="${loai.id}"
+                                        th:text="${loai.ten}"></option>
+                            </select>
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <!-- Button -->
+                        <div class="controls">
+                            <button class="btn btn-success">Register</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <form th:if="${dichVu}" action="/create-services" method="post" accept-charset="UTF-8" th:object="${dichVu}"
+                  class="form-horizontal">
+                <fieldset>
+                    <div id="resDichVu">
+                        <legend class="">Register</legend>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="codeDV">Mã Dịch Vụ</label>
+                        <div class="controls">
+                            <input type="text" id="codeDV" name="codeDV" th:field="*{code}" placeholder=""
+                                   class="input-xlarge">
+                            <p th:if="${#fields.hasErrors('code')}" style="color: red" th:accept-charset="UTF-8"
+                               th:errors="*{code}" class="help-block">Example: DV-1234</p>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="nameDV">Tên Dịch Vụ</label>
+                        <div class="controls">
+                            <input type="text" id="nameDV" name="nameDV" th:field="*{name}" placeholder=""
+                                   class="input-xlarge">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="area">Diện Tích</label>
+                        <div class="controls">
+                            <input type="text" id="area" name="area" th:field="*{area}" placeholder=""
+                                   class="input-xlarge">
+                            <p th:if="${#fields.hasErrors('area')}" style="color: red" th:accept-charset="UTF-8"
+                               th:errors="*{area}" class="help-block"></p>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="floor">Số Tầng</label>
+                        <div class="controls">
+                            <input type="text" id="floor" name="floor" th:field="*{floor}" placeholder=""
+                                   class="input-xlarge">
+                            <p th:if="${#fields.hasErrors('floor')}" style="color: red" th:accept-charset="UTF-8"
+                               th:errors="*{floor}"
+                               class="help-block">Example: abc@abc.com</p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="maxPeople">Số Người</label>
+                        <div class="controls">
+                            <input type="text" id="maxPeople" name="maxPeople" th:field="*{maxPeople}" placeholder=""
+                                   class="input-xlarge">
+                            <p th:if="${#fields.hasErrors('maxPeople')}" style="color: red" th:accept-charset="UTF-8"
+                               th:errors="*{maxPeople}" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="cmnd">Giá</label>
+                        <div class="controls">
+                            <input type="text" id="price" name="price" th:field="*{price}" placeholder=""
+                                   class="input-xlarge">
+                            <p th:if="${#fields.hasErrors('price')}" style="color: red" th:accept-charset="UTF-8"
+                               th:errors="*{price}"
+                               class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="status">Trạng Thái</label>
+                        <div class="controls">
+                            <select name="status" id="status" class="custom-select-sm" th:field="*{status}">
+                                <option value="Có" th:text="Có"></option>
+                                <option value="Không" th:text="Không"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="kieuThue">Phương Thức Thuê</label>
+                        <div class="controls">
+                            <select id="kieuThue" name="kieuThue" th:field="*{kieuThue.id}">
+                                <option th:each="kieuThue : ${listKieuThue}" th:value="${kieuThue.id}"
+                                        th:text="${kieuThue.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="loaiDichVu">Loại Dịch Vụ Sử Dụng</label>
+                        <div class="controls">
+                            <select id="loaiDichVu" name="loaiDichVu" th:field="*{loaiDichVu.id}">
+                                <option th:each="loaiDichVu : ${listLoaiDichVu}" th:value="${loaiDichVu.id}"
+                                        th:text="${loaiDichVu.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <!-- Button -->
+                        <div class="controls">
+                            <button class="btn btn-success">Register</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+
+            <h2>Section title</h2>
+            <div th:if="${list}" th:unless="${listDichVu}" class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên Khách Hàng</th>
+                        <th>Code</th>
+                        <th>Loại Khách Hàng</th>
+                        <th>Địa Chỉ</th>
+                        <th>Ngày Sinh</th>
+                        <th>Số Điện Thoại</th>
+                        <th>Số CMND</th>
+                        <th>Email</th>
+                        <th colspan="2">Thao tác</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="customer : ${list.content}">
+                        <td th:text="${customer.id}"></td>
+                        <td th:text="${customer.name}"></td>
+                        <td th:text="${customer.code}"></td>
+                        <td th:text="${customer.loaiKhach.ten}"></td>
+                        <td th:text="${customer.address}"></td>
+                        <td><input type="date" th:value="${customer.birthDay}" readonly></td>
+                        <td th:text="${customer.phoneNumber}"></td>
+                        <td th:text="${customer.cmnd}"></td>
+                        <td th:text="${customer.email}"></td>
+                        <td><a th:href="@{/edit-customer(id= ${customer.id})}">Edit</a></td>
+                        <td><a onclick="return confirm_delete()" th:href="@{/delete-customer(id= ${customer.id})}">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <button th:if="${list.hasPrevious()}">
+                        <a th:href="@{/customer-list(page=${list.number - 1})}">Previous</a>
+                    </button>
+                    <span th:text="${list.number + 1}"></span>/<span th:text="${list.totalPages}"></span>
+                    <button th:if="${list.hasNext()}">
+                        <a th:href="@{/customer-list(page=${list.number + 1})}">Next</a>
+                    </button>
+                </div>
+            </div>
+            <div th:if="${listDichVu}" th:unless="${list}" class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên dịch vụ</th>
+                        <th>Code</th>
+                        <th>Loại dịch vụ</th>
+                        <th>Diện tích</th>
+                        <th>Số tầng</th>
+                        <th>Số người</th>
+                        <th>Giá</th>
+                        <th>Trạng thái</th>
+                        <th colspan="2">Thao tác</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="service : ${listDichVu.content}">
+                        <td th:text="${service.id}"></td>
+                        <td th:text="${service.name}"></td>
+                        <td th:text="${service.code}"></td>
+                        <td th:text="${service.loaiDichVu.name}"></td>
+                        <td th:text="${service.area}"></td>
+                        <td th:text="${service.floor}"></td>
+                        <td th:text="${service.maxPeople}"></td>
+                        <td th:text="${service.price}"></td>
+                        <td th:text="${service.status}"></td>
+                        <td><a th:href="@{/edit-services(id=${service.id})}">Edit</a></td>
+                        <td><a onclick="return confirm_delete()"
+                               th:href="@{/delete-service(id=${service.id})}">Delete</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <a th:if="${listDichVu.hasPrevious()}" th:href="@{/services(page=${listDichVu.number - 1})}">Previous</a>
+                    <span th:text="${listDichVu.number + 1}"></span>/<span th:text="${listDichVu.totalPages}"></span>
+                    <a th:if="${listDichVu.hasNext()}" th:href="@{/services(page=${listDichVu.number + 1})}">Next</a>
+                </div>
+            </div>
+        </main>
+    </div>
 </div>
-<div>
-    <a th:href="@{/customer-list}">List Khách Hàng</a>
-    <a th:href="@{/services}">List Dịch Vụ</a>
-    <a th:href="@{/register-customer}">Thêm Mới Khách Hàng</a>
-    <a th:href="@{/create-services}">Thêm Mới Dịch Vụ</a>
-    <a th:href="@{/create-contract}">Thêm Mới Hợp Đồng</a>
-</div>
+<script type="text/javascript">
+    function confirm_delete() {
+        return confirm("Bạn có muốn xóa ?");
+    }
+</script>
 <div th:if="${message}" th:id="mess">
     <script th:inline="javascript">
         /*<![CDATA[*/
@@ -30,132 +412,5 @@
         window.alert(message);
     </script>
 </div>
-<div>
-    <table th:if="${list}" th:unless="${listDichVu}">
-        <tr>
-            <td>ID</td>
-            <td>Tên Khách Hàng</td>
-            <td>Code</td>
-            <td>Loại Khách Hàng</td>
-            <td>Địa Chỉ</td>
-            <td>Ngày Sinh</td>
-            <td>Số Điện Thoại</td>
-            <td>Số CMND</td>
-            <td>Email</td>
-            <td colspan="2">Thao tác</td>
-
-        </tr>
-        <tr th:each="customer : ${list}">
-            <td th:text="${customer.id}"></td>
-            <td th:text="${customer.name}"></td>
-            <td th:text="${customer.code}"></td>
-            <td th:text="${customer.loaiKhach.ten}"></td>
-            <td th:text="${customer.address}"></td>
-            <td th:text="${customer.birthDay}"></td>
-            <td th:text="${customer.phoneNumber}"></td>
-            <td th:text="${customer.cmnd}"></td>
-            <td th:text="${customer.email}"></td>
-            <td><a th:href="@{/edit-customer(id= ${customer.id})}">Edit</a></td>
-            <td><a onclick="return confirm_delete()" th:href="@{/delete-customer(id= ${customer.id})}">Delete</a></td>
-        </tr>
-    </table>
-    <table th:if="${listDichVu}">
-        <tr>
-            <td>ID</td>
-            <td>Tên dịch vụ</td>
-            <td>Code</td>
-            <td>Loại dịch vụ</td>
-            <td>Diện tích</td>
-            <td>Số tầng</td>
-            <td>Số người</td>
-            <td>Giá</td>
-            <td>Trạng thái</td>
-            <td colspan="2">Thao tác</td>
-        </tr>
-        <tr th:each="service : ${listDichVu}">
-            <td th:text="${service.id}"></td>
-            <td th:text="${service.name}"></td>
-            <td th:text="${service.code}"></td>
-            <td th:text="${service.loaiDichVu.name}"></td>
-            <td th:text="${service.area}"></td>
-            <td th:text="${service.floor}"></td>
-            <td th:text="${service.maxPeople}"></td>
-            <td th:text="${service.price}"></td>
-            <td th:text="${service.status}"></td>
-            <td><a th:href="@{/edit-services(id=${service.id})}">Edit</a></td>
-            <td><a onclick="return confirm_delete()" th:href="@{/delete-service(id=${service.id})}">Delete</a></td>
-        </tr>
-    </table>
-    <form th:if="${khachHangMoi}" action="/register-customer" method="post" th:object="${khachHangMoi}">
-        <p>Mã Khách Hàng:
-            <input type="text" th:field="*{code}">
-        </p>
-        <p>Tên Khách Hàng
-        <input type="text" th:field="*{name}">
-        </p>
-        <p>Địa Chỉ
-        <input type="text" th:field="*{address}">
-        </p>
-        <p>Email
-        <input type="text" th:field="*{email}">
-        </p>
-        <p>Số Điện Thoại
-        <input type="text" th:field="*{phoneNumber}">
-        </p>
-        <p>Chứng Minh Nhân Dân
-        <input type="text" th:field="*{cmnd}">
-        </p>
-        <p>Loại Khách
-        <select name="select" th:field="*{loaiKhach.id}">
-            <option th:each="loai : ${listDichVuDangKy}" th:value="${loai.id}" th:text="${loai.name}"></option>
-        </select>
-        </p>
-        <input type="submit" th:value="Register">
-    </form>
-    <form th:if="${dichVu}" action="/create-services" method="post" th:object="${dichVu}">
-        <p> Mã Dịch Vụ
-            <input type="text" th:field="*{code}">
-        </p>
-        <p>Tên Dịch Vụ
-            <input type="text" th:field="*{name}">
-        </p>
-        <p>Diện Tích
-            <input type="text" th:field="*{area}">
-        </p>
-        <p>Số Tầng
-            <input type="text" th:field="*{floor}">
-        </p>
-        <p>Số Người
-            <input type="text" th:field="*{maxPeople}">
-        </p>
-        <p>Giá
-            <input type="text" th:field="*{price}">
-        </p>
-        <p>Trạng Thái
-            <input type="text" th:field="*{status}">
-        </p>
-        <p>Kiểu Thuê
-            <select name="select" th:field="*{kieuThue.id}">
-                <option th:each="kieuThue : ${listKieuThue}" th:value="${kieuThue.id}"
-                        th:text="${kieuThue.name}"></option>
-            </select>
-        </p>
-        <p>Loại Dịch Vụ
-            <select name="select" th:field="*{loaiDichVu.id}">
-                <option th:each="loaiDichVu : ${listLoaiDichVu}" th:value="${loaiDichVu.id}"
-                        th:text="${loaiDichVu.name}"></option>
-            </select>
-        </p>
-        <input type="submit" th:value="Add">
-    </form>
-</div>
-<div>
-
-</div>
-<script type="text/javascript">
-    function confirm_delete() {
-        return confirm("Are you sure ?");
-    }
-</script>
 </body>
 </html>

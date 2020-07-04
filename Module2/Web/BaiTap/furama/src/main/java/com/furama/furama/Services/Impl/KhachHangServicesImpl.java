@@ -67,7 +67,7 @@ public class KhachHangServicesImpl implements KhachHangServices{
     public void validate(Object target, Errors errors) {
         KhachHang khachHang = (KhachHang) target;
         if ((!this.findKhachHangByCode(khachHang))){
-            errors.rejectValue("code","error");
+            errors.rejectValue("code","KhachHang.codeDuplicate");
         }
     }
 }
