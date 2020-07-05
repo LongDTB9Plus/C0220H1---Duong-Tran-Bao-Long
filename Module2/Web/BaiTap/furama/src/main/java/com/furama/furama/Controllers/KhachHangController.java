@@ -82,7 +82,7 @@ public class KhachHangController {
         model.addAttribute("list", khachHangServices.findAllStillActive());
         return "main";
     }
-
+    
     @GetMapping("/search-key")
     public String getSearch(@ModelAttribute("mark") Optional<String> mark, @RequestParam Optional<String> keyword, Model model,
                             @PageableDefault(value = 5) Pageable pageable) {

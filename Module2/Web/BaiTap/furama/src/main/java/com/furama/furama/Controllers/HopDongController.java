@@ -7,6 +7,8 @@ import com.furama.furama.Services.HopDongServices;
 import com.furama.furama.Services.KhachHangServices;
 import com.furama.furama.Services.NhanVienServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -58,6 +60,15 @@ public class HopDongController {
             model.addAttribute("message", "Khoi Tao Hop Dong Thanh Cong!");
             return "main";
         }
+    }
+
+    @GetMapping("/get-contract")
+    public String getContract(@PageableDefault(size = 5)Pageable pageable,@RequestParam("addServices") Optional<Integer> addServices, Model model){
+        if ((addServices.isPresent()) && (addServices.get() == 1)){
+            model.addAttribute("addServices",1);
+        }
+        model.addAttribute("listHopDong",hopDongServices.findAll(pageable));
+        return "listHopDong";
     }
 
 

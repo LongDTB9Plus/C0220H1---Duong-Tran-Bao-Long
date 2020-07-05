@@ -3,16 +3,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/dashboard.css"/>
-    <script src="js/jquery-3.5.0.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/dashboard.js"></script>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../static/css/dashboard.css"/>
+    <script src="../static/js/jquery-3.5.0.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/dashboard.js"></script>
+    <style>
+        .my-custom {
+            position: fixed;
+            top: 8px;
+        }
+    </style>
 </head>
 <body>
 <nav th:fragment="navigateBar" class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" th:href="@{/}">Home</a>
-    <input class="form-control form-control-dark w-75" type="text" placeholder="Search" aria-label="Search">
+    <form class="form-control-dark w-75" action="/search-key">
+        <input class="form-control-dark w-75" type="text" th:name="keyword" placeholder="Search" aria-label="Search">
+        <input class="btn btn-primary btn-sm" type="submit" value="Search">
+    </form>
     <ul th:unless="${userInformation}" class="navbar-nav px-4">
         <li class="nav-item text-nowrap">
             <a class="nav-link" th:href="@{/login}">Đăng Nhập</a>

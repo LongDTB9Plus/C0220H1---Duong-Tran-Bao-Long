@@ -20,14 +20,14 @@ public class DichVuDiKem {
     @Min(value = 0)
     private Integer unit;
     @Column(name = "Trang_thai_kha_dung")
-    private Boolean status;
+    private String status;
     @OneToMany(mappedBy = "dichVuDiKem",cascade = CascadeType.ALL)
     List<HopDongChiTiet> hopDongChiTietList;
 
     public DichVuDiKem() {
     }
 
-    public DichVuDiKem(String name, Double price, Integer unit, Boolean status) {
+    public DichVuDiKem(String name, Double price, Integer unit, String status) {
         this.name = name;
         this.price = price;
         this.unit = unit;
@@ -66,11 +66,11 @@ public class DichVuDiKem {
         this.unit = unit;
     }
 
-    public Boolean getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

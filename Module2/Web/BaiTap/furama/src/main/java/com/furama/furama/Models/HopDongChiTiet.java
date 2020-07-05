@@ -11,7 +11,7 @@ public class HopDongChiTiet {
     @Column(name = "ID_hop_dong_chi_tiet")
     private Integer id;
     @Column(name = "So_luong")
-    @Min(value = 0)
+    @Min(value = 0,message = "Phả là số nguyên dương")
     private Integer amount;
     @ManyToOne
     @JoinColumn(name = "ID_dich_vu_di_kem")
