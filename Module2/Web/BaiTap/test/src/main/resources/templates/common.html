@@ -18,11 +18,11 @@
 <body>
 <nav th:fragment="navigateBar" class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" th:href="@{/}">Home</a>
-    <form class="form-control-dark w-75" action="/search-key">
+    <form class="form-control-dark w-75" th:action="@{/search-by-key}" method="get">
         <input class="form-control-dark w-75" type="text" th:name="keyword" placeholder="Search" aria-label="Search">
         <input class="btn btn-primary btn-sm" type="submit" value="Search">
     </form>
-    <ul th:unless="${userInformation}" class="navbar-nav px-4">
+    <ul class="navbar-nav px-4">
         <li class="nav-item text-nowrap">
             <a class="nav-link" th:href="@{/login}">Đăng Nhập</a>
         </li>
@@ -40,57 +40,21 @@
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/customer-list}">
+                        <a class="nav-link active" th:href="@{/list}">
                             <span data-feather="home"></span>
-                            List Khách Hàng <span class="sr-only">(current)</span>
+                            List Employee <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/services}">
+                        <a class="nav-link" th:href="@{/add-employee}">
                             <span data-feather="file"></span>
-                            List Dịch Vụ
+                            Add New Employee
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/get-contract}">
                             <span data-feather="users"></span>
                             List Hợp Đồng
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/register}">
-                            <span data-feather="users"></span>
-                            List Nhân Viên
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/register}">
-                            <span data-feather="users"></span>
-                            Thêm Mới Khách Hàng
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/create-services}">
-                            <span data-feather="users"></span>
-                            Thêm Mới Dịch Vụ
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/create-contract}">
-                            <span data-feather="bar-chart-2"></span>
-                            Thêm Mới Hợp Đồng
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/create-employee}">
-                            <span data-feather="bar-chart-2"></span>
-                            Thêm Mới Nhân Viên
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/get-contract(addServices = 1)}">
-                            <span data-feather="bar-chart-2"></span>
-                            Thêm Dịch Vụ Đi Kèm
                         </a>
                     </li>
                 </ul>

@@ -13,42 +13,100 @@
 <nav th:replace="common :: navigateBar"></nav>
 <div th:replace="common :: sideBar"></div>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <table class="table table-striped table-sm">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Tên Khách Hàng</th>
-            <th>Tên Nhân Viên</th>
-            <th>Loại Dịch Vụ</th>
-            <th>Tiền Đặt Cọc</th>
-            <th>Ngày Bắt Đầu</th>
-            <th>Ngày Kết Thúc</th>
-            <th>Tổng tiền</th>
-            <th colspan="2">Thao tác</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="hopDong : ${listHopDong}">
-            <td th:text="${hopDong.id}"></td>
-            <td th:text="${hopDong.khachHang.id}"></td>
-            <td th:text="${hopDong.nhanVien.id}"></td>
-            <td th:text="${hopDong.dichVu.name}"></td>
-            <td th:text="${hopDong.datCoc}"></td>
-            <td><input type="date" th:value="${hopDong.dateStart}" readonly></td>
-            <td><input type="date" th:value="${hopDong.dateEnd}" readonly></td>
-            <td th:text="${hopDong.tongTien}"></td>
-            <td th:if="${addServices} == 1"><a th:href="@{/create-detail-services(id = ${hopDong.id})}">Thêm Dịch Vụ</a></td>
-            <td><a th:href="@{/edit-contract(id= ${hopDong.id})}">Edit</a></td>
-            <td><a onclick="return confirm_delete()" th:href="@{/delete-customer(id= ${hopDong.id})}">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <div>
-        <a th:if="${listHopDong.hasPrevious()}" th:href="@{/get-contract(page=${listHopDong.number - 1})}">Previous</a>
-        <span th:text="${listHopDong.number + 1}"></span>/<span th:text="${listHopDong.totalPages}"></span>
-        <a th:if="${listHopDong.hasNext()}" th:href="@{/get-contract(page=${listHopDong.number + 1})}">Next</a>
-    </div>
+    <form action="/add-employee" method="post" accept-charset="UTF-8"
+          th:object="${newEmployee}" class="form-horizontal">
+        <fieldset>
+            <div id="resHopDong">
+                <legend class="">Register New Employee</legend>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="name">Full Name</label>
+                <div class="controls">
+                    <input type="text" id="name" name="name"
+                           th:field="*{name}" class="input-xlarge">
+                    <p th:if="${#fields.hasErrors('name')}" style="color: red"
+                       th:erros="*{name}" class="help-block"></p>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="birthDay">Day of Birth</label>
+                <div class="controls">
+                    <input type="date" id="birthDay" name="birthDay" th:field="*{birthDay}"
+                           class="input-xlarge">
+                    <p class="help-block"><a th:if="${#fields.hasErrors('birthDay')}" style="color: red"
+                                             th:erros="*{birthDay}"></a></p>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="phoneNumber">Phone Number</label>
+                <div class="controls">
+                    <input type="text" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" placeholder=""
+                           class="input-xlarge">
+                    <p class="help-block">
+                        <a th:if="${#fields.hasErrors('phoneNumber')}" style="color: red" th:erros="*{phoneNumber}">
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="idNumber">ID Number</label>
+                <div class="controls">
+                    <input type="text" id="idNumber" name="idNumber" th:field="*{idNumber}" placeholder=""
+                           class="input-xlarge">
+                    <p class="help-block">
+                        <a th:if="${#fields.hasErrors('idNumber')}" style="color: red" th:erros="*{idNumber}">
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="email">Email</label>
+                <div class="controls">
+                    <input type="text" id="email" name="email" th:field="*{email}" placeholder=""
+                           class="input-xlarge">
+                    <p class="help-block">
+                        <a th:if="${#fields.hasErrors('email')}" style="color: red" th:erros="*{email}">
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="address">Address</label>
+                <div class="controls">
+                    <input type="text" id="address" name="address" th:field="*{address}" placeholder=""
+                           class="input-xlarge">
+                    <p class="help-block">
+                        <a th:if="${#fields.hasErrors('address')}" style="color: red" th:erros="*{address}">
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="gender">Gender</label>
+                <div class="controls">
+                    <select id="gender" name="gender" th:field="*{gender}">
+                        <option th:value="Male" th:text="Male"></option>
+                        <option th:value="Female" th:text="Female"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="typeEmployee">Type of Employee</label>
+                <div class="controls">
+                    <select id="typeEmployee" name="typeEmployee" th:accept-charset="UTF8" th:field="*{typeEmployee}">
+                        <option th:each="type : ${listType}" th:value="${type}" th:text="${type}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <!-- Button -->
+                <div class="controls">
+                    <button class="btn btn-success">Register</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
 </main>
 </body>
 </html>

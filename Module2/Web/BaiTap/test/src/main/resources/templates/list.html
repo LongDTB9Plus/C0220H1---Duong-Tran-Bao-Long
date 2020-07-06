@@ -16,43 +16,44 @@
     <table class="table table-striped table-sm">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Tên Khách Hàng</th>
-            <th>Tên Nhân Viên</th>
-            <th>Loại Dịch Vụ</th>
-            <th>Tiền Đặt Cọc</th>
-            <th>Ngày Bắt Đầu</th>
-            <th>Ngày Kết Thúc</th>
-            <th>Tổng tiền</th>
-            <th colspan="2">Thao tác</th>
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Gender</th>
+            <th>Phone Number</th>
+            <th>Date Of Birth</th>
+            <th>Email</th>
+            <th>ID Number</th>
+            <th colspan="2">Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="hopDong : ${listHopDong}">
-            <td th:text="${hopDong.id}"></td>
-            <td th:text="${hopDong.khachHang.id}"></td>
-            <td th:text="${hopDong.nhanVien.id}"></td>
-            <td th:text="${hopDong.dichVu.name}"></td>
-            <td th:text="${hopDong.datCoc}"></td>
-            <td><input type="date" th:value="${hopDong.dateStart}" readonly></td>
-            <td><input type="date" th:value="${hopDong.dateEnd}" readonly></td>
-            <td th:text="${hopDong.tongTien}"></td>
-            <td th:if="${addServices} == 1"><a th:href="@{/create-detail-services(id = ${hopDong.id})}">Thêm Dịch Vụ</a></td>
-            <td><a th:href="@{/edit-contract(id= ${hopDong.id})}">Edit</a></td>
-            <td><a onclick="return confirm_delete()" th:href="@{/delete-customer(id= ${hopDong.id})}">Delete</a>
+        <tr th:each="employee : ${listEmployee}">
+            <td th:text="${employee.id}"></td>
+            <td th:text="${employee.name}"></td>
+            <td th:text="${employee.typeEmployee}"></td>
+            <td th:text="${employee.gender}"></td>
+            <td th:text="${employee.phoneNumber}"></td>
+            <td><input type="date" th:value="${employee.birthDay}" readonly></td>
+            <td th:text="${employee.email}"></td>
+            <td th:text="${employee.idNumber}"></td>
+            <td><a th:href="@{/list}">Edit</a></td>
+            <td><a onclick="return confirm_delete()" th:href="@{/delete(id= ${employee.id})}">Delete</a>
             </td>
         </tr>
         </tbody>
     </table>
-    <div>
-        <a th:if="${listHopDong.hasPrevious()}" th:href="@{/get-contract(page=${listHopDong.number - 1})}">Previous</a>
-        <span th:text="${listHopDong.number + 1}"></span>/<span th:text="${listHopDong.totalPages}"></span>
-        <a th:if="${listHopDong.hasNext()}" th:href="@{/get-contract(page=${listHopDong.number + 1})}">Next</a>
-    </div>
 </main>
+<div th:if="${message}" th:id="mess">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var message = /*[[${message}]]*/ 'default';
+        window.alert(message);
+    </script>
+</div>
 <script type="text/javascript">
     function confirm_delete() {
-        return confirm("Bạn có muốn xóa ?");
+        return confirm("Are You Sure ?");
     }
 </script>
 </body>
