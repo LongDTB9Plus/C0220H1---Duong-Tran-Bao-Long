@@ -35,7 +35,7 @@ public class Employee implements Validator {
     public Employee() {
     }
 
-    public Employee(@NotNull String typeEmployee, @NotNull String name, String birthDay, String gender,
+    public Employee( String typeEmployee, String name, String birthDay, String gender,
                     String phoneNumber, String idNumber, String email, String address) {
         this.typeEmployee = typeEmployee;
         this.name = name;
@@ -134,14 +134,19 @@ public class Employee implements Validator {
             errors.rejectValue("idNumber", "Employee.idNumber");
         }
 //        Tinh tuoi tu ngay sinh
-        LocalDate today = LocalDate.now();                          //Today's date
-        String[] birthDayArray = employee.birthDay.split("-");
-        LocalDate birthday = LocalDate.of(Integer.parseInt(birthDayArray[0]), Integer.parseInt(birthDayArray[1]),
-                Integer.parseInt(birthDayArray[2]));
-        Period period = Period.between(birthday, today);
-        if (period.getYears() < 18){
+        if (employee.birthDay.isEmpty()){
             errors.rejectValue("birthDay","Employee.age");
+        }else {
+            LocalDate today = LocalDate.now();                          //Today's date
+            String[] birthDayArray = employee.birthDay.split("-");
+            LocalDate birthday = LocalDate.of(Integer.parseInt(birthDayArray[0]), Integer.parseInt(birthDayArray[1]),
+                    Integer.parseInt(birthDayArray[2]));
+            Period period = Period.between(birthday, today);
+            if (period.getYears() < 18){
+                errors.rejectValue("birthDay","Employee.age");
+            }
         }
+
 
     }
 }

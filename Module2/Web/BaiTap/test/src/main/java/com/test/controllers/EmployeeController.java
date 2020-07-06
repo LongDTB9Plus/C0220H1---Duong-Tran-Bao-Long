@@ -48,17 +48,16 @@ public class EmployeeController {
     }
     @GetMapping("/add-employee")
     public String addEmployeeGet(Model model){
-        model.addAttribute("newEmployee",new Employee());
+        model.addAttribute("Employee",new Employee());
         model.addAttribute("listType",employeeServices.getListType());
         return "create";
     }
     @PostMapping("/add-employee")
-    public String addEmployeePost(@Valid @ModelAttribute("newEmployee") Employee employee,
+    public String addEmployeePost(@Valid @ModelAttribute("Employee") Employee employee,
                                   BindingResult result,Model model){
         new Employee().validate(employee,result);
         if (result.hasFieldErrors()){
             model.addAttribute("listType",employeeServices.getListType());
-            model.addAttribute("org.springframework.validation.BindingResult.newEmployee", result);
             return "create";
         }
         employeeServices.save(employee);
