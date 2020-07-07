@@ -5,7 +5,6 @@ import org.springframework.validation.Validator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -132,6 +131,9 @@ public class Employee implements Validator {
         }
         if (!(employee.idNumber.matches("^\\d{10}$"))) {
             errors.rejectValue("idNumber", "Employee.idNumber");
+        }
+        if (!(employee.phoneNumber.matches("^\\d{10}$"))){
+            errors.rejectValue("phoneNumber","Employee.phoneNumber");
         }
 //        Tinh tuoi tu ngay sinh
         if (employee.birthDay.isEmpty()){
