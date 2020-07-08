@@ -13,96 +13,57 @@
 <nav th:replace="common :: navigateBar"></nav>
 <div th:replace="common :: sideBar"></div>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <form action="/add-employee" method="post" accept-charset="UTF-8"
-          th:object="${Employee}" class="form-horizontal">
+    <form th:action="@{/create}" method="post" accept-charset="UTF-8"
+          th:object="${sachMoi}" class="form-horizontal">
         <fieldset>
             <div id="resHopDong">
-                <legend class="">Register New Employee</legend>
+                <legend class="">Thêm Sách Mới</legend>
             </div>
             <div class="control-group">
-                <label class="control-label" for="name">Full Name</label>
+                <label class="control-label" for="maSach">Mã Sách</label>
                 <div class="controls">
-                    <input type="text" id="name" name="name"
-                           th:field="*{name}" class="input-xlarge">
-                    <p th:if="${#fields.hasErrors('name')}" th:accept-charset="UTF-8" style="color: red"
-                       th:errors="*{name}" class="help-block"></p>
+                    <input type="text" id="maSach" name="maSach"
+                           th:field="*{maSach}" class="input-xlarge">
+                    <p th:if="${#fields.hasErrors('maSach')}" th:accept-charset="UTF-8" style="color: red"
+                       th:errors="*{maSach}" class="help-block"></p>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="birthDay">Day of Birth</label>
+                <label class="control-label" for="birthDay">Tên Sách</label>
                 <div class="controls">
-                    <input type="date" id="birthDay" name="birthDay" th:field="*{birthDay}"
+                    <input type="text" id="birthDay" name="tenSach" th:field="*{tenSach}"
                            class="input-xlarge">
-                    <p class="help-block"><a th:if="${#fields.hasErrors('birthDay')}" th:accept-charset="UTF-8" style="color: red"
-                                             th:errors="*{birthDay}"></a></p>
+                    <p class="help-block"><a th:if="${#fields.hasErrors('tenSach')}" th:accept-charset="UTF-8" style="color: red"
+                                             th:errors="*{tenSach}"></a></p>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="phoneNumber">Phone Number</label>
+                <label class="control-label" for="tacGia">Tên Tác Giả</label>
                 <div class="controls">
-                    <input type="text" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" placeholder=""
+                    <input type="text" id="tacGia" name="tacGia" th:field="*{tacGia}"
                            class="input-xlarge">
                     <p class="help-block">
-                        <a th:if="${#fields.hasErrors('phoneNumber')}" style="color: red" th:errors="*{phoneNumber}">
+                        <a th:if="${#fields.hasErrors('tacGia')}" style="color: red" th:errors="*{tacGia}">
                         </a>
                     </p>
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="idNumber">ID Number</label>
+                <label class="control-label" for="gia">Giá Bán</label>
                 <div class="controls">
-                    <input type="text" id="idNumber" name="idNumber" th:field="*{idNumber}" placeholder=""
+                    <input type="text" id="gia" name="gia" th:field="*{gia}"
                            class="input-xlarge">
                     <p class="help-block">
-                        <a th:if="${#fields.hasErrors('idNumber')}" style="color: red" th:errors="*{idNumber}">
+                        <a th:if="${#fields.hasErrors('gia')}" style="color: red" th:errors="*{gia}">
                         </a>
                     </p>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="email">Email</label>
-                <div class="controls">
-                    <input type="text" id="email" name="email" th:field="*{email}" placeholder=""
-                           class="input-xlarge">
-                    <p class="help-block">
-                        <a th:if="${#fields.hasErrors('email')}" style="color: red" th:errors="*{email}">
-                        </a>
-                    </p>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="address">Address</label>
-                <div class="controls">
-                    <input type="text" id="address" name="address" th:field="*{address}" placeholder=""
-                           class="input-xlarge">
-                    <p class="help-block">
-                        <a th:if="${#fields.hasErrors('address')}" style="color: red" th:errors="*{address}">
-                        </a>
-                    </p>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="gender">Gender</label>
-                <div class="controls">
-                    <select id="gender" name="gender" th:field="*{gender}">
-                        <option th:value="Male" th:text="Male"></option>
-                        <option th:value="Female" th:text="Female"></option>
-                    </select>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="typeEmployee">Type of Employee</label>
-                <div class="controls">
-                    <select id="typeEmployee" name="typeEmployee" th:accept-charset="UTF8" th:field="*{typeEmployee}">
-                        <option th:each="type : ${listType}" th:value="${type}" th:text="${type}"></option>
-                    </select>
                 </div>
             </div>
             <div class="control-group">
                 <!-- Button -->
                 <div class="controls">
-                    <button class="btn btn-success">Register</button>
+                    <button class="btn btn-success">Đăng Ký</button>
                 </div>
             </div>
         </fieldset>

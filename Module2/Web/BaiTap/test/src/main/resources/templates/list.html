@@ -38,7 +38,7 @@
             <td th:text="${employee.email}"></td>
             <td th:text="${employee.idNumber}"></td>
             <td><a th:href="@{/list}">Edit</a></td>
-            <td><a onclick="return confirm_delete()" th:href="@{/delete(id= ${employee.id})}">Delete</a>
+            <td><a th:onclick="'return confirm_delete(\''+${employee.id}+'\');'" th:href="@{/delete(id= ${employee.id})}">Delete</a>
             </td>
         </tr>
         </tbody>
@@ -52,8 +52,8 @@
     </script>
 </div>
 <script type="text/javascript">
-    function confirm_delete() {
-        return confirm("Are You Sure ?");
+    function confirm_delete(id) {
+        return confirm("Are You Sure ?" + id);
     }
 </script>
 </body>

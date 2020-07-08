@@ -20,6 +20,10 @@
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" th:href="@{/}">Home</a>
     <form class="form-control-dark w-75" th:action="@{/search-by-key}" method="get">
         <input class="form-control-dark w-75" type="text" th:name="keyword" placeholder="Search" aria-label="Search">
+        <select name="typeSearch" id="typeSearch">
+            <option value="Ma Sach">Mã Sách</option>
+            <option value="Ten Sach">Tên Sách</option>
+        </select>
         <input class="btn btn-primary btn-sm" type="submit" value="Search">
     </form>
     <ul class="navbar-nav px-4">
@@ -42,13 +46,13 @@
                     <li class="nav-item">
                         <a class="nav-link active" th:href="@{/list}">
                             <span data-feather="home"></span>
-                            List Employee <span class="sr-only">(current)</span>
+                            Danh Sách <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/add-employee}">
+                        <a class="nav-link" th:href="@{/create}">
                             <span data-feather="file"></span>
-                            Add New Employee
+                            Thêm Sách Mới
                         </a>
                     </li>
                 </ul>
