@@ -6,8 +6,8 @@ import com.furama.furama.Services.HopDongServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
 
 @Service
 public class HopDongServicesImpl implements HopDongServices {
@@ -26,5 +26,15 @@ public class HopDongServicesImpl implements HopDongServices {
     @Override
     public HopDong findById(Integer id) {
         return hopDongRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
     }
 }

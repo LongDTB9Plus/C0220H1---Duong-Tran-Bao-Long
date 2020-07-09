@@ -6,6 +6,9 @@ import com.furama.furama.Services.NhanVienServices;
 import com.furama.furama.Services.TrinhDoServices;
 import com.furama.furama.Services.ViTriServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -45,6 +48,13 @@ public class NhanVienController {
         }
         nhanVienServices.save(nhanVien);
         model.addAttribute("message", "Khởi tạo thành công");
+        return "main";
+    }
+
+    @GetMapping("/get-list-employee")
+    public String getListEmployee(@PageableDefault(size = 3)Pageable pageable,Model model){
+        Page<NhanVien> nhanViens = nhanVienServices.findAll(pageable);
+        model.addAttribute("listEmployee",nhanViens);
         return "main";
     }
 }
