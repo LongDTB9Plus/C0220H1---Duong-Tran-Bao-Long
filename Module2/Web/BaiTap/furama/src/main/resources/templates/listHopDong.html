@@ -55,6 +55,24 @@
         return confirm("Bạn có muốn xóa ?");
     }
 </script>
+    <script>
+        $.ajax.onload({
+            type: "GET", //GET, DELETE, PUT...
+            url: "https://spring-student-api.herokuapp.com/info?apiKey = eaf118ab-babf-43ed-a788-b66d2f0ca00c",
+            contentType: "text",
+            dataType: "json",
+            // dataType: "text",
+            success: function(result){
+                let data = result;
+                jQuery(data).each(function(i, item){
+                    console.log(item.id, item.name)
+                })
+            },
+            fail: function(result) {
+
+            }
+        });
+    </script>
 </main>
 </body>
 </html>

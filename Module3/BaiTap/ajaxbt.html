@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../bootstrap/js/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Giới Tính</th>
+            <th>Ngày Sinh</th>
+            <th>Số Điện Thoại</th>
+            <th>Địa Chỉ</th>
+        </tr>
+        </thead>
+        <tbody id="containerItem">
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET", //GET, DELETE, PUT...
+            url: "https://spring-student-api.herokuapp.com/info?apiKey=eaf118ab-babf-43ed-a788-b66d2f0ca00c",
+            contentType: "text",
+            dataType: "json",
+            // dataType: "text",
+            success: function (result) {
+                console.log(result);
+                var html_append = '';
+                jQuery(result).each(function (i, item) {
+                    console.log(item.id);
+                     html_append += '<tr><td>' + item.id+ '</td>' +
+                        '<td>' + item.fullName+ '</td>' +
+                        '<td>' + item.gender+ '</td>' +
+                        '<td>' + item.birthDate+ '</td>' +
+                        '<td>' + item.phoneNumber+ '</td>' +
+                        '<td>' + item.address+ '</td></tr>';
+                    $("#containerItem").html(html_append);
+                })
+            },
+            fail: function (result) {
+
+            }
+        });
+    });
+    // $(document).ready(function () {
+    //     jQuery.ajax({
+    //         type: "GET",
+    //         url: "https://spring-student-api.herokuapp.com/info?apiKey = eaf118ab-babf-43ed-a788-b66d2f0ca00c",
+    //         success: function (data) {
+    //             console.log(data);
+    //
+    //             jQuery.each(data.results, function (i, val) {
+    //                 // here you can do your magic
+    //                 $("#yourdivid").append(document.createTextNode(val.));
+    //                 $("#yourdivid").append(document.createTextNode(val.count));
+    //             });
+    //         }
+    //     });
+    // });
+</script>
+</body>
+</html>
