@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Title</title>
-    <script src="../js/jquery-3.5.1.min.js"></script>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/f9a6e5722f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/extend.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Title</title>
+<script src="../js/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<script src="../js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/f9a6e5722f.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../css/extend.css">
 </head>
 <body>
 <div class="container-fluid mt-3">
@@ -102,56 +102,46 @@
             </ul>
         </div>
     </nav>
-</div>
-<div class="row align-items-center mt-3">
-    <div class="col-2"></div>
-    <div class="col-8 card border-warning">
-        <form>
-            <div class="form-group mt-2">
-                <label for="exampleFormControlInput1">Tên Khách Hàng</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Tên Nhân Viên</label>
-                <input type="text" class="form-control"
-                >
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Tiền Đặt Cọc</label>
-                <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Ngày Bắt Đầu</label>
-                <input type="date" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Ngày Kết Thúc</label>
-                <input type="date" class="form-control"
-                >
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Loại Dịch Vụ</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                    <option>Ocean Suite</option>
-                    <option>Ocean Studio Suite</option>
-                    <option>Garden Superior</option>
-                    <option>Garden Deluxe</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Tổng Tiền</label>
-                <input type="text" class="form-control"
-                >
-            </div>
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary">
-                    <i class="far fa-paper-plane"></i>
-                    <span class="ml-1">Thêm Mới</span>
-                </button>
-            </div>
-        </form>
+    <div class="row mt-4">
+        <div class="col-12">
+            <form class="form-inline justify-content-end my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+        <div class="col-12 mt-2">
+            <table class="table text-center">
+                <thead class="thead-light text-center">
+                <tr>
+                    <th scope="col">Họ Tên Khách Hàng</th>
+                    <th scope="col">Họ Tên Nhân Viên</th>
+                    <th scope="col">Ngày Bắt Đầu</th>
+                    <th scope="col">Ngày Kết Thúc</th>
+                    <th scope="col">Tiền Đặt Cọc</th>
+                    <th scope="col">Loại Dịch Vụ</th>
+                    <th scope="col">Thông Tin Dịch Vụ Đi Kèm</th>
+                    <th scope="col">Tổng Tiền</th>
+                    <th scope="col">Thêm Dịch Vụ</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Manfred von Richtofen</td>
+                    <td>Bismarck</td>
+                    <td>21/01/2020</td>
+                    <td>07/02/2020</td>
+                    <td>5.000.000</td>
+                    <td>Ocean Suite</td>
+                    <td><a href="#">Thông Tin</a></td>
+                    <td>30.000.000
+                    <td><a href="#">
+                        <i class="fas fa-plus-square"></i>
+                    </a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-<div class="col-2"></div>
 </body>
 </html>

@@ -1,0 +1,15 @@
+div div{
+  border: 1px solid;
+  display: block;
+  float: left;
+  height: 32px;
+  width: 32px;
+  margin: 10px;
+  text-align: center;
+  align-content: center;
+  padding: 4px;
+}
+div div:hover{
+  background-color: yellow;
+  box-shadow: aliceblue;
+}
