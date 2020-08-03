@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "FuramaM3": {
+    "caseM3": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/FuramaM3",
+            "outputPath": "dist/caseM3",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -68,18 +68,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "FuramaM3:build"
+            "browserTarget": "caseM3:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "FuramaM3:build:production"
+              "browserTarget": "caseM3:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "FuramaM3:build"
+            "browserTarget": "caseM3:build"
           }
         },
         "test": {
@@ -96,7 +96,8 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           }
         },
         "lint": {
@@ -116,19 +117,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "FuramaM3:serve"
+            "devServerTarget": "caseM3:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "FuramaM3:serve:production"
+              "devServerTarget": "caseM3:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "FuramaM3",
+  "defaultProject": "caseM3",
   "cli": {
-    "analytics": false
+    "analytics": "31fa3835-1ea3-4f49-872c-6dc25dc95a7f"
   }
 }

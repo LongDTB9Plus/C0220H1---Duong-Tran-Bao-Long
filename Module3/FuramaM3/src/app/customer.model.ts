@@ -1,3 +1,5 @@
+import {CustomerTypeModel} from './customerType.model';
+
 export interface CustomerModel {
   id: string;
   name: string;
@@ -6,7 +8,7 @@ export interface CustomerModel {
   idNumber: string;
   dateOfBirth: string;
   address: string;
-  type: string;
+  type: CustomerTypeModel;
 }
 
 export let customerList = [
@@ -18,7 +20,10 @@ export let customerList = [
     idNumber: '123-456-789',
     dateOfBirth: '22/07/1990',
     address: 'HongKong',
-    type: 'Gold'
+    type: {
+      id: 2,
+      name: 'Gold'
+    }
   },
   {
     id: 'KH-0002',
@@ -28,6 +33,9 @@ export let customerList = [
     idNumber: '123-456-333',
     dateOfBirth: '22/07/1930',
     address: 'USA',
-    type: 'Platinum'
+    type: {
+      id: 1,
+      name: 'Platinum'
+    }
   }
 ];

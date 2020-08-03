@@ -1,32 +1,32 @@
-<!--<div class="col-12 mt-2">-->
-<!--  <table class="table text-center">-->
-<!--    <thead class="thead-light text-center">-->
-<!--    <tr>-->
-<!--      <th scope="col">Họ Tên Khách Hàng</th>-->
-<!--      <th scope="col">Họ Tên Nhân Viên</th>-->
-<!--      <th scope="col">Ngày Bắt Đầu</th>-->
-<!--      <th scope="col">Ngày Kết Thúc</th>-->
-<!--      <th scope="col">Tiền Đặt Cọc</th>-->
-<!--      <th scope="col">Loại Dịch Vụ</th>-->
-<!--      <th scope="col">Thông Tin Dịch Vụ Đi Kèm</th>-->
-<!--      <th scope="col">Tổng Tiền</th>-->
-<!--      <th scope="col">Thêm Dịch Vụ</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--    <tr *ngFor="let contract of contractList; index as i; trackBy: trackByFn">-->
-<!--      <td>{{contract.}}</td>-->
-<!--      <td>{{contract.}}</td>-->
-<!--      <td>{{contract.}}</td>-->
-<!--      <td>{{contract.}}</td>-->
-<!--      <td>{{contract.}}</td>-->
-<!--      <td>{{contract}}</td>-->
-<!--      <td><a href="#">Thông Tin</a></td>-->
-<!--      <td>{{contract.total}}</td>-->
-<!--      <td><a href="#">-->
-<!--        <i class="fas fa-plus-square"></i>-->
-<!--      </a></td>-->
-<!--    </tr>-->
-<!--    </tbody>-->
-<!--  </table>-->
-<!--</div>-->
+<div class="col-12 mt-2">
+  <table class="table text-center">
+    <thead class="thead-light text-center">
+    <tr>
+      <th scope="col">Họ Tên Khách Hàng</th>
+      <th scope="col">Họ Tên Nhân Viên</th>
+      <th scope="col">Ngày Bắt Đầu</th>
+      <th scope="col">Ngày Kết Thúc</th>
+      <th scope="col">Tiền Đặt Cọc</th>
+      <th scope="col">Loại Dịch Vụ</th>
+      <th scope="col">Thông Tin Dịch Vụ Đi Kèm</th>
+      <th scope="col">Tổng Tiền</th>
+      <th scope="col">Thêm Dịch Vụ</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let contract of contractList; index as i">
+      <td>{{contract.customer.name}}</td>
+      <td>{{contract.employee.name}}</td>
+      <td>{{contract.dateStart}}</td>
+      <td>{{contract.dateEnd}}</td>
+      <td>{{contract.deposits|currency}}</td>
+      <td>{{contract.service.name}}</td>
+      <td><a href="#">Thông Tin</a></td>
+      <td>{{contract.total|currency}}</td>
+      <td><a href="#">
+        <i class="fa fa-plus-square"></i>
+      </a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,3 +1,88 @@
+<div class="align-content-center mt-3">
+  <p class="h3 text-center">Villa List</p>
+</div>
+<div class="row mt-4">
+  <div class="col-12">
+    <table class="table text-center">
+      <thead class="thead-light text-center">
+      <tr>
+        <th scope="col">Mã Dịch Vụ</th>
+        <th scope="col">Tên Dịch Vụ</th>
+        <th scope="col">Diện Tích</th>
+        <th scope="col">Diện Tích Bể Bơi</th>
+        <th scope="col">Số Tầng</th>
+        <th scope="col">Số Người</th>
+        <th scope="col">Giá</th>
+        <th scope="col">Trình Trạng</th>
+        <th scope="col">Kiểu Thuê</th>
+        <th colspan="2" scope="col">Thao Tác</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let villa of villaList">
+        <td>{{villa.id}}</td>
+        <td>{{villa.name}}</td>
+        <td>{{villa.area}}</td>
+        <td>{{villa.poolArea}}</td>
+        <td>{{villa.floorNumber}}</td>
+        <td>{{villa.maxPeople}}</td>
+        <td>{{villa.price}}</td>
+        <td>{{villa.status}}</td>
+        <td>{{villa.typeRent}}</td>
+        <td><a href="">
+          <i class="fa fa-pencil-square-o"></i>
+        </a></td>
+        <td><a href="">
+          <i class="fa fa-trash"></i>
+        </a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="align-content-center mt-3">
+  <p class="h3 text-center">Room List</p>
+</div>
+<div class="row mt-4">
+  <div class="col-12">
+    <table class="table text-center">
+      <thead class="thead-light text-center">
+      <tr>
+        <th scope="col">Mã Dịch Vụ</th>
+        <th scope="col">Tên Dịch Vụ</th>
+        <th scope="col">Diện Tích</th>
+        <th scope="col">Số Người</th>
+        <th scope="col">Giá</th>
+        <th scope="col">Trình Trạng</th>
+        <th scope="col">Kiểu Thuê</th>
+        <th scope="col">Dịch Vụ Miên Phí</th>
+        <th colspan="2" scope="col">Thao Tác</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let room of roomList">
+        <td>{{room.id}}</td>
+        <td>{{room.name}}</td>
+        <td>{{room.area}}</td>
+        <td>{{room.maxPeople}}</td>
+        <td>{{room.price}}</td>
+        <td>{{room.status}}</td>
+        <td>{{room.typeRent}}</td>
+        <td>{{room.freeService}}</td>
+        <td><a href="">
+          <i class="fa fa-pencil-square-o"></i>
+        </a></td>
+        <td><a href="">
+          <i class="fa fa-trash"></i>
+        </a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="align-content-center mt-3">
+  <p class="h3 text-center">House List</p>
+</div>
 <div class="row mt-4">
   <div class="col-12">
     <table class="table text-center">
@@ -11,45 +96,24 @@
         <th scope="col">Giá</th>
         <th scope="col">Trình Trạng</th>
         <th scope="col">Kiểu Thuê</th>
-        <th scope="col">Loại Dịch Vụ</th>
         <th colspan="2" scope="col">Thao Tác</th>
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>DV-1234</td>
-        <td>Flying Circus</td>
-        <td>808080808080</td>
-        <td>808080808080</td>
-        <td>22/08/1916</td>
-        <td>Prussia</td>
-        <td>30.000.000
-        <td>Giám Sát</td>
-        <td>Chuyên Viên</td>
-        <td>Đại Học</td>
+      <tr *ngFor="let house of houseList">
+        <td>{{house.id}}</td>
+        <td>{{house.name}}</td>
+        <td>{{house.area}}</td>
+        <td>{{house.floorNumber}}</td>
+        <td>{{house.maxPeople}}</td>
+        <td>{{house.price}}</td>
+        <td>{{house.status}}</td>
+        <td>{{house.typeRent}}</td>
         <td><a href="">
-          <i class="fas fa-edit"></i>
+          <i class="fa fa-pencil-square-o"></i>
         </a></td>
         <td><a href="">
-          <i class="far fa-trash-alt"></i>
-        </a></td>
-      </tr>
-      <tr>
-        <td>Manfred von Richtofen</td>
-        <td>TheRedBaron@gmail.com</td>
-        <td>808080808080</td>
-        <td>808080808080</td>
-        <td>22/08/1916</td>
-        <td>Prussia</td>
-        <td>30.000.000
-        <td>Giám Sát</td>
-        <td>Chuyên Viên</td>
-        <td>Đại Học</td>
-        <td><a href="">
-          <i class="fas fa-edit"></i>
-        </a></td>
-        <td><a href="">
-          <i class="far fa-trash-alt"></i>
+          <i class="fa fa-trash"></i>
         </a></td>
       </tr>
       </tbody>

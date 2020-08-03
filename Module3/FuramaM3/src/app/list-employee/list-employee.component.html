@@ -17,40 +17,22 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>Manfred von Richtofen</td>
-        <td>TheRedBaron@gmail.com</td>
-        <td>808080808080</td>
-        <td>808080808080</td>
-        <td>22/08/1916</td>
-        <td>Prussia</td>
-        <td>30.000.000
-        <td>Giám Sát</td>
-        <td>Chuyên Viên</td>
-        <td>Đại Học</td>
+      <tr *ngFor="let employee of employeeList">
+        <td>{{employee.name}}</td>
+        <td>{{employee.email}}</td>
+        <td>{{employee.phoneNumber}}</td>
+        <td>{{employee.idNumber}}</td>
+        <td>{{employee.dateOfBirth}}</td>
+        <td>{{employee.address}}</td>
+        <td>{{employee.salary | currency}}</td>
+        <td>{{employee.department.name}}</td>
+        <td>{{employee.position.name}}</td>
+        <td>{{employee.literacy.name}}</td>
         <td><a href="">
-          <i class="fas fa-edit"></i>
+          <i class="fa fa-pencil-square-o"></i>
         </a></td>
         <td><a href="">
-          <i class="far fa-trash-alt"></i>
-        </a></td>
-      </tr>
-      <tr>
-        <td>Manfred von Richtofen</td>
-        <td>TheRedBaron@gmail.com</td>
-        <td>808080808080</td>
-        <td>808080808080</td>
-        <td>22/08/1916</td>
-        <td>Prussia</td>
-        <td>30.000.000
-        <td>Giám Sát</td>
-        <td>Chuyên Viên</td>
-        <td>Đại Học</td>
-        <td><a href="">
-          <i class="fas fa-edit"></i>
-        </a></td>
-        <td><a href="">
-          <i class="far fa-trash-alt"></i>
+          <i class="fa fa-trash"></i>
         </a></td>
       </tr>
       </tbody>
