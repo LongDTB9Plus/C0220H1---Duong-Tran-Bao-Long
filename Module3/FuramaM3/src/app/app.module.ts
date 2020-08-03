@@ -27,8 +27,7 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
     AddDetailContractComponent
   ],
   imports: [
-    BrowserModule,
-    AngularFontAwesomeModule
+    BrowserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
