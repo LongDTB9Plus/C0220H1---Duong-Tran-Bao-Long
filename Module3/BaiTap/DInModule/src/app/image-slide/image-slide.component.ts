@@ -22,13 +22,13 @@ export class ImageSlideComponent implements OnInit {
     if (this.index === 3) {
       this.index = 0;
     }
-    this.color = this.changeImageService.changeColor(this.index);
+    this.color = this.changeImageService.getColor(this.index);
   }
   changeImagePrevious(): void {
     this.index -= 1;
     if (this.index === -1) {
       this.index = 2;
     }
-    this.color = this.changeImageService.changeColor(this.index);
+    this.color = this.changeImageService.getColor(this.index);
   }
 }

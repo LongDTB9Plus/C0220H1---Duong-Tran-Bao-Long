@@ -11,7 +11,7 @@ export class ChangeImageService {
   color = [{color: 'red'}, {color: 'green'}, {color: 'blue'}
   ];
 
-  changeColor(index: number): string{
+  getColor(index: number): string{
     return this.color[index].color;
   }
   constructor() {
