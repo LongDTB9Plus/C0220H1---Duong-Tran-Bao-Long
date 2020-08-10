@@ -1,0 +1,79 @@
+<div class="row align-items-center mt-3">
+  <div class="col-2"></div>
+  <div class="col-8 card border-warning">
+    <form (submit)="onSubmit()" [formGroup]="customerEditForm">
+      <ul class="mt-2">
+        <li *ngIf="(customerEditForm.get('id').hasError('pattern') && customerEditForm.get('id').dirty)
+          || (customerEditForm.get('id').hasError('required') && customerEditForm.get('id').touched)">
+          Mã Khách hàng phải theo định dạng : KH-XXXX ( Với X là số 0-9)
+        </li>
+        <li *ngIf="customerEditForm.get('name').hasError('required') && customerEditForm.get('name').touched">
+          Họ Tên không được để trống
+        </li>
+        <li *ngIf="(customerEditForm.get('email').hasError('pattern') && customerEditForm.get('email').dirty)
+          || (customerEditForm.get('email').hasError('required') && customerEditForm.get('email').touched)">
+          Email không hợp lệ
+        </li>
+        <li *ngIf="(customerEditForm.get('phoneNumber').hasError('pattern') && customerEditForm.get('phoneNumber').dirty)
+          || (customerEditForm.get('phoneNumber').hasError('required') && customerEditForm.get('phoneNumber').touched)">
+          Số điện thoại phải đúng định dạng 090xxxxxxx hoặc 091xxxxxxx hoặc (84)+90xxxxxxx hoặc (84)+91xxxxxxx
+        </li>
+        <li *ngIf="(customerEditForm.get('idNumber').hasError('pattern') && customerEditForm.get('idNumber').dirty)
+          || (customerEditForm.get('idNumber').hasError('required') && customerEditForm.get('idNumber').touched)">
+          Số CMND phải đúng định dạng 9 số
+        </li>
+        <li *ngIf="customerEditForm.get('dateOfBirth').hasError('required') && customerEditForm.get('dateOfBirth').touched">
+          Ngày Sinh theo định dạng DD/MM/YYYY
+        </li>
+        <li *ngIf="customerEditForm.get('address').hasError('required') && customerEditForm.get('address').touched">
+          Địa Chỉ không được để trống
+        </li>
+      </ul>
+      <div class="form-group mt-2">
+        <label for="exampleFormControlInput1">Mã Khách Hàng</label>
+        <input formControlName="id" [value]="customer.id" type="text" class="form-control" readonly id="exampleFormControlInput1">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Họ Tên</label>
+        <input formControlName="name" type="text" class="form-control"
+        >
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Email</label>
+        <input formControlName="email" type="text" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Số Điện Thoại</label>
+        <input formControlName="phoneNumber" type="text" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Số Chứng Minh Nhân Dân</label>
+        <input formControlName="idNumber" type="text" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Ngày Sinh</label>
+        <input formControlName="dateOfBirth" type="date" class="form-control"
+        >
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Địa Chỉ</label>
+        <input formControlName="address" type="text" class="form-control"
+        >
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Loại Khách</label>
+        <select formControlName="type" class="form-control" id="exampleFormControlSelect1">
+          <option *ngFor="let type of customerTypeList" [ngValue]="type">{{type.name}}</option>
+        </select>
+      </div>
+      <div class="text-center m-3">
+        <button type="submit" class="btn btn-primary">
+          <i class="fa fa-paper-plane"></i>
+          <span class="ml-1">Sửa Đổi</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="col-2"></div>
+
