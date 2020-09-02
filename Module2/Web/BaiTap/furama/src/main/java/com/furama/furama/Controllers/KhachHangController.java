@@ -2,7 +2,6 @@ package com.furama.furama.Controllers;
 
 import com.furama.furama.Models.HopDong;
 import com.furama.furama.Models.KhachHang;
-import com.furama.furama.Models.User;
 import com.furama.furama.Services.DichVuServices;
 import com.furama.furama.Services.KhachHangServices;
 import com.furama.furama.Services.LoaiKhachServices;
@@ -40,9 +39,7 @@ public class KhachHangController {
     }
     @GetMapping("/register-customer")
     public String getRegister(Model model,@ModelAttribute("khachHangMoi") Optional<KhachHang> khachHang) {
-        if (khachHang.isPresent()){
-            model.addAttribute("khachHangMoi",khachHang.get());
-        }
+        khachHang.ifPresent(hang -> model.addAttribute("khachHangMoi", hang));
         model.addAttribute("listLoaiKhach", loaiKhachServices.findAll());
         return "main";
     }
